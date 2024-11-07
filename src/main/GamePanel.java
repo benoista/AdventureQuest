@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import entity.Warrior;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH= new KeyHandler();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
-    public Player player = new Player(this,keyH);
+    public Warrior player = new Warrior(this,keyH);
 
 
     public GamePanel() {
@@ -82,6 +83,10 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.draw(g2);
         player.draw(g2);
 
+        // Display the lastFrame attribute of player
+        g2.setColor(Color.WHITE);
+        g2.drawString("Last Frame: " + player.getLastFrame(), 10, 20);
+        g2.drawString("Current Frame: " + player.getDirection(), 10, 40);
         g2.dispose();
     }
 }
