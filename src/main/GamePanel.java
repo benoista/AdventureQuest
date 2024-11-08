@@ -1,11 +1,15 @@
 package main;
 
+import entity.Gobelin;
+import entity.Monster;
 import entity.Player;
 import object.SuperObject;
+import entity.Warrior;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTitleSize = 16;
@@ -33,7 +37,11 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[10];
+  
+    public Warrior player = new Warrior(this,keyH);
 
+    //Spawn Monster
+    public ArrayList<Monster> monsters = new ArrayList<>();
 
 
     public GamePanel() {
@@ -42,6 +50,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        //Add monsters
+        monsters.add(new Gobelin(this, 50));
     }
     public void setupGame(){
         aSetter.setObject();
@@ -72,15 +83,22 @@ public class GamePanel extends JPanel implements Runnable {
                 drawCount++;
             }
             if (timer >= 1000000000){
-                System.out.println("FPS: "+drawCount);
                 drawCount=0;
                 timer=0;
             }
         }
 
     }
+
     public void update(){
         player.update();
+
+        for (Monster monster : monsters) {
+            if (cChecker.checkEntityCollision(player, monster)) {
+                cChecker.handleCollision(player);
+            }
+            // Update the monster with monster update()
+        }
 
     }
     public void paintComponent(Graphics g) {
@@ -88,7 +106,14 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         tileM.draw(g2);
         player.draw(g2);
+        for (Monster monster : monsters){
+            monster.draw(g2);
 
+
+        }
+
+
+        // Display the lastFrame attribute of player
         g2.dispose();
     }
 }
