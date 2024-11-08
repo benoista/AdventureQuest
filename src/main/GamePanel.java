@@ -3,6 +3,7 @@ package main;
 import entity.Gobelin;
 import entity.Monster;
 import entity.Player;
+import object.SuperObject;
 import entity.Warrior;
 import tile.TileManager;
 
@@ -21,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = maxScreenRow*tileSize;
 
     //world settings
-    public  final  int maxWorldCol = 30;
-    public  final  int maxWorldRow = 14;
+    public  final  int maxWorldCol = 70;
+    public  final  int maxWorldRow = 50;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight =tileSize * maxWorldRow;
 
@@ -33,6 +34,10 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH= new KeyHandler();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
+    public Player player = new Player(this,keyH);
+    public SuperObject obj[] = new SuperObject[10];
+  
     public Warrior player = new Warrior(this,keyH);
 
     //Spawn Monster
@@ -48,6 +53,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         //Add monsters
         monsters.add(new Gobelin(this, 50));
+    }
+    public void setupGame(){
+        aSetter.setObject();
     }
     public void startGameThread(){
         gameThread = new Thread(this);
