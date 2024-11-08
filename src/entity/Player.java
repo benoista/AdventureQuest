@@ -19,6 +19,7 @@ public abstract class Player extends Entity {
     protected boolean isMovingRight = false;
     protected boolean isMovingDown = false;
     protected boolean isMovingUp = false;
+    protected boolean emote = false;
     protected int frameDelay = 5;
     protected int frameCounter = 0;
 
@@ -103,6 +104,9 @@ public abstract class Player extends Entity {
         }
         if(keyH.attackPressed){
            isAttacking = true;
+        }
+        if(keyH.emotePressed){
+            emote = true;
         }
 
     };
