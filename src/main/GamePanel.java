@@ -84,9 +84,6 @@ public class GamePanel extends JPanel implements Runnable {
         player.draw(g2);
 
         // Display the lastFrame attribute of player
-        g2.setColor(Color.WHITE);
-        g2.drawString("Last Frame: " + player.getLastFrame(), 10, 20);
-        g2.drawString("Current Frame: " + player.getDirection(), 10, 40);
         g2.dispose();
     }
 }

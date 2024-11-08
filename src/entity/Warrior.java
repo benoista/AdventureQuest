@@ -3,8 +3,12 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Warrior extends Player {
 
@@ -16,83 +20,71 @@ public class Warrior extends Player {
     //Animations
     private int currentFrame = 0;
     private Image lastFrame;
-    private Image[][] animationFrames; // Declare the animationFrames array
+    // Declare the animationFrames array
+    private Image[][] animationFramesMoves;
+    private Image[][] animationFramesAttack;
+    private Image[][] animationFramesEmote;
 
     public Warrior(GamePanel game, KeyHandler keyHandler) {
         super(game, keyHandler);
         loadAnimationFrames(); // Initialize the animation frames
-        lastFrame = animationFrames[1][0];
+        lastFrame = animationFramesMoves[1][0];
     }
 
     // Load your images into the animationFrames array
     private void loadAnimationFrames() {
-        animationFrames = new Image[8][9];
-        //moves animations
-        animationFrames[0][0] = scaleImage(new ImageIcon("src/resources/warrior/up/0.png").getImage());
-        animationFrames[0][1] = scaleImage(new ImageIcon("src/resources/warrior/up/1.png").getImage());
-        animationFrames[0][3] = scaleImage(new ImageIcon("src/resources/warrior/up/3.png").getImage());
-        animationFrames[0][4] = scaleImage(new ImageIcon("src/resources/warrior/up/4.png").getImage());
-        animationFrames[0][2] = scaleImage(new ImageIcon("src/resources/warrior/up/2.png").getImage());
-        animationFrames[0][5] = scaleImage(new ImageIcon("src/resources/warrior/up/5.png").getImage());
-        animationFrames[0][6] = scaleImage(new ImageIcon("src/resources/warrior/up/6.png").getImage());
-        animationFrames[0][7] = scaleImage(new ImageIcon("src/resources/warrior/up/7.png").getImage());
-        animationFrames[1][0] = scaleImage(new ImageIcon("src/resources/warrior/down/0.png").getImage());
-        animationFrames[1][1] = scaleImage(new ImageIcon("src/resources/warrior/down/1.png").getImage());
-        animationFrames[1][2] = scaleImage(new ImageIcon("src/resources/warrior/down/2.png").getImage());
-        animationFrames[1][3] = scaleImage(new ImageIcon("src/resources/warrior/down/3.png").getImage());
-        animationFrames[1][4] = scaleImage(new ImageIcon("src/resources/warrior/down/4.png").getImage());
-        animationFrames[1][5] = scaleImage(new ImageIcon("src/resources/warrior/down/5.png").getImage());
-        animationFrames[1][6] = scaleImage(new ImageIcon("src/resources/warrior/down/6.png").getImage());
-        animationFrames[1][7] = scaleImage(new ImageIcon("src/resources/warrior/down/7.png").getImage());
-        animationFrames[1][8] = scaleImage(new ImageIcon("src/resources/warrior/down/8.png").getImage());
-        animationFrames[2][0] = scaleImage(new ImageIcon("src/resources/warrior/left/0.png").getImage());
-        animationFrames[2][1] = scaleImage(new ImageIcon("src/resources/warrior/left/1.png").getImage());
-        animationFrames[2][2] = scaleImage(new ImageIcon("src/resources/warrior/left/2.png").getImage());
-        animationFrames[2][3] = scaleImage(new ImageIcon("src/resources/warrior/left/3.png").getImage());
-        animationFrames[2][4] = scaleImage(new ImageIcon("src/resources/warrior/left/4.png").getImage());
-        animationFrames[2][5] = scaleImage(new ImageIcon("src/resources/warrior/left/5.png").getImage());
-        animationFrames[2][6] = scaleImage(new ImageIcon("src/resources/warrior/left/6.png").getImage());
-        animationFrames[2][7] = scaleImage(new ImageIcon("src/resources/warrior/left/7.png").getImage());
-        animationFrames[2][8] = scaleImage(new ImageIcon("src/resources/warrior/left/8.png").getImage());
-        animationFrames[3][0] = scaleImage(new ImageIcon("src/resources/warrior/right/0.png").getImage());
-        animationFrames[3][1] = scaleImage(new ImageIcon("src/resources/warrior/right/1.png").getImage());
-        animationFrames[3][2] = scaleImage(new ImageIcon("src/resources/warrior/right/2.png").getImage());
-        animationFrames[3][3] = scaleImage(new ImageIcon("src/resources/warrior/right/3.png").getImage());
-        animationFrames[3][4] = scaleImage(new ImageIcon("src/resources/warrior/right/4.png").getImage());
-        animationFrames[3][5] = scaleImage(new ImageIcon("src/resources/warrior/right/5.png").getImage());
-        animationFrames[3][6] = scaleImage(new ImageIcon("src/resources/warrior/right/6.png").getImage());
-        animationFrames[3][7] = scaleImage(new ImageIcon("src/resources/warrior/right/7.png").getImage());
-        animationFrames[3][8] = scaleImage(new ImageIcon("src/resources/warrior/right/8.png").getImage());
+        try {
+            BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/moves.png")));
+            BufferedImage spriteSheetAttack = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/attack.png")));
+            BufferedImage spriteSheetEmote = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/emote.png")));
 
-        //Attack Animations
-        //up
-        animationFrames[4][0] = scaleImage(new ImageIcon("src/resources/warrior/attack/up/0.png").getImage());
-        animationFrames[4][1] = scaleImage(new ImageIcon("src/resources/warrior/attack/up/1.png").getImage());
-        animationFrames[4][2] = scaleImage(new ImageIcon("src/resources/warrior/attack/up/2.png").getImage());
-        animationFrames[4][3] = scaleImage(new ImageIcon("src/resources/warrior/attack/up/3.png").getImage());
-        animationFrames[4][4] = scaleImage(new ImageIcon("src/resources/warrior/attack/up/4.png").getImage());
-        animationFrames[4][5] = scaleImage(new ImageIcon("src/resources/warrior/attack/up/5.png").getImage());
-        //down
-        animationFrames[5][0] = scaleImage(new ImageIcon("src/resources/warrior/attack/down/0.png").getImage());
-        animationFrames[5][1] = scaleImage(new ImageIcon("src/resources/warrior/attack/down/1.png").getImage());
-        animationFrames[5][2] = scaleImage(new ImageIcon("src/resources/warrior/attack/down/2.png").getImage());
-        animationFrames[5][3] = scaleImage(new ImageIcon("src/resources/warrior/attack/down/3.png").getImage());
-        animationFrames[5][4] = scaleImage(new ImageIcon("src/resources/warrior/attack/down/4.png").getImage());
-        animationFrames[5][5] = scaleImage(new ImageIcon("src/resources/warrior/attack/down/5.png").getImage());
-        //left
-        animationFrames[6][0] = scaleImage(new ImageIcon("src/resources/warrior/attack/left/0.png").getImage());
-        animationFrames[6][1] = scaleImage(new ImageIcon("src/resources/warrior/attack/left/1.png").getImage());
-        animationFrames[6][2] = scaleImage(new ImageIcon("src/resources/warrior/attack/left/2.png").getImage());
-        animationFrames[6][3] = scaleImage(new ImageIcon("src/resources/warrior/attack/left/3.png").getImage());
-        animationFrames[6][4] = scaleImage(new ImageIcon("src/resources/warrior/attack/left/4.png").getImage());
-        animationFrames[6][5] = scaleImage(new ImageIcon("src/resources/warrior/attack/left/5.png").getImage());
-        //right
-        animationFrames[7][0] = scaleImage(new ImageIcon("src/resources/warrior/attack/right/0.png").getImage());
-        animationFrames[7][1] = scaleImage(new ImageIcon("src/resources/warrior/attack/right/1.png").getImage());
-        animationFrames[7][2] = scaleImage(new ImageIcon("src/resources/warrior/attack/right/2.png").getImage());
-        animationFrames[7][3] = scaleImage(new ImageIcon("src/resources/warrior/attack/right/3.png").getImage());
-        animationFrames[7][4] = scaleImage(new ImageIcon("src/resources/warrior/attack/right/4.png").getImage());
-        animationFrames[7][5] = scaleImage(new ImageIcon("src/resources/warrior/attack/right/5.png").getImage());
+            int frameWidthMoves = 63; // Width of each frame in moves sprite sheet
+            int frameHeightMoves = 63; // Height of each frame in moves sprite sheet
+
+            animationFramesMoves = new Image[8][9];
+            animationFramesAttack = new Image[4][6];
+            animationFramesEmote = new Image[4][7];
+
+            // Load move animations
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (j * frameWidthMoves + frameWidthMoves <= spriteSheetMoves.getWidth() && i * frameHeightMoves + frameHeightMoves <= spriteSheetMoves.getHeight()) {
+                        animationFramesMoves[i][j] = spriteSheetMoves.getSubimage(j * frameWidthMoves, i * frameHeightMoves, frameWidthMoves, frameHeightMoves);
+                    }
+                }
+            }
+
+            // Load emote animations
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (j * frameWidthMoves + frameWidthMoves <= spriteSheetEmote.getWidth() && i * frameHeightMoves + frameHeightMoves <= spriteSheetEmote.getHeight()) {
+                        animationFramesEmote[i][j] = spriteSheetEmote.getSubimage(j * frameWidthMoves, i * frameHeightMoves, frameWidthMoves, frameHeightMoves);
+                    }
+                }
+            }
+
+            // Load attack animations
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 6; j++) {
+                    animationFramesAttack[i][j] = scaleImage(new ImageIcon("src/resources/warrior/attack/" + getDirectionName(i) + "/" + j + ".png").getImage());
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("Resource not found: " + e.getMessage());
+        }
+    }
+
+    private String getDirectionName(int index) {
+        switch (index) {
+            case 0: return "up";
+            case 1: return "down";
+            case 2: return "left";
+            case 3: return "right";
+            default: return "";
+        }
     }
 
     //Resize Image
@@ -111,49 +103,68 @@ public class Warrior extends Player {
     //UpdateFrame for animation
     public void draw(Graphics2D g2) {
         frameCounter++;
+        if(emote){
+            frameDelay = 7;
+        } else {
+            frameDelay = 5;
+        }
         if (frameCounter >= frameDelay) {
             frameCounter = 0;
-            currentFrame++; // Increment current frame for animation
+            currentFrame++;// Increment current frame for animation
             if (isAttacking) {
                 if (currentFrame >= 6) {
                     currentFrame = 0;
                     isAttacking = false; // Reset attack state after animation completes
                 }
                 if (direction.equals("up")) {
-                    lastFrame = animationFrames[4][currentFrame];
+                    lastFrame = animationFramesAttack[0][currentFrame];
                 } else if (direction.equals("down")) {
-                    lastFrame = animationFrames[5][currentFrame];
+                    lastFrame = animationFramesAttack[1][currentFrame];
                 } else if (direction.equals("left")) {
-                    lastFrame = animationFrames[6][currentFrame];
+                    lastFrame = animationFramesAttack[2][currentFrame];
                 } else {
-                    lastFrame = animationFrames[7][currentFrame];
+                    lastFrame = animationFramesAttack[3][currentFrame];
                 }
             } else {
                 // Moving animation
                 if (isMovingRight) {
-                    lastFrame = animationFrames[3][currentFrame % animationFrames[3].length];
+                    lastFrame = animationFramesMoves[3][currentFrame % animationFramesMoves[3].length];
                 } else if (isMovingUp) {
-                    lastFrame = animationFrames[0][currentFrame % animationFrames[0].length];
+                    lastFrame = animationFramesMoves[0][currentFrame % animationFramesMoves[0].length];
                 } else if (isMovingDown) {
-                    lastFrame = animationFrames[1][currentFrame % animationFrames[1].length];
+                    lastFrame = animationFramesMoves[2][currentFrame % animationFramesMoves[2].length];
                 } else if (isMovingLeft) {
-                    lastFrame = animationFrames[2][currentFrame % animationFrames[2].length];
+                    lastFrame = animationFramesMoves[1][currentFrame % animationFramesMoves[1].length];
+                } else if (emote){
+                    if (currentFrame >= 7) {
+                        currentFrame = 0;
+                        emote = false;
+                    }
+                    if (direction.equals("up")) {
+                        lastFrame = animationFramesEmote[0][currentFrame];
+                    } else if (direction.equals("down")) {
+                        lastFrame = animationFramesEmote[2][currentFrame];
+                    } else if (direction.equals("left")) {
+                        lastFrame = animationFramesEmote[1][currentFrame];
+                    } else {
+                        lastFrame = animationFramesEmote[3][currentFrame];
+                    }
                 }
             }
         }
         if(lastFrame == null){
             switch(direction){
                 case "up":
-                    lastFrame = animationFrames[0][0];
+                    lastFrame = animationFramesMoves[0][0];
                     break;
                 case "down":
-                    lastFrame = animationFrames[1][0];
+                    lastFrame = animationFramesMoves[2][0];
                     break;
                 case "left":
-                    lastFrame = animationFrames[2][0];
+                    lastFrame = animationFramesMoves[1][0];
                     break;
                 case "right":
-                    lastFrame = animationFrames[3][0];
+                    lastFrame = animationFramesMoves[3][0];
                     break;
             }
         }
