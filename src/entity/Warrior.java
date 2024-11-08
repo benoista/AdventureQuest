@@ -14,8 +14,10 @@ public class Warrior extends Player {
 
     //Warrior Class
     private int HP = 100;
-    private int AP = 10;
+    private int DMG = 10;
 
+    private int attackCooldown = 0;
+    private final int attackCooldownMax = 40;
 
     //Animations
     private int currentFrame = 0;
@@ -29,6 +31,11 @@ public class Warrior extends Player {
         super(game, keyHandler);
         loadAnimationFrames(); // Initialize the animation frames
         lastFrame = animationFramesMoves[1][0];
+        attackRange = new Rectangle();
+        attackRange.x = 0 ;
+        attackRange.y = 20;
+        attackRange.width = 70 ;
+        attackRange.height = 50;
     }
 
     // Load your images into the animationFrames array
@@ -94,10 +101,34 @@ public class Warrior extends Player {
     }
 
 
-    public void setAttacking(boolean attacking) {
-        isAttacking = attacking;
+    public void attackRangeDirection(){
+        switch(direction){
+            case "up":
+                attackRange.x = 0;
+                attackRange.y = -20;
+                attackRange.width = 70;
+                attackRange.height = 50;
+                break;
+            case "down":
+                attackRange.x = 0;
+                attackRange.y = 40;
+                attackRange.width = 70;
+                attackRange.height = 50;
+                break;
+            case "left":
+                attackRange.x = -20;
+                attackRange.y = 0;
+                attackRange.width = 50;
+                attackRange.height = 70;
+                break;
+            case "right":
+                attackRange.x = 40;
+                attackRange.y = 0;
+                attackRange.width = 50;
+                attackRange.height = 70;
+                break;
+        }
     }
-
 
     //UpdateFrame for animation
     public void draw(Graphics2D g2) {
@@ -115,14 +146,19 @@ public class Warrior extends Player {
                     currentFrame = 0;
                     isAttacking = false; // Reset attack state after animation completes
                 }
-                if (direction.equals("up")) {
-                    lastFrame = animationFramesAttack[0][currentFrame];
-                } else if (direction.equals("down")) {
-                    lastFrame = animationFramesAttack[1][currentFrame];
-                } else if (direction.equals("left")) {
-                    lastFrame = animationFramesAttack[2][currentFrame];
-                } else {
-                    lastFrame = animationFramesAttack[3][currentFrame];
+                switch(direction){
+                    case "up":
+                        lastFrame = animationFramesAttack[0][currentFrame];
+                        break;
+                    case "down":
+                        lastFrame = animationFramesAttack[1][currentFrame];
+                        break;
+                    case "left":
+                        lastFrame = animationFramesAttack[2][currentFrame];
+                        break;
+                    case "right":
+                        lastFrame = animationFramesAttack[3][currentFrame];
+                        break;
                 }
             } else {
                 // Moving animation
@@ -139,14 +175,19 @@ public class Warrior extends Player {
                         currentFrame = 0;
                         emote = false;
                     }
-                    if (direction.equals("up")) {
-                        lastFrame = animationFramesEmote[0][currentFrame];
-                    } else if (direction.equals("down")) {
-                        lastFrame = animationFramesEmote[2][currentFrame];
-                    } else if (direction.equals("left")) {
-                        lastFrame = animationFramesEmote[1][currentFrame];
-                    } else {
-                        lastFrame = animationFramesEmote[3][currentFrame];
+                    switch(direction){
+                        case "up":
+                            lastFrame = animationFramesEmote[0][currentFrame];
+                            break;
+                        case "down":
+                            lastFrame = animationFramesEmote[2][currentFrame];
+                            break;
+                        case "left":
+                            lastFrame = animationFramesEmote[1][currentFrame];
+                            break;
+                        case "right":
+                            lastFrame = animationFramesEmote[3][currentFrame];
+                            break;
                     }
                 }
             }
@@ -168,17 +209,54 @@ public class Warrior extends Player {
             }
         }
         g2.drawImage(lastFrame, screenX, screenY, null);
-    }
+        g2.setColor(Color.RED);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+        g2.setColor(Color.BLUE);
+        g2.drawRect(screenX + attackRange.x, screenY + attackRange.y, attackRange.width, attackRange.height);
 
-    public String getDirection() {
-        return direction;
-    }
-
-
-    public Image getLastFrame() {
-        return lastFrame;
     }
 
 
+
+    @Override
+    public void update() {
+        super.update();
+        attackRangeDirection();
+
+        if (attackCooldown >0){
+            attackCooldown--;
+        }
+
+        for (Monster monster : gp.monsters) {
+            if (isAttacking && attackCooldown == 0) {
+                attack(monster);
+                attackCooldown = attackCooldownMax;
+            }
+        }
+    }
+
+
+    public void attack(Monster monster) {
+        // Convert attackRange to absolute position on the map
+        Rectangle absoluteAttackRange = new Rectangle(
+                worldX + attackRange.x,
+                worldY + attackRange.y,
+                attackRange.width,
+                attackRange.height
+        );
+
+        // Convert monster's solidArea to absolute position on the map
+        Rectangle absoluteSolidArea = new Rectangle(
+                monster.worldX + monster.solidArea.x,
+                monster.worldY + monster.solidArea.y,
+                monster.solidArea.width,
+                monster.solidArea.height
+        );
+
+        if (absoluteAttackRange.intersects(absoluteSolidArea)) {
+            monster.setHP(monster.getHP() - DMG);
+            System.out.println("Monster HP: " + monster.getHP());
+        }
+    }
 
 }
