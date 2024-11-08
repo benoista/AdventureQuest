@@ -23,8 +23,10 @@ public class Gobelin extends Monster {
 
 
         // Spawn of the Gobelin
-        this.worldX = gp.tileSize * 5;
-        this.worldY = gp.tileSize * 5;
+        // MAX MAP, 4 4 & 66 46
+
+        this.worldX = gp.tileSize * (30 + (int)(Math.random() * ((50 - 30) + 1)));
+        this.worldY = gp.tileSize * (20 + (int)(Math.random() * ((35 - 20) + 1)));
 
         this.Frame = new ImageIcon("src/resources/monster/gobelin/gobelin.png").getImage();
     }

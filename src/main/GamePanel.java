@@ -35,7 +35,6 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
-    public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[10];
   
     public Warrior player = new Warrior(this,keyH);
@@ -52,6 +51,20 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         //Add monsters
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(this, 50));
         monsters.add(new Gobelin(this, 50));
     }
     public void setupGame(){

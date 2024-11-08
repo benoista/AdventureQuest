@@ -223,21 +223,29 @@ public class Warrior extends Player {
         super.update();
         attackRangeDirection();
 
-        if (attackCooldown >0){
+        if (attackCooldown > 0) {
             attackCooldown--;
         }
 
-        for (Monster monster : gp.monsters) {
-            if (isAttacking && attackCooldown == 0) {
-                attack(monster);
-                attackCooldown = attackCooldownMax;
+        if (isAttacking && attackCooldown == 0) {
+            for (Monster monster : gp.monsters) {
+                if(checkRange(monster)){
+                    attack(monster);
+                    attackCooldown = attackCooldownMax;
+                }
             }
         }
     }
 
-
+    //Player attack Monster
     public void attack(Monster monster) {
-        // Convert attackRange to absolute position on the map
+        monster.setHP(monster.getHP() - DMG);
+        System.out.println("Monster HP: " + monster.getHP());
+    }
+
+
+    public boolean checkRange(Monster monster){
+        // AttackRange to MAP
         Rectangle absoluteAttackRange = new Rectangle(
                 worldX + attackRange.x,
                 worldY + attackRange.y,
@@ -245,18 +253,21 @@ public class Warrior extends Player {
                 attackRange.height
         );
 
-        // Convert monster's solidArea to absolute position on the map
+        // SolidArea TO MAP
         Rectangle absoluteSolidArea = new Rectangle(
                 monster.worldX + monster.solidArea.x,
                 monster.worldY + monster.solidArea.y,
                 monster.solidArea.width,
                 monster.solidArea.height
         );
-
+        // If the attack touch Monster
         if (absoluteAttackRange.intersects(absoluteSolidArea)) {
-            monster.setHP(monster.getHP() - DMG);
-            System.out.println("Monster HP: " + monster.getHP());
+            return true;
+        }else{
+            return false;
         }
+
+
     }
 
 }
