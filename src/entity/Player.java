@@ -22,11 +22,14 @@ public abstract class Player extends Entity {
     protected boolean emote = false;
     protected int frameDelay = 5;
     protected int frameCounter = 0;
+    private int attackCooldown = 0;
+    private final int attackCooldownMax = 30; // Adjust this value as needed
 
 
     public final int screenX;
     public final int screenY;
 
+    protected Rectangle attackRange;
     public Player(GamePanel gp, KeyHandler keyH)  {
         this.gp   = gp;
         this.keyH = keyH;
@@ -34,10 +37,12 @@ public abstract class Player extends Entity {
         screenY =gp.screenHeight/2 - (gp.tileSize/2);
 
         solidArea = new Rectangle();
-        solidArea.x =8;
+        solidArea.x =23;
         solidArea.y =25;
-        solidArea.width = 32 ;
+        solidArea.width = 20 ;
         solidArea.height = 32;
+
+
 
         setDefaultValues();
     }
@@ -52,22 +57,22 @@ public abstract class Player extends Entity {
     public void update(){
         isMovingLeft = false;isMovingUp = false;isMovingDown = false;isMovingRight = false;
         if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true){
-            if (keyH.upPressed==true){
+            if (keyH.upPressed){
                 direction="up";
 
 
             }
-            else if (keyH.downPressed==true){
+            else if (keyH.downPressed){
                 direction="down";
 
 
             }
-            else if (keyH.leftPressed==true){
+            else if (keyH.leftPressed){
                 direction="left";
 
 
             }
-            else if (keyH.rightPressed==true){
+            else if (keyH.rightPressed){
                 direction="right";
 
             }
