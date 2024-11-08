@@ -35,7 +35,6 @@ public class Warrior extends Player {
     private void loadAnimationFrames() {
         try {
             BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/moves.png")));
-            BufferedImage spriteSheetAttack = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/attack.png")));
             BufferedImage spriteSheetEmote = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/emote.png")));
 
             int frameWidthMoves = 63; // Width of each frame in moves sprite sheet
