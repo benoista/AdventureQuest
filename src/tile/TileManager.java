@@ -13,7 +13,8 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
-    public int mapdecor[][];
+
+
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -23,6 +24,9 @@ public class TileManager {
 
         getTileImage();
         loadMap("/maps/map01.txt");
+
+
+
     }
     public void getTileImage(){
         try {
@@ -41,15 +45,15 @@ public class TileManager {
 
             //water
 
-            setup(11, "311", false);
-            setup(10, "376", false);
-            setup(12, "312", false);
-            setup(13, "314", false);
-            setup(14, "341", false);
-            setup(15, "344", false);
-            setup(16, "401", false);
-            setup(17, "402", false);
-            setup(18, "404", false);
+            setup(11, "311", true);
+            setup(10, "376", true);
+            setup(12, "312", true);
+            setup(13, "314", true);
+            setup(14, "341", true);
+            setup(15, "344", true);
+            setup(16, "401", true);
+            setup(17, "402", true);
+            setup(18, "404", true);
 
             //grass
             setup(19, "158", false);
@@ -76,57 +80,57 @@ public class TileManager {
             setup(35, "3", false);
             setup(36, "60", false);
             //montain
-            setup(37, "158", false);
-            setup(38, "63", false);
-            setup(39, "90", false);
-            setup(40, "91", false);
-            setup(41, "93", false);
-            setup(42, "64", false);
-            setup(43, "49", false);
-            setup(44, "12", false);
+            setup(37, "158", true);
+            setup(38, "63", true);
+            setup(39, "90", true);
+            setup(40, "91", true);
+            setup(41, "93", true);
+            setup(42, "64", true);
+            setup(43, "49", true);
+            setup(44, "12", true);
             // bridge
-            setup(45, "52", false);
-            setup(46, "11", false);
+            setup(45, "52", true);
+            setup(46, "11", true);
             setup(47, "65", false);
-            setup(48, "15", false);
-            setup(49, "39", false);
-            setup(50, "40", false);
-            setup(51, "44", false);
-            setup(52, "587", false);
-            setup(53, "image1x1", false);
-            setup(54, "image2x1", false);
-            setup(55, "image3x1", false);
+            setup(48, "15", true);
+            setup(49, "39", true);
+            setup(50, "40", true);
+            setup(51, "44", true);
+            setup(52, "587", true);
+            setup(53, "image1x1", true);
+            setup(54, "image2x1", true);
+            setup(55, "image3x1", true);
 
-            setup(56, "image1x2", false);
-            setup(57, "image2x2", false);
-            setup(58, "image3x2", false);
+            setup(56, "image1x2", true);
+            setup(57, "image2x2", true);
+            setup(58, "image3x2", true);
 
-            setup(59, "image1x3", false);
-            setup(60, "image2x3", false);
-            setup(61, "image3x3", false);
+            setup(59, "image1x3", true);
+            setup(60, "image2x3", true);
+            setup(61, "image3x3", true);
 
-            setup(62, "image1x4", false);
-            setup(63, "image2x4", false);
-            setup(64, "image3x4", false);
+            setup(62, "image1x4", true);
+            setup(63, "image2x4", true);
+            setup(64, "image3x4", true);
 
-            setup(65, "box", false);
-            setup(66, "tono", false);
-            setup(67, "fchg", false);
-            setup(68, "fchd", false);
-            setup(69, "fcbg", false);
-            setup(70, "fcbd", false);
-            setup(71, "rockg", false);
-            setup(72, "rockd", false);
-            setup(73, "buchg", false);
-            setup(74, "buchd", false);
-            setup(75, "statuh", false);
-            setup(76, "statum", false);
-            setup(77, "statub", false);
+            setup(65, "box", true);
+            setup(66, "tono", true);
+            setup(67, "fchg", true);
+            setup(68, "fchd", true);
+            setup(69, "fcbg", true);
+            setup(70, "fcbd", true);
+            setup(71, "rockg", true);
+            setup(72, "rockd", true);
+            setup(73, "buchg", true);
+            setup(74, "buchd", true);
+            setup(75, "statuh", true);
+            setup(76, "statum", true);
+            setup(77, "statub", true);
             setup(78, "fj", false);
             setup(79, "fr", false);
-            setup(80, "pmh", false);
-            setup(81, "pmb", false);
-            setup(82, "tronc", false);
+            setup(80, "pmh", true);
+            setup(81, "pmb", true);
+            setup(82, "tronc", true);
             setup(83, "hg", false);
             setup(84, "h", false);
             setup(85, "hd", false);
@@ -136,15 +140,15 @@ public class TileManager {
             setup(89, "bg", false);
             setup(90, "b", false);
             setup(91, "bd", false);
-            setup(92, "lamph", false);
-            setup(93, "lampmid", false);
-            setup(94, "lampb", false);
-            setup(95, "fhg", false);
-            setup(96, "fh", false);
-            setup(97, "fhd", false);
-            setup(98, "fg", false);
-            setup(99, "fbg", false);
-            setup(100,"fbd", false);
+            setup(92, "lamph", true);
+            setup(93, "lampmid", true);
+            setup(94, "lampb", true);
+            setup(95, "fhg", true);
+            setup(96, "fh", true);
+            setup(97, "fhd", true);
+            setup(98, "fg", true);
+            setup(99, "fbg", true);
+            setup(100,"fbd", true);
 
             setup(101, "466", false);
             setup(102, "467", false);
@@ -159,24 +163,7 @@ public class TileManager {
             setup(111, "617", false);
             setup(112, "618", false);
 
-            setup(113, "rock", false);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            setup(113, "rock", true);
 
         }catch (Exception e){e.printStackTrace();}
 
