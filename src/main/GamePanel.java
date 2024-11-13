@@ -6,6 +6,7 @@ import entity.Player;
 import object.SuperObject;
 import entity.Warrior;
 import tile.TileManager;
+import tile.TileManager2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS =60;
 
     TileManager tileM = new TileManager(this);
+    TileManager2 tileN = new TileManager2(this);
     KeyHandler keyH= new KeyHandler();
     Sound se = new Sound();
     Sound music = new Sound();
@@ -127,6 +129,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         tileM.draw(g2);
+        tileN.draw(g2);
 
         for (int i = 0 ; i < obj.length ; i++) {
             if (obj[i] != null) {

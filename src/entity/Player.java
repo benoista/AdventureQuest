@@ -50,8 +50,8 @@ public abstract class Player extends Entity {
 
     public void setDefaultValues(){
         worldX=gp.tileSize*20;
-        worldY=gp.tileSize*10;
-        speed=40;
+        worldY=gp.tileSize*15;
+        speed=4;
         direction="down";
     }
         public void pickUpObject(int i){
