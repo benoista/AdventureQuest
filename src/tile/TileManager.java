@@ -13,11 +13,12 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
+    public int mapdecor[][];
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new Tile[60];
+        tile = new Tile[115];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
@@ -92,10 +93,78 @@ public class TileManager {
             setup(50, "40", false);
             setup(51, "44", false);
             setup(52, "587", false);
-            setup(53, "588", false);
-            setup(54, "616", false);
-            setup(55, "617", false);
-            setup(56, "618", false);
+            setup(53, "image1x1", false);
+            setup(54, "image2x1", false);
+            setup(55, "image3x1", false);
+
+            setup(56, "image1x2", false);
+            setup(57, "image2x2", false);
+            setup(58, "image3x2", false);
+
+            setup(59, "image1x3", false);
+            setup(60, "image2x3", false);
+            setup(61, "image3x3", false);
+
+            setup(62, "image1x4", false);
+            setup(63, "image2x4", false);
+            setup(64, "image3x4", false);
+
+            setup(65, "box", false);
+            setup(66, "tono", false);
+            setup(67, "fchg", false);
+            setup(68, "fchd", false);
+            setup(69, "fcbg", false);
+            setup(70, "fcbd", false);
+            setup(71, "rockg", false);
+            setup(72, "rockd", false);
+            setup(73, "buchg", false);
+            setup(74, "buchd", false);
+            setup(75, "statuh", false);
+            setup(76, "statum", false);
+            setup(77, "statub", false);
+            setup(78, "fj", false);
+            setup(79, "fr", false);
+            setup(80, "pmh", false);
+            setup(81, "pmb", false);
+            setup(82, "tronc", false);
+            setup(83, "hg", false);
+            setup(84, "h", false);
+            setup(85, "hd", false);
+            setup(86, "mg", false);
+            setup(87, "m", false);
+            setup(88, "md", false);
+            setup(89, "bg", false);
+            setup(90, "b", false);
+            setup(91, "bd", false);
+            setup(92, "lamph", false);
+            setup(93, "lampmid", false);
+            setup(94, "lampb", false);
+            setup(95, "fhg", false);
+            setup(96, "fh", false);
+            setup(97, "fhd", false);
+            setup(98, "fg", false);
+            setup(99, "fbg", false);
+            setup(100,"fbd", false);
+
+            setup(101, "466", false);
+            setup(102, "467", false);
+            setup(103, "468", false);
+            setup(104, "496", false);
+            setup(105, "497", false);
+            setup(106, "498", false);
+            setup(107, "586", false);
+            setup(108, "587", false);
+            setup(109, "588", false);
+            setup(110, "616", false);
+            setup(111, "617", false);
+            setup(112, "618", false);
+
+            setup(113, "rock", false);
+
+
+
+
+
 
 
 
