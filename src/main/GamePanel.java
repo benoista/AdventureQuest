@@ -22,19 +22,22 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = maxScreenRow*tileSize;
 
     //world settings
-    public  final  int maxWorldCol = 70;
-    public  final  int maxWorldRow = 50;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight =tileSize * maxWorldRow;
+    public  final  int maxWorldCol = 160;
+    public  final  int maxWorldRow = 120;
 
 
     int FPS =60;
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH= new KeyHandler();
-    Thread gameThread;
+    Sound se = new Sound();
+    Sound music = new Sound();
+
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+
+    Thread gameThread;
     public SuperObject obj[] = new SuperObject[10];
   
     public Warrior player = new Warrior(this,keyH);
@@ -69,6 +72,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void setupGame(){
         aSetter.setObject();
+
+        playMusic(0);
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -114,19 +119,43 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
     }
+
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+
         tileM.draw(g2);
+
+        for (int i = 0 ; i < obj.length ; i++) {
+            if (obj[i] != null) {
+                obj[i].draw(g2,this);
+            }
+        }
+
         player.draw(g2);
         for (Monster monster : monsters){
             monster.draw(g2);
 
 
         }
+        ui.draw(g2);
 
 
         // Display the lastFrame attribute of player
         g2.dispose();
+    }
+    public void playMusic(int i){
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+    public void stopMusic(){
+        music.stop();
+    }
+    public void playSE(int i){
+        se.setFile(i);
+        se.play();
     }
 }
