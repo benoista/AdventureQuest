@@ -9,29 +9,22 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TileManager {
+public class TileManager2{
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][];
+    public int mapdecor[][];
 
-
-
-    public TileManager(GamePanel gp) {
+    public TileManager2(GamePanel gp) {
         this.gp = gp;
 
         tile = new Tile[115];
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapdecor = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/map01.txt");
-
-
-
+        loadMap("/maps/mapoverlay.txt");
     }
     public void getTileImage(){
         try {
-
-            //water
             setup(0, "01", false);
             setup(1, "01", false);
             setup(2, "01", false);
@@ -164,7 +157,6 @@ public class TileManager {
             setup(112, "618", false);
 
             setup(113, "rock", true);
-
         }catch (Exception e){e.printStackTrace();}
 
     }
@@ -190,7 +182,7 @@ public class TileManager {
                     String numbers[] = line.split(",");
                     int num = Integer.parseInt(numbers[col]);
 
-                    mapTileNum[col][row]=num;
+                    mapdecor[col][row]=num;
                     col++;
 
                 }
@@ -210,18 +202,18 @@ public class TileManager {
 
 
         while (worldCol<gp.maxWorldCol && worldRow<gp.maxWorldRow){
-            int tileNum = mapTileNum[worldCol][worldRow];
+            int tileNum = mapdecor[worldCol][worldRow];
 
             int worldX = worldCol*gp.tileSize;
             int worldY = worldRow*gp.tileSize;
-            int screenX=worldX -gp.player.worldX +gp.screenX;
-            int screenY=worldY -gp.player.worldY +gp.screenY;
+            int screenX=worldX -gp.player.worldX +gp.player.screenX;
+            int screenY=worldY -gp.player.worldY +gp.player.screenY;
 
             if (
-                    worldX + gp.tileSize > gp.player.worldX-gp.screenX&&
-                            worldY + gp.tileSize > gp.player.worldY-gp.screenY&&
-                            worldX - gp.tileSize <gp.player.worldX+gp.screenX&&
-                            worldY - gp.tileSize <gp.player.worldY+gp.screenY){
+                    worldX + gp.tileSize > gp.player.worldX-gp.player.screenX&&
+                            worldY + gp.tileSize > gp.player.worldY-gp.player.screenY&&
+                            worldX - gp.tileSize <gp.player.worldX+gp.player.screenX&&
+                            worldY - gp.tileSize <gp.player.worldY+gp.player.screenY){
                 if (this.tile[tileNum] != null && this.tile[tileNum].image != null) {
                     g2.drawImage(tile[tileNum].image, screenX, screenY,  null);
                 } else {

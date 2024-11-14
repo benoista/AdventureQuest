@@ -5,18 +5,19 @@ import main.GamePanel;
 import javax.imageio.ImageIO;
 import java.io.File;
 
-public class OBJ_Boot extends SuperObject{
+public class Door extends SuperObject{
     GamePanel gp;
 
-    public OBJ_Boot(GamePanel gp) {
-        name = "Boot";
+    public Door(GamePanel gp) {
+        name = "Door";
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/boot.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/objects/image8x4.png"));
             uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+        collision = true;
     }
 }

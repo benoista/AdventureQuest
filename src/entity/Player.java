@@ -1,6 +1,9 @@
 package entity;
 
 import main.KeyHandler;
+import main.*;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -9,6 +12,9 @@ public abstract class Player extends BaseCharacter {
     KeyHandler keyH;
 
     //Emote
+
+
+
     protected boolean emote = false;
 
     //Key for object
@@ -40,20 +46,20 @@ public abstract class Player extends BaseCharacter {
     /*
     public void pickUpObject(int i){
         if (i != 999){
-            String objectName = gp.obj[i].name;
+            String objectName = obj[i].name;
 
             switch (objectName){
                 case "Key":
-                    gp.playSE(1);
+                    se.playSE(1);
                     hasKey++;
-                    gp.obj[i]=null;
+                    obj[i]=null;
                     gp.ui.showMessage("You picked up key");
 
                     break;
                 case "Door":
                     if (hasKey>0){
-                        gp.playSE(3);
-                        gp.obj[i]=null;
+                        se.playSE(3);
+                        obj[i]=null;
                         hasKey--;
                         gp.ui.showMessage("open a door");
                     }
@@ -61,16 +67,21 @@ public abstract class Player extends BaseCharacter {
                         gp.ui.showMessage("you need a key");
                     break;
                 case "Boot":
-                    gp.playSE(2);
+                    se.playSE(2);
                     speed+=1;
-                    gp.obj[i]=null;
+                    obj[i]=null;
                     gp.ui.showMessage("Your speed just increase");
                     break;
 
                 case "Chest":
                     gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
+
+                    se.playSE(4);
+                    break;
+
+                case "House":
+                    se.playSE(3);
+
                     break;
 
 
@@ -79,7 +90,7 @@ public abstract class Player extends BaseCharacter {
             }
         }
 
-        }
+    }
 
      */
         //Update the player
@@ -126,7 +137,7 @@ public abstract class Player extends BaseCharacter {
             }
         }
         if(keyH.attackPressed){
-           isAttacking = true;
+            isAttacking = true;
         }
         if(keyH.emotePressed){
             emote = true;
