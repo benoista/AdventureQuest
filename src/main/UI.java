@@ -1,6 +1,6 @@
 package main;
 
-import object.OBJ_key;
+import object.Key;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,7 +24,7 @@ public class UI {
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
-        OBJ_key key = new OBJ_key(gp);
+        Key key = new Key(gp);
         keyImage = key.image;
     }
     public void showMessage(String text) {

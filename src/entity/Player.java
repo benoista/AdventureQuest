@@ -1,7 +1,6 @@
 package entity;
 
-import main.GamePanel;
-import main.KeyHandler;
+import main.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,11 +8,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
+
+import static main.Main.*;
+
+
 public abstract class Player extends Entity {
     //GamePanel and KeyHandler
     GamePanel gp;
     KeyHandler keyH;
-
     protected boolean isAttacking = false;
     protected boolean isMovingLeft = false;
     protected boolean isMovingRight = false;
@@ -51,25 +53,25 @@ public abstract class Player extends Entity {
     public void setDefaultValues(){
         worldX=gp.tileSize*20;
         worldY=gp.tileSize*15;
-        speed=4;
+        speed=15;
         direction="down";
     }
-        public void pickUpObject(int i){
+    public void pickUpObject(int i){
         if (i != 999){
-            String objectName = gp.obj[i].name;
+            String objectName = obj[i].name;
 
             switch (objectName){
                 case "Key":
-                    gp.playSE(1);
+                    se.playSE(1);
                     hasKey++;
-                    gp.obj[i]=null;
+                    obj[i]=null;
                     gp.ui.showMessage("You picked up key");
 
                     break;
                 case "Door":
                     if (hasKey>0){
-                        gp.playSE(3);
-                        gp.obj[i]=null;
+                        se.playSE(3);
+                        obj[i]=null;
                         hasKey--;
                         gp.ui.showMessage("open a door");
                     }
@@ -77,16 +79,21 @@ public abstract class Player extends Entity {
                         gp.ui.showMessage("you need a key");
                     break;
                 case "Boot":
-                    gp.playSE(2);
+                    se.playSE(2);
                     speed+=1;
-                    gp.obj[i]=null;
+                    obj[i]=null;
                     gp.ui.showMessage("Your speed just increase");
                     break;
 
                 case "Chest":
                     gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
+
+                    se.playSE(4);
+                    break;
+
+                case "House":
+                    se.playSE(3);
+
                     break;
 
 
@@ -95,7 +102,7 @@ public abstract class Player extends Entity {
             }
         }
 
-        }
+    }
 
     public void update(){
         isMovingLeft = false;isMovingUp = false;isMovingDown = false;isMovingRight = false;
@@ -153,7 +160,7 @@ public abstract class Player extends Entity {
             }
         }
         if(keyH.attackPressed){
-           isAttacking = true;
+            isAttacking = true;
         }
         if(keyH.emotePressed){
             emote = true;

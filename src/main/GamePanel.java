@@ -1,16 +1,15 @@
 package main;
 
-import entity.Gobelin;
-import entity.Monster;
-import entity.Player;
+import entity.*;
 import object.SuperObject;
-import entity.Warrior;
 import tile.TileManager;
 import tile.TileManager2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+
+import static main.Main.obj;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTitleSize = 16;
@@ -32,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     TileManager2 tileN = new TileManager2(this);
     KeyHandler keyH= new KeyHandler();
-    Sound se = new Sound();
+    //public static Sound se = new Sound();
     Sound music = new Sound();
 
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -40,9 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
 
     Thread gameThread;
-    public SuperObject obj[] = new SuperObject[10];
-  
-    public Warrior player = new Warrior(this,keyH);
+
+
+    public Mage player = new Mage(this,keyH);
 
     //Spawn Monster
     public ArrayList<Monster> monsters = new ArrayList<>();
@@ -74,8 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void setupGame(){
         aSetter.setObject();
-
-        playMusic(0);
+        music.playMusic();
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -149,16 +147,5 @@ public class GamePanel extends JPanel implements Runnable {
         // Display the lastFrame attribute of player
         g2.dispose();
     }
-    public void playMusic(int i){
-        music.setFile(i);
-        music.play();
-        music.loop();
-    }
-    public void stopMusic(){
-        music.stop();
-    }
-    public void playSE(int i){
-        se.setFile(i);
-        se.play();
-    }
+
 }

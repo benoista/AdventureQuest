@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 
 public class SuperObject {
     public BufferedImage image;
+    public BufferedImage image1;
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
@@ -26,6 +27,8 @@ public class SuperObject {
                         worldX - gp.tileSize <gp.player.worldX+gp.player.screenX&&
                         worldY - gp.tileSize <gp.player.worldY+gp.player.screenY){
 
-                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
-}}}
+            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image1, screenX, screenY, gp.tileSize*4, gp.tileSize*4, null);
+
+        }}}

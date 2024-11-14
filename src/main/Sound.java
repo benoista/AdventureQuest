@@ -13,10 +13,10 @@ public class Sound {
 
     public Sound() {
         soundURL[0] = getClass().getResource("/sound/music.wav");
-        soundURL[4] = getClass().getResource("/sound/fanfare.wav");
         soundURL[1] = getClass().getResource("/sound/coin.wav");
         soundURL[2] = getClass().getResource("/sound/powerup.wav");
         soundURL[3] = getClass().getResource("/sound/unlock.wav");
+        soundURL[4] = getClass().getResource("/sound/fanfare.wav");
     }
     public void setFile(int i){
         try {
@@ -28,6 +28,19 @@ public class Sound {
 
         }
     }
+    public void playMusic(){
+        setFile(0);
+        play();
+        loop();
+    }
+    public void stopMusic(){
+        stop();
+    }
+    public void playSE(int i){
+        setFile(i);
+        play();
+    }
+
     public void play(){
         clip.start();
     }
@@ -37,4 +50,5 @@ public class Sound {
     public void stop(){
         clip.stop();
     }
+
 }
