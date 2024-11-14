@@ -1,61 +1,49 @@
 package entity;
 
+import main.KeyHandler;
 import main.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
+import java.util.ArrayList;
 
-
-import static main.Main.*;
-
-
-public abstract class Player extends Entity {
-    //GamePanel and KeyHandler
-    GamePanel gp;
+public abstract class Player extends BaseCharacter {
+    //KeyHandler
     KeyHandler keyH;
-    protected boolean isAttacking = false;
-    protected boolean isMovingLeft = false;
-    protected boolean isMovingRight = false;
-    protected boolean isMovingDown = false;
-    protected boolean isMovingUp = false;
+
+    //Emote
+
+
+
     protected boolean emote = false;
-    protected int frameDelay = 5;
-    protected int frameCounter = 0;
-    private int attackCooldown = 0;
-    private final int attackCooldownMax = 30; // Adjust this value as needed
 
-
-    public final int screenX;
-    public final int screenY;
+    //Key for object
     public int hasKey = 0;
 
-    protected Rectangle attackRange;
-    public Player(GamePanel gp, KeyHandler keyH)  {
-        this.gp   = gp;
+    // Declare the animationFrames array
+    protected Image[][] animationFramesMoves;
+    protected Image[][] animationFramesAttack;
+    protected Image[][] animationFramesEmote;
+
+    //Animations
+    protected int currentFrame = 0;
+    protected Image lastFrame;
+    ;
+
+
+    public Player(KeyHandler keyH)  {
         this.keyH = keyH;
-        screenX =gp.screenWidth/2 - (gp.tileSize/2);
-        screenY =gp.screenHeight/2 - (gp.tileSize/2);
-
-        solidArea = new Rectangle();
-        solidArea.x =23;
-        solidArea.y =25;
-        solidArea.width = 20 ;
-        solidArea.height = 32;
-
-
-
         setDefaultValues();
     }
 
     public void setDefaultValues(){
-        worldX=gp.tileSize*20;
-        worldY=gp.tileSize*15;
-        speed=15;
+        worldX = (16*3)*20;
+        worldY = (16*3)*10;
+        speed=10;
         direction="down";
     }
+
+    /*
     public void pickUpObject(int i){
         if (i != 999){
             String objectName = obj[i].name;
@@ -104,54 +92,43 @@ public abstract class Player extends Entity {
 
     }
 
-    public void update(){
+     */
+        //Update the player
+    public void update(ArrayList<Monster> monsters, int screenX, int screenY){
         isMovingLeft = false;isMovingUp = false;isMovingDown = false;isMovingRight = false;
         if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true){
             if (keyH.upPressed){
                 direction="up";
-
-
             }
             else if (keyH.downPressed){
                 direction="down";
-
-
             }
             else if (keyH.leftPressed){
                 direction="left";
-
-
             }
             else if (keyH.rightPressed){
                 direction="right";
-
             }
             collisionOn = false;
+            /*
             gp.cChecker.checkTile(this);
-
             int objIndex = gp.cChecker.checkObject(this,true);
             pickUpObject(objIndex);
-            if(collisionOn==false){
+             */
+            if(!collisionOn){
                 switch (direction){
                     case "up":
                         worldY -=speed;
                         isMovingUp = true;
                         break;
-
-
-
                     case "down":
                         worldY +=speed;
                         isMovingDown = true;
                         break;
-
-
                     case "left":
                         worldX-=speed;
                         isMovingLeft = true;
                         break;
-
-
                     case "right":
                         worldX+=speed;
                         isMovingRight = true;
@@ -168,4 +145,48 @@ public abstract class Player extends Entity {
 
     };
 
+    public boolean checkRange(Monster monster, int screenX, int screenY) {
+        // AttackRange to MAP
+        Rectangle absoluteAttackRange = new Rectangle(
+                worldX + attackRange.x,
+                worldY + attackRange.y,
+                attackRange.width,
+                attackRange.height
+        );
+
+        // SolidArea TO MAP
+        Rectangle absoluteSolidArea = new Rectangle(
+                monster.worldX + monster.solidArea.x,
+                monster.worldY + monster.solidArea.y,
+                monster.solidArea.width,
+                monster.solidArea.height
+        );
+        // If the attack touch Monster
+        if (absoluteAttackRange.intersects(absoluteSolidArea)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Player attack Monster
+    public void attack(Monster monster) {
+        monster.setHP(monster.getHP() - this.dmg);
+        System.out.println("Monster HP: " + monster.getHP());
+    }
+
+    //Implemented in subcalsses;
+    public void attackRangeDirection(){};
+
+    // Initialize the animation frames
+    public String getDirectionName(int index) {
+        switch (index) {
+            case 0: return "up";
+            case 1: return "left";
+            case 2: return "down";
+            case 3: return "right";
+            default: return "";
+        }
+    }
 }
+

@@ -15,6 +15,9 @@ public class Gobelin extends Monster {
         super(gp, HP);
 
 
+
+
+        //hitbox
         solidArea = new Rectangle();
         solidArea.x = 1;
         solidArea.y = 4;
@@ -34,8 +37,8 @@ public class Gobelin extends Monster {
 
     @Override
     public void draw(Graphics2D g2) {
-        int monsterX = worldX - gp.player.worldX + gp.player.screenX;
-        int monsterY = worldY - gp.player.worldY + gp.player.screenY;
+        int monsterX = worldX - gp.player.worldX + gp.screenX;
+        int monsterY = worldY - gp.player.worldY + gp.screenY;
         g2.drawImage(Frame, monsterX, monsterY, null);
         g2.setColor(Color.RED);
         g2.drawRect(monsterX + solidArea.x, monsterY + solidArea.y, solidArea.width, solidArea.height);

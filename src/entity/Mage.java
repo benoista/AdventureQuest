@@ -5,6 +5,7 @@ import main.KeyHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Mage extends Player {
 
@@ -15,23 +16,23 @@ public class Mage extends Player {
     private int attackCooldown = 0;
     private final int attackCooldownMax = 40;
 
-    //Animations
-    private int currentFrame = 0;
-    private Image lastFrame;
-
-    // Declare the animationFrames array
-    private Image[][] animationFramesMoves;
-    private Image[][] animationFramesAttack;
-    private Image[][] animationFramesEmote;
-
     //FireBall
     private Fireball fireball;
 
-    public Mage(GamePanel game, KeyHandler keyHandler) {
-        super(game, keyHandler);
-        loadAnimationFrames(); // Initialize the animation frames
+    public Mage(KeyHandler keyHandler, Fireball fir) {
+        super(keyHandler);
+        // Initialize the animation frames
+        loadAnimationFrames();
+        //Initialize the default frame
         lastFrame = animationFramesMoves[1][0];
-        fireball = new Fireball(gp);
+        // Set the fireball
+        fireball = fir;
+
+        solidArea = new Rectangle();
+        solidArea.x =23;
+        solidArea.y =25;
+        solidArea.width = 20 ;
+        solidArea.height = 32;
     }
 
     // Load your images into the animationFrames array
@@ -61,16 +62,6 @@ public class Mage extends Player {
         }
     }
 
-    private String getDirectionName(int index) {
-        switch (index) {
-            case 0: return "up";
-            case 1: return "left";
-            case 2: return "down";
-            case 3: return "right";
-            default: return "";
-        }
-    }
-
     //Resize Image
     private Image scaleImage(Image image) {
         int width = image.getWidth(null);
@@ -79,7 +70,7 @@ public class Mage extends Player {
     }
 
     //UpdateFrame for animation
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2, int screenX, int screenY) {
         frameCounter++;
         if(emote){
             frameDelay = 7;
@@ -166,12 +157,12 @@ public class Mage extends Player {
 
 
     @Override
-    public void update() {
-        super.update();
+    public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
+        super.update(monsters, screenX, screenY);
 
         if (attackCooldown > 0) {
             attackCooldown--;
-        }
+        };
 
         if (isAttacking && attackCooldown == 0) {
             if (!fireball.isAlive()) {
@@ -182,8 +173,8 @@ public class Mage extends Player {
 
         fireball.update();
 
-        for (Monster monster : gp.monsters) {
-            if (checkRange(monster)) {
+        for (Monster monster : monsters) {
+            if (checkRange(monster, screenX, screenY)) {
                 attack(monster);
             }
         }
@@ -194,18 +185,18 @@ public class Mage extends Player {
 
 
     //Player attack Monster
+    @Override
     public void attack(Monster monster) {
-        monster.setHP(monster.getHP() - DMG);
-        System.out.println("Monster HP: " + monster.getHP());
+        super.attack(monster);
         fireball.setAlive(false);
     }
 
 
-    public boolean checkRange(Monster monster) {
+    public boolean checkRange(Monster monster, int screenX, int screenY) {
         if (fireball.isAlive()) {
             Rectangle absoluteAttackRange = new Rectangle(
-                    fireball.getPosX() + fireball.solidArea.x + gp.player.worldX - gp.player.screenX,
-                    fireball.getPosY() + fireball.solidArea.y + gp.player.worldY - gp.player.screenY,
+                    fireball.getPosX() + fireball.solidArea.x + worldX - screenX,
+                    fireball.getPosY() + fireball.solidArea.y + worldY - screenY,
                     fireball.solidArea.width,
                     fireball.solidArea.height
             );

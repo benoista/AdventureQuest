@@ -21,6 +21,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = maxScreenCol*tileSize;
     public final int screenHeight = maxScreenRow*tileSize;
 
+    public final int screenX = screenWidth/2 - (tileSize/2);
+    public final int screenY = screenHeight/2 - (tileSize/2);
+
+
     //world settings
     public  final  int maxWorldCol = 160;
     public  final  int maxWorldRow = 120;
@@ -40,8 +44,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
 
+    public SuperObject obj[] = new SuperObject[10];
 
-    public Mage player = new Mage(this,keyH);
+    public Fireball fireball = new Fireball(this);
+    public Mage player = new Mage(keyH, fireball);
+
 
     //Spawn Monster
     public ArrayList<Monster> monsters = new ArrayList<>();
@@ -94,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
             timer += currentTime-lastTime;
             lastTime = currentTime;
             if(delta>= 1) {
-                update();
+                update(screenX, screenY);
 
                 repaint();
                 delta--;
@@ -108,8 +115,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void update(){
-        player.update();
+    public void update(int screenX, int screenY){
+        player.update(monsters ,screenX, screenY);
 
         for (Monster monster : monsters) {
             if (cChecker.checkEntityCollision(player, monster)) {
@@ -135,7 +142,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        player.draw(g2);
+        player.draw(g2, screenX ,screenY);
         for (Monster monster : monsters){
             monster.draw(g2);
 

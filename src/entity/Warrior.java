@@ -1,6 +1,5 @@
 package entity;
 
-import main.GamePanel;
 import main.KeyHandler;
 
 import javax.imageio.ImageIO;
@@ -8,34 +7,37 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Warrior extends Player {
 
-    //Warrior Class
-    private int HP = 100;
-    private int DMG = 10;
 
-    private int attackCooldown = 0;
-    private final int attackCooldownMax = 40;
 
-    //Animations
-    private int currentFrame = 0;
-    private Image lastFrame;
-    // Declare the animationFrames array
-    private Image[][] animationFramesMoves;
-    private Image[][] animationFramesAttack;
-    private Image[][] animationFramesEmote;
+    public Warrior(KeyHandler keyHandler) {
+        super(keyHandler);
+        this.hp = 100;
+        this.dmg = 10;
+        this.attackCooldown = 90;
+        this.attackCooldown = 0;
 
-    public Warrior(GamePanel game, KeyHandler keyHandler) {
-        super(game, keyHandler);
-        loadAnimationFrames(); // Initialize the animation frames
-        lastFrame = animationFramesMoves[1][0];
+        // Initialize the animation frames
+        loadAnimationFrames();
+        //Initialize the default frame
+        lastFrame = animationFramesMoves[2][0];
+
+        // Set the attack range
         attackRange = new Rectangle();
-        attackRange.x = 0 ;
-        attackRange.y = 20;
-        attackRange.width = 70 ;
+        attackRange.x = 0;
+        attackRange.y = -20;
+        attackRange.width = 70;
         attackRange.height = 50;
+
+        solidArea = new Rectangle();
+        solidArea.x =23;
+        solidArea.y =25;
+        solidArea.width = 20 ;
+        solidArea.height = 32;
     }
 
     // Load your images into the animationFrames array
@@ -83,16 +85,6 @@ public class Warrior extends Player {
         }
     }
 
-    private String getDirectionName(int index) {
-        switch (index) {
-            case 0: return "up";
-            case 1: return "down";
-            case 2: return "left";
-            case 3: return "right";
-            default: return "";
-        }
-    }
-
     //Resize Image
     private Image scaleImage(Image image) {
         int width = image.getWidth(null);
@@ -100,12 +92,12 @@ public class Warrior extends Player {
         return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
-
+    @Override
     public void attackRangeDirection(){
         switch(direction){
             case "up":
                 attackRange.x = 0;
-                attackRange.y = -20;
+                attackRange.y = -40;
                 attackRange.width = 70;
                 attackRange.height = 50;
                 break;
@@ -130,8 +122,26 @@ public class Warrior extends Player {
         }
     }
 
+    @Override
+    public void update(ArrayList<Monster> monsters, int screenX, int screenY){;
+        super.update(monsters, screenX, screenY);
+        attackRangeDirection();
+
+        if (attackCooldown > 0) {
+            attackCooldown--;
+        }
+
+        if (isAttacking && attackCooldown == 0) {
+            for (Monster monster : monsters) {
+                if(checkRange(monster, screenX, screenY)){
+                    attack(monster);
+                    attackCooldown = attackCooldownMax;
+                }
+            }
+        }
+    }
     //UpdateFrame for animation
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2, int screenX, int screenY) {
         frameCounter++;
         if(emote){
             frameDelay = 7;
@@ -151,10 +161,10 @@ public class Warrior extends Player {
                         lastFrame = animationFramesAttack[0][currentFrame];
                         break;
                     case "down":
-                        lastFrame = animationFramesAttack[1][currentFrame];
+                        lastFrame = animationFramesAttack[2][currentFrame];
                         break;
                     case "left":
-                        lastFrame = animationFramesAttack[2][currentFrame];
+                        lastFrame = animationFramesAttack[1][currentFrame];
                         break;
                     case "right":
                         lastFrame = animationFramesAttack[3][currentFrame];
@@ -216,58 +226,5 @@ public class Warrior extends Player {
 
     }
 
-
-
-    @Override
-    public void update() {
-        super.update();
-        attackRangeDirection();
-
-        if (attackCooldown > 0) {
-            attackCooldown--;
-        }
-
-        if (isAttacking && attackCooldown == 0) {
-            for (Monster monster : gp.monsters) {
-                if(checkRange(monster)){
-                    attack(monster);
-                    attackCooldown = attackCooldownMax;
-                }
-            }
-        }
-    }
-
-    //Player attack Monster
-    public void attack(Monster monster) {
-        monster.setHP(monster.getHP() - DMG);
-        System.out.println("Monster HP: " + monster.getHP());
-    }
-
-
-    public boolean checkRange(Monster monster){
-        // AttackRange to MAP
-        Rectangle absoluteAttackRange = new Rectangle(
-                worldX + attackRange.x,
-                worldY + attackRange.y,
-                attackRange.width,
-                attackRange.height
-        );
-
-        // SolidArea TO MAP
-        Rectangle absoluteSolidArea = new Rectangle(
-                monster.worldX + monster.solidArea.x,
-                monster.worldY + monster.solidArea.y,
-                monster.solidArea.width,
-                monster.solidArea.height
-        );
-        // If the attack touch Monster
-        if (absoluteAttackRange.intersects(absoluteSolidArea)) {
-            return true;
-        }else{
-            return false;
-        }
-
-
-    }
 
 }
