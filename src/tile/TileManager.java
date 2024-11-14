@@ -227,14 +227,14 @@ public class TileManager {
 
             int worldX = worldCol*gp.tileSize;
             int worldY = worldRow*gp.tileSize;
-            int screenX=worldX -gp.player.worldX +gp.player.screenX;
-            int screenY=worldY -gp.player.worldY +gp.player.screenY;
+            int screenX=worldX -gp.player.worldX +gp.screenX;
+            int screenY=worldY -gp.player.worldY +gp.screenY;
 
             if (
-                    worldX + gp.tileSize > gp.player.worldX-gp.player.screenX&&
-                            worldY + gp.tileSize > gp.player.worldY-gp.player.screenY&&
-                            worldX - gp.tileSize <gp.player.worldX+gp.player.screenX&&
-                            worldY - gp.tileSize <gp.player.worldY+gp.player.screenY){
+                    worldX + gp.tileSize > gp.player.worldX-gp.screenX&&
+                            worldY + gp.tileSize > gp.player.worldY-gp.screenY&&
+                            worldX - gp.tileSize <gp.player.worldX+gp.screenX&&
+                            worldY - gp.tileSize <gp.player.worldY+gp.screenY){
                 if (this.tile[tileNum] != null && this.tile[tileNum].image != null) {
                     g2.drawImage(tile[tileNum].image, screenX, screenY,  null);
                 } else {

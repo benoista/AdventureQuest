@@ -17,14 +17,14 @@ public class SuperObject {
     public int solidAreaDefaultY = 0;
     UtilityTool uTool = new UtilityTool();
     public void draw(Graphics2D g2, GamePanel gp) {
-        int screenX=worldX -gp.player.worldX +gp.player.screenX;
-        int screenY=worldY -gp.player.worldY +gp.player.screenY;
+        int screenX=worldX -gp.player.worldX +gp.screenX;
+        int screenY=worldY -gp.player.worldY +gp.screenY;
 
         if (
-                worldX + gp.tileSize > gp.player.worldX-gp.player.screenX&&
-                        worldY + gp.tileSize > gp.player.worldY-gp.player.screenY&&
-                        worldX - gp.tileSize <gp.player.worldX+gp.player.screenX&&
-                        worldY - gp.tileSize <gp.player.worldY+gp.player.screenY){
+                worldX + gp.tileSize > gp.player.worldX-gp.screenX&&
+                        worldY + gp.tileSize > gp.player.worldY-gp.screenY&&
+                        worldX - gp.tileSize <gp.player.worldX+gp.screenX&&
+                        worldY - gp.tileSize <gp.player.worldY+gp.screenY){
 
                 g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
