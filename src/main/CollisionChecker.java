@@ -106,7 +106,7 @@ public class CollisionChecker {
     }
 
     public void handleCollision(Entity entity){
-        if (entity.collisionOn == false){
+        if (entity.collisionOn){
             switch (entity.direction){
                 case "up":
                     entity.worldY += entity.speed;

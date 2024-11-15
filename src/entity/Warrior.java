@@ -1,5 +1,6 @@
 package entity;
 
+import main.CollisionChecker;
 import main.KeyHandler;
 
 import javax.imageio.ImageIO;
@@ -14,8 +15,8 @@ public class Warrior extends Player {
 
 
 
-    public Warrior(KeyHandler keyHandler) {
-        super(keyHandler);
+    public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker) {
+        super(keyHandler, collisionChecker);
         this.hp = 100;
         this.dmg = 10;
         this.attackCooldown = 90;
