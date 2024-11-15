@@ -5,9 +5,12 @@ import object.Key;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
+import main.Main.*;
+
+import static main.Main.gp;
 
 public class UI {
-    GamePanel gp;
+
     Font arial_40 , arial_80B;
     BufferedImage keyImage;
     public boolean messageOn = false;
@@ -18,8 +21,8 @@ public class UI {
     double playTime;
     DecimalFormat dFromat = new DecimalFormat("#0.00");
 
-    public UI(GamePanel gp) {
-        this.gp = gp;
+    public UI() {
+
 
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);

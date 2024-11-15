@@ -40,16 +40,17 @@ public class GamePanel extends JPanel implements Runnable {
 
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
-    public UI ui = new UI(this);
+
 
     Thread gameThread;
 
-    public SuperObject obj[] = new SuperObject[10];
 
     public Fireball fireball = new Fireball(this);
     public Mage player = new Mage(keyH, cChecker , fireball);
 
-
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
     //Spawn Monster
     public ArrayList<Monster> monsters = new ArrayList<>();
 
@@ -67,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
         aSetter.setObject();
         music.playMusic();
+        gameState = playState;
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -102,6 +104,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(int screenX, int screenY){
+
         player.update(monsters ,screenX, screenY);
         for (Monster monster : monsters) {
             if (cChecker.checkEntityCollision(player, monster)) {
@@ -132,7 +135,7 @@ public class GamePanel extends JPanel implements Runnable {
                 obj[i].draw(g2,this);
             }
         }
-        ui.draw(g2);
+        Main.ui.draw(g2);
 
 
         // Display the lastFrame attribute of player

@@ -51,9 +51,7 @@ public class AssetSetter {
 
     }
 
-    public void setMonster(){
 
-    }
 
 
 }
