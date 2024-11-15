@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static main.Main.*;
+
 public abstract class Player extends BaseCharacter {
     //KeyHandler
     KeyHandler keyH;
@@ -38,12 +40,12 @@ public abstract class Player extends BaseCharacter {
 
     public void setDefaultValues(){
         worldX = (16*3)*20;
-        worldY = (16*3)*10;
+        worldY = (16*3)*15;
         speed=10;
         direction="down";
     }
 
-    /*
+
     public void pickUpObject(int i){
         if (i != 999){
             String objectName = obj[i].name;
@@ -53,7 +55,7 @@ public abstract class Player extends BaseCharacter {
                     se.playSE(1);
                     hasKey++;
                     obj[i]=null;
-                    gp.ui.showMessage("You picked up key");
+                    ui.showMessage("You picked up key");
 
                     break;
                 case "Door":
@@ -61,20 +63,20 @@ public abstract class Player extends BaseCharacter {
                         se.playSE(3);
                         obj[i]=null;
                         hasKey--;
-                        gp.ui.showMessage("open a door");
+                        ui.showMessage("open a door");
                     }
                     else
-                        gp.ui.showMessage("you need a key");
+                        ui.showMessage("you need a key");
                     break;
                 case "Boot":
                     se.playSE(2);
                     speed+=1;
                     obj[i]=null;
-                    gp.ui.showMessage("Your speed just increase");
+                    ui.showMessage("Your speed just increase");
                     break;
 
                 case "Chest":
-                    gp.ui.gameFinished = true;
+                    ui.gameFinished = true;
 
                     se.playSE(4);
                     break;
@@ -92,7 +94,7 @@ public abstract class Player extends BaseCharacter {
 
     }
 
-     */
+
         //Update the player
     public void update(ArrayList<Monster> monsters, int screenX, int screenY){
         isMovingLeft = false;isMovingUp = false;isMovingDown = false;isMovingRight = false;
@@ -114,6 +116,7 @@ public abstract class Player extends BaseCharacter {
             gp.cChecker.checkTile(this);
             int objIndex = gp.cChecker.checkObject(this,true);
             pickUpObject(objIndex);
+
              */
             if(!collisionOn){
                 switch (direction){
