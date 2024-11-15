@@ -1,26 +1,37 @@
 package entity;
 
+import main.CollisionChecker;
 import main.GamePanel;
 
 import java.awt.*;
 
-public abstract class Monster extends Entity{
-    GamePanel gp;
-    protected int HP;
+public abstract class Monster extends BaseCharacter{
 
-    public Monster(GamePanel gp, int HP) {
-        this.gp   = gp;
-        this.HP = HP;
+    public Monster(int hp, CollisionChecker collisionChecker) {
+        this.hp = hp;
+        this.collisionChecker = collisionChecker;
 
     }
-    public int getHP() {
-        return HP;
+    public int getHp() {
+        return hp;
     }
 
-    public void setHP(int HP) {
-        this.HP = HP;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
-    public void draw(Graphics2D g2) {
+    public Image draw() {
+        return null;
+
+    }
+
+    public void update() {
+        if (hp <= 0) {
+            isDead = true;
+        }
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }

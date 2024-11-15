@@ -176,8 +176,8 @@ public abstract class Player extends BaseCharacter {
 
     //Player attack Monster
     public void attack(Monster monster) {
-        monster.setHP(monster.getHP() - this.dmg);
-        System.out.println("Monster HP: " + monster.getHP());
+        monster.setHp(monster.getHp() - this.dmg);
+        System.out.println("Monster HP: " + monster.getHp());
     }
 
     //Implemented in subcalsses;

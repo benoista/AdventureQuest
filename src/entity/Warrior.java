@@ -143,6 +143,9 @@ public class Warrior extends Player {
     }
     //UpdateFrame for animation
     public void draw(Graphics2D g2, int screenX, int screenY) {
+        if (isDead) {
+            return; // Skip drawing if the monster is dead
+        }
         frameCounter++;
         if(emote){
             frameDelay = 7;

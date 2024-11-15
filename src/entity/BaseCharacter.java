@@ -10,7 +10,7 @@ public abstract class BaseCharacter extends Entity{
     protected boolean isMovingRight = false;
     protected boolean isMovingDown = false;
     protected boolean isMovingUp = false;
-
+    protected boolean isDead = false;
 
 
     protected int frameDelay = 5;
