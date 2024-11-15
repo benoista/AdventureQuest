@@ -1,6 +1,7 @@
 package main;
 
 import entity.*;
+import object.Fireball;
 import object.SuperObject;
 import tile.TileManager;
 import tile.TileManager2;
@@ -8,8 +9,6 @@ import tile.TileManager2;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
-import static main.Main.obj;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTitleSize = 16;
@@ -45,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
 
-    public Fireball fireball = new Fireball(this);
+    public Fireball fireball = new Fireball(cChecker);
     public Mage player = new Mage(keyH, cChecker , fireball);
 
     public int gameState;

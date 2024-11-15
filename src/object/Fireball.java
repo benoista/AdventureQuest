@@ -1,13 +1,13 @@
-package entity;
+package object;
 
-import main.GamePanel;
+import entity.Entity;
+import main.CollisionChecker;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Fireball extends Entity {
+public class Fireball extends SuperObject {
 
-    private GamePanel gp;
     private int maxLife = 30;
     private Image[][] FireBall;
     private boolean alive;
@@ -16,9 +16,11 @@ public class Fireball extends Entity {
     private String direction = "down";
     private int posX;
     private int posY;
+    private int speed;
+    private CollisionChecker collisionChecker;
 
-    public Fireball(GamePanel gp) {
-        this.gp = gp;
+    public Fireball(CollisionChecker collisionChecker) {
+        this.collisionChecker = collisionChecker;
         speed = 10;
         alive = false;
 
