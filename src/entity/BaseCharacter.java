@@ -24,5 +24,15 @@ public abstract class BaseCharacter extends Entity{
     protected int dmg;
 
     //attackRange
-    protected Rectangle attackRange;
+    public Rectangle attackRange;
+    //visionRange
+    public Rectangle visionRange;
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }
