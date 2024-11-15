@@ -1,8 +1,8 @@
 package entity;
 
 import main.CollisionChecker;
-import main.GamePanel;
 import main.KeyHandler;
+import object.Fireball;
 
 import javax.swing.*;
 import java.awt.*;
