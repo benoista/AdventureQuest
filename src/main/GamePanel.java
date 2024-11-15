@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static main.Main.obj;
+
 public class GamePanel extends JPanel implements Runnable {
     final int originalTitleSize = 16;
     final int scale = 3;

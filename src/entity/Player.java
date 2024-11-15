@@ -118,7 +118,7 @@ public abstract class Player extends BaseCharacter {
             /*
             int objIndex =collisionChecker.checkObject(this,true);
             pickUpObject(objIndex);
-
+            */
             if(!collisionOn){
                 switch (direction){
                     case "up":
