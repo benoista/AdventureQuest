@@ -69,6 +69,10 @@ public class GamePanel extends JPanel implements Runnable {
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
+        monsters.add(new Gobelin(cChecker));
+        monsters.add(new Gobelin(cChecker));
+        monsters.add(new Gobelin(cChecker));
+        monsters.add(new Gobelin(cChecker));
     }
     public void setupGame(){
         aSetter.setObject();
@@ -116,6 +120,13 @@ public class GamePanel extends JPanel implements Runnable {
             if (cChecker.checkEntityCollision(player, monster)) {
                 cChecker.handleCollision(player);
             }
+            if (cChecker.checkvisionRange(player, monster)){
+                if (!cChecker.inAttackRange(monster, player)) {
+                    monster.setChase(player.worldX, player.worldY);
+                }else{
+                    monster.attack(player);
+                }
+            }
         }
     }
 
@@ -140,6 +151,8 @@ public class GamePanel extends JPanel implements Runnable {
                 int monsterX = monster.worldX - player.worldX + screenX;
                 int monsterY = monster.worldY - player.worldY + screenY;
                 g2.drawImage(monster.draw(), monsterX, monsterY, null);
+                monster.drawVision(g2, monsterX, monsterY);
+                monster.drawAttackRange(g2, monsterX, monsterY);
             }
         }
         for (int i = 0 ; i < obj.length ; i++) {

@@ -148,6 +148,8 @@ public class Mage extends Player {
         }
 
         g2.drawImage(lastFrame, screenX, screenY, null);
+        g2.setColor(Color.YELLOW);
+        g2.drawRect(48,48,16*43, 16*30);
         g2.setColor(Color.RED);
         g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         fireball.draw(g2);

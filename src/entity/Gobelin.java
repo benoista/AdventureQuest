@@ -15,6 +15,9 @@ public class Gobelin extends Monster {
     public Gobelin(CollisionChecker collisionChecker) {
         super(60, collisionChecker);
 
+        this.direction = "down";
+        this.speed = 1;
+        this.dmg = 5;
 
         //hitbox
         solidArea = new Rectangle();
@@ -38,6 +41,4 @@ public class Gobelin extends Monster {
         }
         return Frame;
     }
-
-
 }

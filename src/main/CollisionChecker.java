@@ -1,5 +1,6 @@
 package main;
 
+import entity.BaseCharacter;
 import entity.Entity;
 
 import static main.Main.obj;
@@ -186,5 +187,39 @@ public class CollisionChecker {
             }
         }
         return index;
+    }
+
+    public boolean checkvisionRange(BaseCharacter baseCharacter1, BaseCharacter baseCharacter2){
+       int baseCharacter1LeftWorldX = baseCharacter1.worldX+ baseCharacter1.visionRange.x;
+       int baseCharacter1RightWorldX = baseCharacter1.worldX + baseCharacter1.visionRange.x +baseCharacter1.visionRange.width;
+       int baseCharacter1TopWorldY = baseCharacter1.worldY + baseCharacter1.visionRange.y;
+       int baseCharacter1BottomWorldY = baseCharacter1.worldY + baseCharacter1.visionRange.y +baseCharacter1.visionRange.height;
+
+       int baseCharacter2LeftWorldX = baseCharacter2.worldX+ baseCharacter2.solidArea.x;
+       int baseCharacter2RightWorldX = baseCharacter2.worldX + baseCharacter2.solidArea.x +baseCharacter2.solidArea.width;
+       int baseCharacter2TopWorldY = baseCharacter2.worldY + baseCharacter2.solidArea.y;
+       int baseCharacter2BottomWorldY = baseCharacter2.worldY + baseCharacter2.solidArea.y +baseCharacter2.solidArea.height;
+
+         if (baseCharacter1LeftWorldX < baseCharacter2RightWorldX || baseCharacter1RightWorldX > baseCharacter2LeftWorldX || baseCharacter1TopWorldY < baseCharacter2BottomWorldY || baseCharacter1BottomWorldY > baseCharacter2TopWorldY){
+              return true;
+         }
+         return false;
+    }
+
+    public boolean inAttackRange(BaseCharacter baseCharacter1, BaseCharacter baseCharacter2) {
+        int baseCharacter1LeftWorldX = baseCharacter1.worldX + baseCharacter1.attackRange.x;
+        int baseCharacter1RightWorldX = baseCharacter1.worldX + baseCharacter1.attackRange.x + baseCharacter1.attackRange.width;
+        int baseCharacter1TopWorldY = baseCharacter1.worldY + baseCharacter1.attackRange.y;
+        int baseCharacter1BottomWorldY = baseCharacter1.worldY + baseCharacter1.attackRange.y + baseCharacter1.attackRange.height;
+
+        int baseCharacter2LeftWorldX = baseCharacter2.worldX + baseCharacter2.solidArea.x;
+        int baseCharacter2RightWorldX = baseCharacter2.worldX + baseCharacter2.solidArea.x + baseCharacter2.solidArea.width;
+        int baseCharacter2TopWorldY = baseCharacter2.worldY + baseCharacter2.solidArea.y;
+        int baseCharacter2BottomWorldY = baseCharacter2.worldY + baseCharacter2.solidArea.y + baseCharacter2.solidArea.height;
+
+        if (baseCharacter1RightWorldX > baseCharacter2LeftWorldX && baseCharacter1LeftWorldX < baseCharacter2RightWorldX && baseCharacter1BottomWorldY > baseCharacter2TopWorldY && baseCharacter1TopWorldY < baseCharacter2BottomWorldY){
+            return true;
+        };
+        return false;
     }
 }
