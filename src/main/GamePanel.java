@@ -48,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public Fireball fireball = new Fireball(cChecker);
-    public Mage player = new Mage(keyH, cChecker , fireball);
+    public Warrior player = new Warrior(keyH, cChecker);
 
     public int gameState;
     public final int playState = 1;
