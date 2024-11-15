@@ -10,7 +10,7 @@ public abstract class Monster extends BaseCharacter{
     public Monster(int hp, CollisionChecker collisionChecker) {
         this.hp = hp;
         this.collisionChecker = collisionChecker;
-
+        this.attackCooldown = attackCooldownMax;
         //Vision
         this.visionRange = new Rectangle(-200,-200,16*30, 16*30);
 
@@ -64,7 +64,12 @@ public abstract class Monster extends BaseCharacter{
     }
 
     public void attack(BaseCharacter player) {
-        player.setHp(player.getHp() - this.dmg);
-        System.out.println("Player HP: " + player.getHp());
+        if (attackCooldown > 0) {
+            attackCooldown--;
+        }else{
+            player.setHp(player.getHp() - this.dmg);
+            System.out.println("Player HP: " + player.getHp());
+            attackCooldown = attackCooldownMax;
+        }
     }
 }

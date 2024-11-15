@@ -20,7 +20,6 @@ public class Warrior extends Player {
         this.hp = 100;
         this.dmg = 10;
         this.attackCooldown = 90;
-        this.attackCooldown = 0;
 
         // Initialize the animation frames
         loadAnimationFrames();
