@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public Fireball fireball = new Fireball(this);
-    public Mage player = new Mage(keyH, fireball);
+    public Mage player = new Mage(keyH, cChecker , fireball);
 
     public int gameState;
     public final int playState = 1;
@@ -63,20 +63,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         //Add monsters
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
-        monsters.add(new Gobelin(this, 50));
         monsters.add(new Gobelin(this, 50));
     }
     public void setupGame(){
@@ -120,14 +106,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void update(int screenX, int screenY){
 
         player.update(monsters ,screenX, screenY);
-
         for (Monster monster : monsters) {
             if (cChecker.checkEntityCollision(player, monster)) {
                 cChecker.handleCollision(player);
             }
-            // Update the monster with monster update()
         }
-
     }
 
 

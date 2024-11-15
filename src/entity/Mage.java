@@ -1,5 +1,6 @@
 package entity;
 
+import main.CollisionChecker;
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -19,8 +20,8 @@ public class Mage extends Player {
     //FireBall
     private Fireball fireball;
 
-    public Mage(KeyHandler keyHandler, Fireball fir) {
-        super(keyHandler);
+    public Mage(KeyHandler keyHandler, CollisionChecker collisionChecker, Fireball fir) {
+        super(keyHandler, collisionChecker);
         // Initialize the animation frames
         loadAnimationFrames();
         //Initialize the default frame

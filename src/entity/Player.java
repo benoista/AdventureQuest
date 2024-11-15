@@ -33,14 +33,16 @@ public abstract class Player extends BaseCharacter {
     ;
 
 
-    public Player(KeyHandler keyH)  {
+    public Player(KeyHandler keyH, CollisionChecker collisionChecker)  {
         this.keyH = keyH;
+        this.collisionChecker = collisionChecker;
         setDefaultValues();
     }
 
     public void setDefaultValues(){
-        worldX = (16*3)*20;
-        worldY = (16*3)*15;
+
+        worldX = (16*3)*21;
+        worldY = (16*3)*13;
         speed=10;
         direction="down";
     }
@@ -112,12 +114,11 @@ public abstract class Player extends BaseCharacter {
                 direction="right";
             }
             collisionOn = false;
+            collisionChecker.checkTile(this);
             /*
-            gp.cChecker.checkTile(this);
-            int objIndex = gp.cChecker.checkObject(this,true);
+            int objIndex =collisionChecker.checkObject(this,true);
             pickUpObject(objIndex);
 
-             */
             if(!collisionOn){
                 switch (direction){
                     case "up":
@@ -145,6 +146,7 @@ public abstract class Player extends BaseCharacter {
         if(keyH.emotePressed){
             emote = true;
         }
+
 
     };
 

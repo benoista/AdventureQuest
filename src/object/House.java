@@ -12,7 +12,7 @@ public class House extends SuperObject{
     public House(GamePanel gp) {
         name = "House";
         try {
-            image1 = ImageIO.read(getClass().getResourceAsStream("/objects/house.png"));
+            image1 = ImageIO.read(getClass().getResourceAsStream("/objects/House.png"));
 
         }
         catch(Exception e) {
