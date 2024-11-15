@@ -10,10 +10,6 @@ import java.util.ArrayList;
 
 public class Mage extends Player {
 
-    //Mage Class
-    private int HP = 60;
-    private int DMG = 30;
-
     private int attackCooldown = 0;
     private final int attackCooldownMax = 40;
 
@@ -22,6 +18,8 @@ public class Mage extends Player {
 
     public Mage(KeyHandler keyHandler, CollisionChecker collisionChecker, Fireball fir) {
         super(keyHandler, collisionChecker);
+        this.hp = 100;
+        this.dmg = 30;
         // Initialize the animation frames
         loadAnimationFrames();
         //Initialize the default frame
