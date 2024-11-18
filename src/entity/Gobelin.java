@@ -19,12 +19,6 @@ public class Gobelin extends Monster {
         this.speed = 1;
         this.dmg = 5;
 
-        //hitbox
-        solidArea = new Rectangle();
-        solidArea.x = 1;
-        solidArea.y = 4;
-        solidArea.width = 35 ;
-        solidArea.height = 35;
 
 
         this.worldX = (16*3) * (30 + (int)(Math.random() * ((50 - 30) + 1)));

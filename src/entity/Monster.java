@@ -15,7 +15,10 @@ public abstract class Monster extends BaseCharacter{
         this.visionRange = new Rectangle(-200,-200,16*30, 16*30);
 
         //attackRange
-        this.attackRange = new Rectangle(-50,-50,150, 150);
+        this.attackRange = new Rectangle(-30,-30,100, 100);
+
+        //hitbox
+        solidArea = new Rectangle(1,4,35,35);
     }
     public int getHp() {
         return hp;
