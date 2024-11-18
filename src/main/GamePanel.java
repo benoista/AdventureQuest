@@ -48,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public Fireball fireball = new Fireball(cChecker);
-    public Warrior player = new Warrior(keyH, cChecker);
+    public Mage player = new Mage(keyH, cChecker, fireball);
 
     public int gameState;
     public final int playState = 1;
@@ -65,12 +65,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         //Add monsters
-        monsters.add(new Gobelin(cChecker));
-        monsters.add(new Gobelin(cChecker));
-        monsters.add(new Gobelin(cChecker));
-        monsters.add(new Gobelin(cChecker));
-        monsters.add(new Gobelin(cChecker));
-        monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
     }
@@ -120,10 +114,17 @@ public class GamePanel extends JPanel implements Runnable {
             if (cChecker.checkEntityCollision(player, monster)) {
                 cChecker.handleCollision(player);
             }
-            if (cChecker.checkvisionRange(player, monster)){
+            if (cChecker.checkvisionRange(player, monster)) {
                 if (!cChecker.inAttackRange(monster, player)) {
-                    monster.setChase(player.worldX, player.worldY);
-                }else{
+                    for (Monster monster1 : monsters) {
+                        if (monster != monster1 && cChecker.checkEntityCollision(monster, monster1)) {
+                            monster.collisionOn = false;
+                            break;
+                        } else {
+                            monster.setChase(player.worldX, player.worldY);
+                        }
+                    }
+                } else {
                     monster.attack(player);
                 }
             }
@@ -151,7 +152,6 @@ public class GamePanel extends JPanel implements Runnable {
                 int monsterX = monster.worldX - player.worldX + screenX;
                 int monsterY = monster.worldY - player.worldY + screenY;
                 g2.drawImage(monster.draw(), monsterX, monsterY, null);
-                monster.drawVision(g2, monsterX, monsterY);
                 monster.drawAttackRange(g2, monsterX, monsterY);
             }
         }
