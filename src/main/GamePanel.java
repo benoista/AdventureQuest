@@ -2,7 +2,6 @@ package main;
 
 import entity.*;
 import object.Fireball;
-import object.SuperObject;
 import tile.TileManager;
 import tile.TileManager2;
 
@@ -21,9 +20,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenRow=12;
     public final int screenWidth = maxScreenCol*tileSize;
     public final int screenHeight = maxScreenRow*tileSize;
-
     public final int screenX = screenWidth/2 - (tileSize/2);
     public final int screenY = screenHeight/2 - (tileSize/2);
+    private boolean isWarrior;
+    public Player player;
 
 
     //world settings
@@ -47,29 +47,46 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public Fireball fireball = new Fireball(cChecker);
-    public Mage player = new Mage(keyH, cChecker , fireball);
+
+
+
 
     public int gameState;
+    public final int tilteState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     //Spawn Monster
     public ArrayList<Monster> monsters = new ArrayList<>();
 
-
-    public GamePanel() {
+    public GamePanel(boolean isWarrior) {
+        setSize(800, 600);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        this.isWarrior = isWarrior;
+
+        // Set up the game window
+
+
+
+
+
+        // Add game panel or other components here
+        if (isWarrior) {
+            this.player= new Warrior(keyH, cChecker);
+        } else {
+            this.player = new Mage(keyH, cChecker , fireball);
+        }
 
         //Add monsters
         monsters.add(new Gobelin(this, 50));
     }
     public void setupGame(){
         aSetter.setObject();
-        music.playMusic();
-        gameState = playState;
+        music.playMusic(0);
+
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -116,12 +133,14 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
 
         tileM.draw(g2);
         tileN.draw(g2);
+
 
 
 

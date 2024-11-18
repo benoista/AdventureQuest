@@ -3,8 +3,6 @@ package main;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 import java.net.URL;
 
 public class Sound {
@@ -17,6 +15,17 @@ public class Sound {
         soundURL[2] = getClass().getResource("/sound/powerup.wav");
         soundURL[3] = getClass().getResource("/sound/unlock.wav");
         soundURL[4] = getClass().getResource("/sound/fanfare.wav");
+        soundURL[5] = getClass().getResource("/sound/tp.wav");
+        soundURL[6] = getClass().getResource("/sound/dungeon.wav");
+    }
+    public void play(){
+        clip.start();
+    }
+    public void loop(){
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+    public void stop(int i){
+        clip.stop();
     }
     public void setFile(int i){
         try {
@@ -28,27 +37,20 @@ public class Sound {
 
         }
     }
-    public void playMusic(){
-        setFile(0);
+    public void playMusic(int i){
+        setFile(i);
         play();
         loop();
     }
-    public void stopMusic(){
-        stop();
+    public void stopMusic(int i){
+        setFile(i);
+        stop(i);
     }
     public void playSE(int i){
         setFile(i);
         play();
     }
 
-    public void play(){
-        clip.start();
-    }
-    public void loop(){
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
-    public void stop(){
-        clip.stop();
-    }
+
 
 }

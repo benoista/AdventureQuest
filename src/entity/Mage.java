@@ -18,7 +18,7 @@ public class Mage extends Player {
 
     public Mage(KeyHandler keyHandler, CollisionChecker collisionChecker, Fireball fir) {
         super(keyHandler, collisionChecker);
-        this.hp = 100;
+        this.hp = 10;
         this.dmg = 30;
         // Initialize the animation frames
         loadAnimationFrames();

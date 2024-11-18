@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 
 public class SuperObject {
-    public BufferedImage image;
-    public BufferedImage image1;
+    public BufferedImage image,image1,image2,image3;
+
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
@@ -30,5 +30,8 @@ public class SuperObject {
 
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             g2.drawImage(image1, screenX, screenY, gp.tileSize*4, gp.tileSize*4, null);
+            g2.drawImage(image3, screenX, screenY, gp.tileSize* 2, gp.tileSize* 2, null);
+
+
 
         }}}

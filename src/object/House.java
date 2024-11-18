@@ -18,5 +18,6 @@ public class House extends SuperObject{
         catch(Exception e) {
             e.printStackTrace();
         }
+        collision = true;
     }
 }
