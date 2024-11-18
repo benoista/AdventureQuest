@@ -20,7 +20,11 @@ public abstract class Player extends BaseCharacter {
     protected boolean emote = false;
 
     //Key for object
-    public int hasKey = 0;
+    public static int hasRedKey = 0;
+    public static int hasKey = 0;
+    public static int maxhp = 10;
+    public static int hp = maxhp;
+
 
     // Declare the animationFrames array
     protected Image[][] animationFramesMoves;
@@ -47,6 +51,7 @@ public abstract class Player extends BaseCharacter {
         worldY = (16*3)*13;
         speed=10;
         direction="down";
+
     }
 
 
@@ -62,6 +67,14 @@ public abstract class Player extends BaseCharacter {
                     ui.showMessage("You picked up key");
 
                     break;
+                case "RedKey":
+                    se.playSE(1);
+
+                    hasRedKey++;
+                    obj[i]=null;
+                    ui.showMessage("You picked up key");
+
+                    break;
                 case "Door":
                     if (hasKey>0){
                         se.playSE(3);
@@ -72,6 +85,16 @@ public abstract class Player extends BaseCharacter {
                     else
                         ui.showMessage("you need a key");
                     break;
+                case "RedDoor":
+                    if (hasRedKey>0){
+                        se.playSE(3);
+                        obj[i]=null;
+                        hasRedKey--;
+                        ui.showMessage("open a red door");
+                    }
+                    else
+                        ui.showMessage("you need a red key");
+                    break;
                 case "Boot":
                     se.playSE(2);
                     speed+=1;
@@ -79,16 +102,44 @@ public abstract class Player extends BaseCharacter {
                     ui.showMessage("Your speed just increase");
                     break;
 
-                case "Chest":
-                    ui.gameFinished = true;
+                case "Sword":
+                    se.playSE(2);
+                    dmg+=10;
+                    obj[i]=null;
+                    ui.showMessage("Your damage just increase");
+                    break;
+                case "Heal":
+                    se.playSE(2);
 
+                    maxhp+=0.1;
+                    hp+=maxhp;
+                    obj[i]=null;
+                    ui.showMessage("your health just increase");
+                    break;
+
+                case "Portal":
+
+                    music.stopMusic(0);
+                    se.playMusic(6);
+
+
+                    ui.showMessage("You just acces the end of the world");
+                    worldX = 16*3* 135;
+                    worldY= 16*3*35;
+                    break;
+
+                case "Chest":
+                    ui.gameLost = true;
+                    music.stopMusic(0);
                     se.playSE(4);
+
                     break;
 
                 case "House":
                     se.playSE(3);
 
                     break;
+
 
 
 
@@ -117,8 +168,11 @@ public abstract class Player extends BaseCharacter {
             }
             collisionOn = false;
             collisionChecker.checkTile(this);
+
             int objIndex =collisionChecker.checkObject(this,true);
             pickUpObject(objIndex);
+
+
             if(!collisionOn){
                 switch (direction){
                     case "up":
@@ -193,7 +247,8 @@ public abstract class Player extends BaseCharacter {
             default: return "";
         }
     }
-
+ 
+    public void draw(Graphics2D g2, int screenX, int screenY){}
 
 }
 

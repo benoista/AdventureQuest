@@ -48,6 +48,25 @@ public class AssetSetter {
         obj[8].worldX = 72 * gp.tileSize;
         obj[8].worldY = 67 * gp.tileSize;
 
+        obj[9]= new Sword(gp);
+        obj[9].worldX = 20 * gp.tileSize;
+        obj[9].worldY = 23 * gp.tileSize;
+        obj[10]= new Portal(gp);
+        obj[10].worldX = 24 * gp.tileSize +24;
+        obj[10].worldY = 16 * gp.tileSize;
+
+        obj[11]= new Heal(gp);
+        obj[11].worldX = 26 * gp.tileSize ;
+        obj[11].worldY = 20 * gp.tileSize;
+
+        obj[12]= new RedKey(gp);
+        obj[12].worldX = 16 * gp.tileSize;
+        obj[12].worldY = 12 * gp.tileSize;
+
+        obj[13]= new RedDoor(gp);
+        obj[13].worldX = 17 * gp.tileSize;
+        obj[13].worldY = 12 * gp.tileSize;
+
 
     }
 
