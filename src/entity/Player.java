@@ -40,6 +40,8 @@ public abstract class Player extends BaseCharacter {
     public Player(KeyHandler keyH, CollisionChecker collisionChecker)  {
         this.keyH = keyH;
         this.collisionChecker = collisionChecker;
+
+        this.visionRange = new Rectangle(48,48,16*43, 16*30);
         setDefaultValues();
     }
 
@@ -170,6 +172,7 @@ public abstract class Player extends BaseCharacter {
             int objIndex =collisionChecker.checkObject(this,true);
             pickUpObject(objIndex);
 
+
             if(!collisionOn){
                 switch (direction){
                     case "up":
@@ -227,8 +230,8 @@ public abstract class Player extends BaseCharacter {
 
     //Player attack Monster
     public void attack(Monster monster) {
-        monster.setHP(monster.getHP() - this.dmg);
-        System.out.println("Monster HP: " + monster.getHP());
+        monster.setHp(monster.getHp() - this.dmg);
+        System.out.println("Monster HP: " + monster.getHp());
     }
 
     //Implemented in subcalsses;
@@ -244,6 +247,8 @@ public abstract class Player extends BaseCharacter {
             default: return "";
         }
     }
+ 
     public void draw(Graphics2D g2, int screenX, int screenY){}
+
 }
 

@@ -8,6 +8,7 @@ import tile.TileManager2;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static main.Main.obj;
 
@@ -51,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
+
+
     public int gameState;
     public final int tilteState = 0;
     public final int playState = 1;
@@ -81,7 +84,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //Add monsters
-        monsters.add(new Gobelin(this, 50));
+        monsters.add(new Gobelin(cChecker));
+        monsters.add(new Gobelin(cChecker));
     }
     public void setupGame(){
         aSetter.setObject();
@@ -125,8 +129,23 @@ public class GamePanel extends JPanel implements Runnable {
 
         player.update(monsters ,screenX, screenY);
         for (Monster monster : monsters) {
+            monster.update();
             if (cChecker.checkEntityCollision(player, monster)) {
                 cChecker.handleCollision(player);
+            }
+            if (cChecker.checkvisionRange(player, monster)) {
+                if (!cChecker.inAttackRange(monster, player)) {
+                    for (Monster monster1 : monsters) {
+                        if (monster != monster1 && cChecker.checkEntityCollision(monster, monster1)) {
+                            monster.collisionOn = false;
+                            break;
+                        } else {
+                            monster.setChase(player.worldX, player.worldY);
+                        }
+                    }
+                } else {
+                    monster.attack(player);
+                }
             }
         }
     }
@@ -143,12 +162,19 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
-
         player.draw(g2, screenX ,screenY);
-        for (Monster monster : monsters){
-            monster.draw(g2);
 
-
+        Iterator<Monster> iterator = monsters.iterator();
+        while (iterator.hasNext()) {
+            Monster monster = iterator.next();
+            if (monster.isDead()) {
+                iterator.remove();
+            } else {
+                int monsterX = monster.worldX - player.worldX + screenX;
+                int monsterY = monster.worldY - player.worldY + screenY;
+                g2.drawImage(monster.draw(), monsterX, monsterY, null);
+                monster.drawAttackRange(g2, monsterX, monsterY);
+            }
         }
         for (int i = 0 ; i < obj.length ; i++) {
             if (obj[i] != null) {
