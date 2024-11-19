@@ -18,8 +18,8 @@ public class Mage extends Player {
 
     public Mage(KeyHandler keyHandler, CollisionChecker collisionChecker, Fireball fir) {
         super(keyHandler, collisionChecker);
-        this.hp = 100;
-        this.dmg = 30;
+        this.hp = 10;
+        this.dmg = 20;
         // Initialize the animation frames
         loadAnimationFrames();
         //Initialize the default frame
@@ -69,6 +69,7 @@ public class Mage extends Player {
     }
 
     //UpdateFrame for animation
+    @Override
     public void draw(Graphics2D g2, int screenX, int screenY) {
         frameCounter++;
         if(emote){
@@ -148,10 +149,6 @@ public class Mage extends Player {
         }
 
         g2.drawImage(lastFrame, screenX, screenY, null);
-        g2.setColor(Color.YELLOW);
-        g2.drawRect(48,48,16*43, 16*30);
-        g2.setColor(Color.RED);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         fireball.draw(g2);
     }
 
