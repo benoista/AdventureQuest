@@ -17,8 +17,8 @@ public class Warrior extends Player {
 
     public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker) {
         super(keyHandler, collisionChecker);
-        this.hp = 10;
-        this.dmg = 10;
+        this.hp = 15;
+        this.dmg = 30;
         this.attackCooldown = 90;
 
         // Initialize the animation frames
@@ -35,9 +35,9 @@ public class Warrior extends Player {
 
         solidArea = new Rectangle();
         solidArea.x =23;
-        solidArea.y =25;
+        solidArea.y =8;
         solidArea.width = 20 ;
-        solidArea.height = 32;
+        solidArea.height = 40;
     }
 
     // Load your images into the animationFrames array
@@ -141,6 +141,7 @@ public class Warrior extends Player {
         }
     }
     //UpdateFrame for animation
+    @Override
     public void draw(Graphics2D g2, int screenX, int screenY) {
         if (isDead) {
             return; // Skip drawing if the monster is dead
