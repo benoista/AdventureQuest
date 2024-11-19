@@ -1,25 +1,27 @@
+// Monster.java
 package entity;
 
 import main.CollisionChecker;
-import main.GamePanel;
 
 import java.awt.*;
 
-public abstract class Monster extends BaseCharacter{
+public abstract class Monster extends BaseCharacter {
+    protected int attackCooldownMax = 120;
 
     public Monster(int hp, CollisionChecker collisionChecker) {
         this.hp = hp;
         this.collisionChecker = collisionChecker;
         this.attackCooldown = attackCooldownMax;
-        //Vision
-        this.visionRange = new Rectangle(-200,-200,16*30, 16*30);
+        // Vision
+        this.visionRange = new Rectangle(-200, -200, 16 * 30, 16 * 30);
 
-        //attackRange
-        this.attackRange = new Rectangle(-30,-30,100, 100);
+        // Attack range
+        this.attackRange = new Rectangle(-30, -30, 100, 100);
 
-        //hitbox
-        solidArea = new Rectangle(1,4,35,35);
+        // Hitbox
+        solidArea = new Rectangle(1, 4, 35, 35);
     }
+
     public int getHp() {
         return hp;
     }
@@ -28,8 +30,7 @@ public abstract class Monster extends BaseCharacter{
         this.hp = hp;
     }
 
-    public Image draw() {
-        return null;
+    public void draw(Graphics2D g2, int monsterX, int monsterY) {
     }
 
     public void drawVision(Graphics2D g, int monsterX, int monsterY) {
@@ -55,24 +56,43 @@ public abstract class Monster extends BaseCharacter{
     public void setChase(int playerX, int playerY) {
         if (worldX < playerX) {
             worldX += speed;
+            this.direction = "right";
         } else if (worldX > playerX) {
             worldX -= speed;
+            this.direction = "left";
         }
 
         if (worldY < playerY) {
             worldY += speed;
+            this.direction = "down";
         } else if (worldY > playerY) {
             worldY -= speed;
+            this.direction = "up";
         }
     }
 
     public void attack(BaseCharacter player) {
-        if (attackCooldown > 0) {
+        currentFrame = 0;
+        isAttacking = true; // Set isAttacking to true when attacking
+        player.setHp(player.getHp() - this.dmg);
+        System.out.println("Player HP: " + player.getHp());
+        attackCooldown = attackCooldownMax;
+    }
+
+
+    public boolean canAttack() {
+        if (attackCooldown == 0 && isAttacking == false) {
+            return true;
+        } else {
             attackCooldown--;
-        }else{
-            player.setHp(player.getHp() - this.dmg);
-            System.out.println("Player HP: " + player.getHp());
-            attackCooldown = attackCooldownMax;
+            return false;
         }
+    }
+
+    public boolean getisAttacking() {
+        return isAttacking;
+    }
+    public Image drawGobelin(){
+        return null;
     }
 }
