@@ -6,6 +6,7 @@ import java.awt.*;
 
 
 public class Entity {
+
     public int worldX,worldY;
 
     //Speed for the fireball
