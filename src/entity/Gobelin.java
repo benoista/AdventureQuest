@@ -17,7 +17,7 @@ public class Gobelin extends Monster {
 
         this.direction = "down";
         this.speed = 1;
-        this.dmg = 5;
+        this.dmg = 1;
 
 
 
@@ -29,7 +29,7 @@ public class Gobelin extends Monster {
     }
 
 
-    public Image draw() {
+    public Image drawGobelin() {
         if (isDead) {
             return null;
         }

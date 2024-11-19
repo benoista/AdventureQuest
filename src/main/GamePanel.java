@@ -46,12 +46,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
 
-
+    public Player player;
     public Fireball fireball = new Fireball(cChecker);
-
-
-
-
 
 
     public int gameState;
@@ -68,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
         this.isWarrior = isWarrior;
 
         // Set up the game window
@@ -84,6 +81,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //Add monsters
+        monsters.add(new Minotaur(cChecker));
+        monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
     }
@@ -125,9 +124,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void update(int screenX, int screenY){
-
-        player.update(monsters ,screenX, screenY);
+    public void update(int screenX, int screenY) {
+        player.update(monsters, screenX, screenY);
         for (Monster monster : monsters) {
             monster.update();
             if (cChecker.checkEntityCollision(player, monster)) {
@@ -144,7 +142,9 @@ public class GamePanel extends JPanel implements Runnable {
                         }
                     }
                 } else {
-                    monster.attack(player);
+                    if (monster.canAttack()) {
+                        monster.attack(player);
+                    }
                 }
             }
         }
@@ -170,10 +170,14 @@ public class GamePanel extends JPanel implements Runnable {
             if (monster.isDead()) {
                 iterator.remove();
             } else {
-                int monsterX = monster.worldX - player.worldX + screenX;
-                int monsterY = monster.worldY - player.worldY + screenY;
-                g2.drawImage(monster.draw(), monsterX, monsterY, null);
-                monster.drawAttackRange(g2, monsterX, monsterY);
+                if (monster instanceof Gobelin){
+                    g2.drawImage(monster.drawGobelin() , monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY, null);
+                } else {
+                    int monsterX = monster.worldX - player.worldX + screenX;
+                    int monsterY = monster.worldY - player.worldY + screenY;
+                    monster.draw(g2,monsterX, monsterY);
+                    monster.drawAttackRange(g2, monsterX, monsterY);
+                }
             }
         }
         for (int i = 0 ; i < obj.length ; i++) {
