@@ -22,8 +22,8 @@ public abstract class Player extends BaseCharacter {
     //Key for object
     public static int hasRedKey = 0;
     public static int hasKey = 0;
-    public static int maxhp = 10;
-    public static int hp = maxhp;
+    public static int maxhpUi = 10;
+    public static int hpUi = maxhpUi;
 
 
 
@@ -106,8 +106,8 @@ public abstract class Player extends BaseCharacter {
                 case "Heal":
                     se.playSE(2);
 
-                    maxhp+=0.1;
-                    hp+=maxhp;
+                    maxhpUi+=0.1;
+                    hp+=maxhpUi;
                     obj[i]=null;
                     ui.showMessage("your health just increase");
                     break;
@@ -189,6 +189,7 @@ public abstract class Player extends BaseCharacter {
                 }
             }
         }
+
 
 
         if(keyH.attackPressed){
