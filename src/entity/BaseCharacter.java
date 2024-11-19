@@ -17,6 +17,13 @@ public abstract class BaseCharacter extends Entity{
     protected int frameCounter = 0;
     protected int attackCooldown = 0;
     protected int attackCooldownMax = 30;
+    protected int currentFrame = 0;
+
+    // Declare the animationFrames array
+    protected Image[][] animationFramesMoves;
+    protected Image[][] animationFramesAttack;
+    protected Image[][] animationFramesEmote;
+
 
 
     //Game
@@ -34,5 +41,19 @@ public abstract class BaseCharacter extends Entity{
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    //Implemented in subcalsses;
+    public void attackRangeDirection(){};
+
+    // Initialize the animation frames
+    public String getDirectionName(int index) {
+        switch (index) {
+            case 0: return "up";
+            case 1: return "left";
+            case 2: return "down";
+            case 3: return "right";
+            default: return "";
+        }
     }
 }
