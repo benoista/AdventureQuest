@@ -17,7 +17,7 @@ public class Warrior extends Player {
 
     public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker) {
         super(keyHandler, collisionChecker);
-        this.hp = 15;
+        this.hp = this.maxhpUi = 15;
         this.dmg = 30;
         this.attackCooldown = 90;
 
@@ -222,6 +222,8 @@ public class Warrior extends Player {
             }
         }
         g2.drawImage(lastFrame, screenX, screenY, null);
+        g2.setColor(Color.WHITE);
+        g2.drawString("HP: " + hp, screenX +10, screenY -10);
 
     }
 

@@ -140,7 +140,7 @@ public class UI {
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i =0;
-        while(i< maxhp/2){
+        while(i< maxhpUi/2){
             g2.drawImage(noHeart,x,y,null);
             i++;
             x += gp.tileSize;
@@ -149,10 +149,10 @@ public class UI {
         y=gp.tileSize/2;
         i =0;
 
-        while (i < hp){
+        while (i < hpUi){
             g2.drawImage(halfHeart,x,y,null);
             i++;
-            if (i< hp){
+            if (i< hpUi){
                 g2.drawImage(FullHeart,x,y,null);
             }
             i++;
