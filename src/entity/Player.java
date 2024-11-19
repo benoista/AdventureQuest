@@ -22,13 +22,8 @@ public abstract class Player extends BaseCharacter {
     //Key for object
     public int hasKey = 0;
 
-    // Declare the animationFrames array
-    protected Image[][] animationFramesMoves;
-    protected Image[][] animationFramesAttack;
-    protected Image[][] animationFramesEmote;
 
     //Animations
-    protected int currentFrame = 0;
     protected Image lastFrame;
     ;
 
@@ -45,7 +40,7 @@ public abstract class Player extends BaseCharacter {
 
         worldX = (16*3)*21;
         worldY = (16*3)*13;
-        speed=10;
+        speed=4;
         direction="down";
     }
 
@@ -180,20 +175,10 @@ public abstract class Player extends BaseCharacter {
         System.out.println("Monster HP: " + monster.getHp());
     }
 
-    //Implemented in subcalsses;
-    public void attackRangeDirection(){};
 
-    // Initialize the animation frames
-    public String getDirectionName(int index) {
-        switch (index) {
-            case 0: return "up";
-            case 1: return "left";
-            case 2: return "down";
-            case 3: return "right";
-            default: return "";
-        }
+
+    public void draw(Graphics2D g2, int screenX, int screenY) {
     }
-
 
 }
 
