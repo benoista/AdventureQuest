@@ -28,11 +28,7 @@ public class Mage extends Player {
         // Set the fireball
         fireball = fir;
 
-        solidArea = new Rectangle();
-        solidArea.x =23;
-        solidArea.y =25;
-        solidArea.width = 20 ;
-        solidArea.height = 32;
+        this.solidArea = new Rectangle(10, 25, 20, 32);
     }
 
     // Load your images into the animationFrames array
@@ -158,6 +154,8 @@ public class Mage extends Player {
     @Override
     public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
         super.update(monsters, screenX, screenY);
+        this.solidArea = new Rectangle(10, 25, 25, 32);
+
 
         if (attackCooldown > 0) {
             attackCooldown--;

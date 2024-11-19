@@ -189,6 +189,8 @@ public abstract class Player extends BaseCharacter {
                 }
             }
         }
+
+
         if(keyH.attackPressed){
             isAttacking = true;
         }

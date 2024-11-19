@@ -33,11 +33,8 @@ public class Warrior extends Player {
         attackRange.width = 70;
         attackRange.height = 50;
 
-        solidArea = new Rectangle();
-        solidArea.x =23;
-        solidArea.y =8;
-        solidArea.width = 20 ;
-        solidArea.height = 40;
+        //Set the hitbox
+        solidArea = new Rectangle(23, 8, 20, 40);
     }
 
     // Load your images into the animationFrames array
@@ -92,6 +89,7 @@ public class Warrior extends Player {
         return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
+    //Change attackRangeDirection
     @Override
     public void attackRangeDirection(){
         switch(direction){
@@ -126,6 +124,7 @@ public class Warrior extends Player {
     public void update(ArrayList<Monster> monsters, int screenX, int screenY){;
         super.update(monsters, screenX, screenY);
         attackRangeDirection();
+        solidArea = new Rectangle(23,8,20,40);
 
         if (attackCooldown > 0) {
             attackCooldown--;
@@ -223,10 +222,6 @@ public class Warrior extends Player {
             }
         }
         g2.drawImage(lastFrame, screenX, screenY, null);
-        g2.setColor(Color.RED);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-        g2.setColor(Color.BLUE);
-        g2.drawRect(screenX + attackRange.x, screenY + attackRange.y, attackRange.width, attackRange.height);
 
     }
 

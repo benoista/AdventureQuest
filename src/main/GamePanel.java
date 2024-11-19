@@ -46,7 +46,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
 
-    public Player player;
     public Fireball fireball = new Fireball(cChecker);
 
 
@@ -81,10 +80,13 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //Add monsters
+        /*
         monsters.add(new Minotaur(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
+
+         */
     }
     public void setupGame(){
         aSetter.setObject();
