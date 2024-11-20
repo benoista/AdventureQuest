@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
         monsters.add(new Gobelin(cChecker));
         */
         monsters.add(new Gobelin(cChecker));
-        monsters.add(new Minotaur(cChecker));
+        monsters.add(new Gobelin(cChecker));
 
 
 
@@ -182,14 +182,9 @@ public class GamePanel extends JPanel implements Runnable {
             if (monster.isDead()) {
                 iterator.remove();
             } else {
-                if (monster instanceof Gobelin){
-                    g2.drawImage(monster.drawGobelin() , monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY, null);
-                    monster.drawVision(g2, monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY);
-                } else {
-                    int monsterX = monster.worldX - player.worldX + screenX;
-                    int monsterY = monster.worldY - player.worldY + screenY;
-                    monster.draw(g2,monsterX, monsterY);
-                }
+                int monsterX = monster.worldX - player.worldX + screenX;
+                int monsterY = monster.worldY - player.worldY + screenY;
+                monster.draw(g2,monsterX, monsterY);
             }
         }
         for (int i = 0 ; i < obj.length ; i++) {
