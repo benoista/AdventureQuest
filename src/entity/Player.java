@@ -276,7 +276,11 @@ public abstract class Player extends BaseCharacter {
  
     public void draw(Graphics2D g2, int screenX, int screenY){}
 
-
-
+    public boolean isDead() {
+        if (hp <= 0) {
+            isDead = true;
+        }
+        return isDead;
+    }
 }
 

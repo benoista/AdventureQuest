@@ -68,6 +68,9 @@ public class Mage extends Player {
     //UpdateFrame for animation
     @Override
     public void draw(Graphics2D g2, int screenX, int screenY) {
+        if(isDead){
+            return;
+        }
         frameCounter++;
         if(emote){
             frameDelay = 7;
