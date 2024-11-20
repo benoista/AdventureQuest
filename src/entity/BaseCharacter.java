@@ -55,10 +55,10 @@ public abstract class BaseCharacter extends Entity {
 
     // Game-related stats
 
-    /** The character's health points. */
-    protected int hp;
 
-    /** The character's damage dealt when attacking. */
+    public int maxhp;
+    public int hp;
+
     protected int dmg;
 
     // Attack and vision ranges

@@ -14,19 +14,26 @@ import static main.Main.*;
  */
 public abstract class Player extends BaseCharacter {
 
+
     /** KeyHandler instance for managing user input. */
+
+    //KeyHandler
     KeyHandler keyH;
-
     /** Boolean indicating whether the player is performing an emote. */
-    protected boolean emote = false;
 
+    //Emote
+    protected boolean emote = false;
     /** Static variables for tracking keys and player stats. */
-    public static int hasRedKey = 0;
-    public static int hasKey = 0;
-    public static int maxhp = 10;
-    public static int hp = maxhp;
+ //Key for object
+    public int hasRedKey = 0;
+    public int hasKey = 0;
 
     /** Holds the current animation frame for the player. */
+
+
+
+    //Animations
+
     protected Image lastFrame;
 
     /**
@@ -38,8 +45,19 @@ public abstract class Player extends BaseCharacter {
     public Player(KeyHandler keyH, CollisionChecker collisionChecker) {
         this.keyH = keyH;
         this.collisionChecker = collisionChecker;
-        this.visionRange = new Rectangle(48, 48, 16 * 43, 16 * 30);
+
+
+        this.visionRange = new Rectangle(-300,-200,650, 450);
         setDefaultValues();
+    }
+
+    public void setDefaultValues(){
+
+        worldX = (16*3)*21;
+        worldY = (16*3)*13;
+        speed=5;
+        direction="down";
+
 
     }
 
@@ -133,6 +151,7 @@ public abstract class Player extends BaseCharacter {
         }
     }
 
+
     /**
      * Updates the player's position and actions based on user input.
      *
@@ -140,21 +159,33 @@ public abstract class Player extends BaseCharacter {
      * @param screenX the X-coordinate of the screen for drawing.
      * @param screenY the Y-coordinate of the screen for drawing.
      */
-    public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
-        isMovingLeft = false;
-        isMovingUp = false;
-        isMovingDown = false;
-        isMovingRight = false;
 
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
-            if (keyH.upPressed) {
-                direction = "up";
-            } else if (keyH.downPressed) {
-                direction = "down";
-            } else if (keyH.leftPressed) {
-                direction = "left";
-            } else if (keyH.rightPressed) {
+        //Update the player
+    public void update(ArrayList<Monster> monsters, int screenX, int screenY){
+        isMovingLeft = false;isMovingUp = false;isMovingDown = false;isMovingRight = false;
+        if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true){
+
+            if (keyH.upPressed && keyH.rightPressed) {
+                direction="up-right";
+                System.out.println("up-right1");
+            } else if (keyH.upPressed && keyH.leftPressed) {
+                direction="up-left";
+            } else if (keyH.downPressed && keyH.rightPressed) {
+                direction="down-right";
+            } else if (keyH.downPressed && keyH.leftPressed) {
+                direction="down-left";
+            } else if (keyH.upPressed){
+                direction="up";
+            }
+            else if (keyH.downPressed){
+                direction="down";
+            }
+            else if (keyH.leftPressed){
+                direction="left";
+            }
+            else if (keyH.rightPressed) {
                 direction = "right";
+
             }
 
             collisionOn = false;
@@ -163,8 +194,30 @@ public abstract class Player extends BaseCharacter {
             int objIndex = collisionChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
-            if (!collisionOn) {
-                switch (direction) {
+
+            if(!collisionOn){
+                switch (direction){
+                    case "up-right":
+                        worldX +=speed*0.75;
+                        worldY -=speed*0.75;
+                        isMovingRight = true;
+                        break;
+                    case "up-left":
+                        worldY -=speed*0.75;
+                        worldX -=speed*0.75;
+                        isMovingLeft = true;
+                        break;
+                    case "down-right":
+                        worldY +=speed*0.75;
+                        worldX +=speed*0.75;
+                        isMovingRight = true;
+                        break;
+                    case "down-left":
+                        worldY +=speed*0.75;
+                        worldX -=speed*0.75;
+                        isMovingLeft = true;
+                        break;
+
                     case "up":
                         worldY -= speed;
                         isMovingUp = true;
@@ -181,11 +234,17 @@ public abstract class Player extends BaseCharacter {
                         worldX += speed;
                         isMovingRight = true;
                         break;
+
+
                 }
             }
         }
 
-        if (keyH.attackPressed) {
+
+
+
+        if(keyH.attackPressed){
+
             isAttacking = true;
         }
         if (keyH.emotePressed) {
@@ -250,6 +309,7 @@ public abstract class Player extends BaseCharacter {
         }
     }
 
+
     /**
      * Draws the player on the screen.
      *
@@ -257,7 +317,17 @@ public abstract class Player extends BaseCharacter {
      * @param screenX the X-coordinate of the screen for drawing.
      * @param screenY the Y-coordinate of the screen for drawing.
      */
-    public void draw(Graphics2D g2, int screenX, int screenY) {
+ 
         // Method implementation is left empty in this abstract class
+
+ 
+    public void draw(Graphics2D g2, int screenX, int screenY){}
+
+    public boolean isDead() {
+        if (hp <= 0) {
+            isDead = true;
+        }
+        return isDead;
+
     }
 }

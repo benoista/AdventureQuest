@@ -33,14 +33,21 @@ public class Mage extends Player {
      */
     public Mage(KeyHandler keyHandler, CollisionChecker collisionChecker, Fireball fir, String playerName) {
         super(keyHandler, collisionChecker);
-        playerName1 = playerName;
-        this.hp = 10;
-        this.dmg = 20;
 
-        loadAnimationFrames();  // Load the animation frames for movement and attack
-        lastFrame = animationFramesMoves[1][0];  // Set default frame
-        fireball = fir;  // Initialize the Fireball object
-        solidArea = new Rectangle(23, 25, 20, 32);  // Set the solid area for collision
+        playerName1 = playerName;
+      
+        this.maxhp = 10;
+        this.hp= 10;
+        this.dmg = 20;
+        // Initialize the animation frames
+        loadAnimationFrames();
+        //Initialize the default frame
+        lastFrame = animationFramesMoves[1][0];
+        // Set the fireball
+        fireball = fir;
+
+        this.solidArea = new Rectangle(10, 25, 20, 32);
+
     }
 
     /**
@@ -91,7 +98,12 @@ public class Mage extends Player {
      * @param screenY  The screen's Y coordinate.
      */
     @Override
-    public void     draw(Graphics2D g2, int screenX, int screenY) {
+
+    public void draw(Graphics2D g2, int screenX, int screenY) {
+        if(isDead){
+            return;
+        }
+
         frameCounter++;
 
         // Adjust frame delay based on emote state
@@ -108,11 +120,10 @@ public class Mage extends Player {
 
             // Handle attack animation
             if (isAttacking) {
-                if (currentFrame >= 6) {
-                    currentFrame = 0;
-                    isAttacking = false;  // Reset attack state after animation completes
-                }
-                switch (direction) {
+
+                isAttacking = false;
+                switch(direction){
+
                     case "up":
                         lastFrame = animationFramesAttack[0][currentFrame];
                         break;
@@ -198,6 +209,8 @@ public class Mage extends Player {
     @Override
     public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
         super.update(monsters, screenX, screenY);
+        this.solidArea = new Rectangle(10, 25, 25, 32);
+
 
         if (attackCooldown > 0) {
             attackCooldown--;  // Decrease attack cooldown

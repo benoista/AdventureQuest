@@ -33,8 +33,13 @@ public class Warrior extends Player {
      */
     public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker, String playerName) {
         super(keyHandler, collisionChecker);
+
         playerName1 = playerName;
-        this.hp = 15;
+      
+
+        this.hp = 16;
+        this.maxhp = 15;
+
         this.dmg = 30;
         this.attackCooldown = 90;
 
@@ -52,11 +57,10 @@ public class Warrior extends Player {
         attackRange.width = 70;
         attackRange.height = 50;
 
-        solidArea = new Rectangle();
-        solidArea.x = 23;
-        solidArea.y = 8;
-        solidArea.width = 20;
-        solidArea.height = 40;
+
+        //Set the hitbox
+        solidArea = new Rectangle(23, 8, 20, 40);
+
     }
 
     /**
@@ -127,6 +131,9 @@ public class Warrior extends Player {
      * @param screenX The X position of the warrior on the screen.
      * @param screenY The Y position of the warrior on the screen.
      */
+
+    //Change attackRangeDirection
+
     @Override
     public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
         super.update(monsters, screenX, screenY);
@@ -180,6 +187,7 @@ public class Warrior extends Player {
         }
     }
 
+=
     /**
      * Draws the warrior on the screen, including animations, attack ranges, and solid areas.
      *
@@ -187,10 +195,32 @@ public class Warrior extends Player {
      * @param screenX The X position of the warrior on the screen.
      * @param screenY The Y position of the warrior on the screen.
      */
+=
+    @Override
+    public void update(ArrayList<Monster> monsters, int screenX, int screenY){;
+        super.update(monsters, screenX, screenY);
+        attackRangeDirection();
+        solidArea = new Rectangle(23,8,20,40);
+
+        if (attackCooldown > 0) {
+            attackCooldown--;
+        }
+
+        if (isAttacking && attackCooldown == 0) {
+            for (Monster monster : monsters) {
+                if(checkRange(monster, screenX, screenY)){
+                    attack(monster);
+                    attackCooldown = attackCooldownMax;
+                }
+            }
+        }
+    }
+    //UpdateFrame for animation
     @Override
     public void draw(Graphics2D g2, int screenX, int screenY) {
-        if (isDead) {
-            return; // Skip drawing if the warrior is dead
+        if(isDead){
+            return;
+
         }
 
         frameCounter++;
@@ -272,6 +302,13 @@ public class Warrior extends Player {
                     break;
             }
         }
+
+        g2.drawImage(lastFrame, screenX, screenY, null);
+        g2.setColor(Color.WHITE);
+        g2.drawString("HP: " + hp, screenX +10, screenY -10);
+
+    }
+
 
         // Draw attack range
         g2.setColor(new Color(255, 0, 0, 100));

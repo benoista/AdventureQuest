@@ -22,17 +22,7 @@ import java.awt.*;
 public class Gobelin extends Monster {
     private Image Frame;
 
-    // Game
-    private int HP;
 
-    /**
-     * Constructs a Gobelin instance with a randomized starting position and initial attributes.
-     * The Gobelin's direction is set to "down", speed is set to 1, and damage is set to 1.
-     * The Gobelin's initial position is randomized within specific bounds.
-     * The Gobelin's image is loaded from the file "src/resources/monster/gobelin/gobelin.png".
-     *
-     * @param collisionChecker The collision checker object used to detect collisions for this Gobelin.
-     */
     public Gobelin(CollisionChecker collisionChecker) {
         super(60, collisionChecker);
 
@@ -59,6 +49,16 @@ public class Gobelin extends Monster {
             return null; // Do not draw if the Gobelin is dead
         }
         return Frame;
+    }
+
+    @Override
+    public void attack(BaseCharacter player) {
+        currentFrame = 0;
+        isAttacking = true; // Set isAttacking to true when attacking
+        player.setHp(player.getHp() - this.dmg);
+        System.out.println("Player HP: " + player.getHp());
+        attackCooldown = attackCooldownMax;
+        isAttacking=false;
     }
 }
 

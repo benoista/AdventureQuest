@@ -14,7 +14,9 @@ public abstract class Monster extends BaseCharacter {
     /**
      * The maximum cooldown time for the monster's attacks.
      */
-    protected int attackCooldownMax = 120;
+
+    protected int attackCooldownMax = 60;
+
 
     /**
      * Constructor for creating a Monster instance.

@@ -9,8 +9,9 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import javax.swing.*;
 
-import static entity.Player.*;
-import static main.Main.gp;
+
+import entity.Player.*;
+
 
 /**
  * {@code UI} handles all the on-screen user interface elements, including the display of player stats,
@@ -80,11 +81,8 @@ public class UI {
      *
      * @param g2 The graphics context used for drawing the UI elements.
      */
-    public void draw(Graphics2D g2) {
-        // If in the dialogue state, no UI updates happen here
-        if (gp.gameState == gp.dialogue) {
-            // Custom dialogue UI handling can be added here
-        }
+ 
+    public void draw(Graphics2D g2, Player player) {
 
         // If the game is won
         if (gameWin == true) {
@@ -145,12 +143,14 @@ public class UI {
             x = gp.getWidth() / 2 - textLength / 2;
             y = gp.getHeight() / 2 - 100;
             g2.drawString(text, x, y);
+
         } else { // Game is ongoing
             drawPlayerLife(g2, player); // Draw player health
             g2.setFont(arial_40);
             g2.setColor(Color.white);
             g2.drawImage(keyImage, 20, 75, 40, 40, null); // Draw key count
             g2.drawString("x" + hasKey, 74, 110);
+
 
             // Track and display time played
             playTime += (double) 1 / 60;
@@ -177,28 +177,23 @@ public class UI {
      * @param g2 The graphics context used for drawing the life hearts.
      * @param player The player whose health is being displayed.
      */
-    public void drawPlayerLife(Graphics2D g2, Player player) {
-        int x = gp.tileSize / 2;
-        int y = gp.tileSize / 2;
-        int i = 0;
 
-        // Draw empty hearts
-        while (i < maxhp / 2) {
-            g2.drawImage(noHeart, x, y, null);
+    public void drawPlayerLife(Graphics2D g2, Player player){
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i =0;
+        while(i< player.maxhp/2){
+            g2.drawImage(noHeart,x,y,null);
             i++;
             x += gp.tileSize;
         }
 
-        // Draw the player's current health
-        x = gp.tileSize / 2;
-        y = gp.tileSize / 2;
-        i = 0;
 
-        while (i < hp) {
-            g2.drawImage(halfHeart, x, y, null);
+        while (i < player.hp){
+            g2.drawImage(halfHeart,x,y,null);
             i++;
-            if (i < hp) {
-                g2.drawImage(FullHeart, x, y, null);
+            if (i< player.hp){
+                g2.drawImage(FullHeart,x,y,null);
             }
             i++;
             x += gp.tileSize;

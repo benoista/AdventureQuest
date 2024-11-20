@@ -28,10 +28,11 @@ public class Minotaur extends Monster {
      */
     public Minotaur(CollisionChecker collisionChecker) {
         super(150, collisionChecker);
+        this.attackCooldownMax = 120;
+        this.direction = "up";
+        this.speed = 1;
+        this.dmg = 2;
 
-        this.direction = "up"; // Initial direction of movement
-        this.speed = 1; // Movement speed
-        this.dmg = 2; // Damage dealt by the Minotaur
 
         worldX = (16 * 3) * 23; // World X position
         worldY = (16 * 3) * 13; // World Y position
@@ -207,6 +208,6 @@ public class Minotaur extends Monster {
         g2.setColor(Color.RED);
         g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         g2.setColor(Color.BLUE);
-        g2.drawRect(screenX + attackRange.x, screenY + attackRange.y, attackRange.width, attackRange.height);
+        g2.drawRect(screenX + visionRange.x, screenY + visionRange.y, visionRange.width, visionRange.height);
     }
 }
