@@ -182,7 +182,7 @@ public abstract class Monster extends BaseCharacter {
      */
     public Image drawGobelin() {
         return null; // Default implementation
-
+    }
 
     // Resize Image
     public Image scaleImage(Image image) {

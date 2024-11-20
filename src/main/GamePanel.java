@@ -253,7 +253,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.draw(g2);
         tileN.draw(g2);
-        System.out.println(playerName);
         player.draw(g2, screenX, screenY);
 
         Iterator<Monster> iterator = monsters.iterator();
