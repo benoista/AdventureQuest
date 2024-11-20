@@ -17,7 +17,8 @@ public class Warrior extends Player {
 
     public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker) {
         super(keyHandler, collisionChecker);
-        this.hp = this.maxhpUi = 15;
+        this.hp = 16;
+        this.maxhp = 15;
         this.dmg = 30;
         this.attackCooldown = 90;
 

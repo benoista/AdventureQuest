@@ -14,18 +14,11 @@ public abstract class Player extends BaseCharacter {
     KeyHandler keyH;
 
     //Emote
-
-
-
     protected boolean emote = false;
 
     //Key for object
-    public static int hasRedKey = 0;
-    public static int hasKey = 0;
-    public static int maxhpUi = 10;
-    public static int hpUi = maxhpUi;
-
-
+    public int hasRedKey = 0;
+    public int hasKey = 0;
 
     //Animations
     protected Image lastFrame;
@@ -106,8 +99,8 @@ public abstract class Player extends BaseCharacter {
                 case "Heal":
                     se.playSE(2);
 
-                    maxhpUi+=0.1;
-                    hp+=maxhpUi;
+                    maxhp+=0.1;
+                    hp+=maxhp;
                     obj[i]=null;
                     ui.showMessage("your health just increase");
                     break;

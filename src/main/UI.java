@@ -1,5 +1,6 @@
 package main;
 
+import entity.Player;
 import object.Heart;
 import object.Key;
 
@@ -8,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import javax.swing.*;
 
-import static entity.Player.*;
+import entity.Player.*;
 
 import static main.GamePanel.*; // Use the correct reference for GamePanel
 import static main.Main.*;
@@ -45,7 +46,7 @@ public class UI {
         messageOn = true;
     }
 
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2, Player player) {
 
           if (gameWin == true) {
                   g2.setFont(arial_40);
@@ -115,11 +116,11 @@ public class UI {
 
 
         else {
-            drawPlayerLife(g2);
+            drawPlayerLife(g2, player);
             g2.setFont(arial_40);
             g2.setColor(Color.white);
             g2.drawImage(keyImage, 20, 75, 40, 40, null);
-            g2.drawString("x" + hasKey, 74, 110);
+            g2.drawString("x" + player.hasKey, 74, 110);
 
             playTime += (double) 1 / 60;
             g2.drawString("Time " + dFromat.format(playTime), 550, 65);
@@ -136,11 +137,11 @@ public class UI {
             }
         }
     }
-    public void drawPlayerLife(Graphics2D g2){
+    public void drawPlayerLife(Graphics2D g2, Player player){
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i =0;
-        while(i< maxhpUi/2){
+        while(i< player.maxhp/2){
             g2.drawImage(noHeart,x,y,null);
             i++;
             x += gp.tileSize;
@@ -149,10 +150,10 @@ public class UI {
         y=gp.tileSize/2;
         i =0;
 
-        while (i < hpUi){
+        while (i < player.hp){
             g2.drawImage(halfHeart,x,y,null);
             i++;
-            if (i< hpUi){
+            if (i< player.hp){
                 g2.drawImage(FullHeart,x,y,null);
             }
             i++;
