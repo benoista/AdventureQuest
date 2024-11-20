@@ -84,9 +84,13 @@ public class GamePanel extends JPanel implements Runnable {
         monsters.add(new Minotaur(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
+        */
         monsters.add(new Gobelin(cChecker));
+        monsters.add(new Minotaur(cChecker));
 
-         */
+
+
+
     }
     public void setupGame(){
         aSetter.setObject();
@@ -128,16 +132,20 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(int screenX, int screenY) {
         player.update(monsters, screenX, screenY);
+        if (player.isDead()) {
+            Main.ui.gameLost = true;
+            gameThread =null;
+        }
         for (Monster monster : monsters) {
             monster.update();
             if (cChecker.checkEntityCollision(player, monster)) {
                 cChecker.handleCollision(player);
             }
-            if (cChecker.checkvisionRange(player, monster)) {
+            if (cChecker.checkvisionRange(monster, player)) {
                 if (!cChecker.inAttackRange(monster, player)) {
                     for (Monster monster1 : monsters) {
                         if (monster != monster1 && cChecker.checkEntityCollision(monster, monster1)) {
-                            monster.collisionOn = false;
+                            monster.collisionOn = true;
                             break;
                         } else {
                             monster.setChase(player.worldX, player.worldY);
@@ -145,7 +153,9 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 } else {
                     if (monster.canAttack()) {
+                        System.out.println(player.getHp());
                         monster.attack(player);
+                        System.out.println(player.getHp());
                     }
                 }
             }
@@ -174,11 +184,11 @@ public class GamePanel extends JPanel implements Runnable {
             } else {
                 if (monster instanceof Gobelin){
                     g2.drawImage(monster.drawGobelin() , monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY, null);
+                    monster.drawVision(g2, monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY);
                 } else {
                     int monsterX = monster.worldX - player.worldX + screenX;
                     int monsterY = monster.worldY - player.worldY + screenY;
                     monster.draw(g2,monsterX, monsterY);
-                    monster.drawAttackRange(g2, monsterX, monsterY);
                 }
             }
         }
@@ -187,7 +197,7 @@ public class GamePanel extends JPanel implements Runnable {
                 obj[i].draw(g2,this);
             }
         }
-        Main.ui.draw(g2);
+        Main.ui.draw(g2, player);
 
 
         // Display the lastFrame attribute of player
