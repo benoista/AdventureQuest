@@ -182,13 +182,24 @@ public abstract class Monster extends BaseCharacter {
      */
     public Image drawGobelin() {
         return null; // Default implementation
+
+
+    }
+    /**
+     * Resizes an image to double its original dimensions.
+     *
+     * @param image the original image to scale.
+     * @return the scaled Image instance or null if the input is invalid.
+     */
+
     }
 
+
     // Resize Image
-    public Image scaleImage(Image image) {
-        int width = image.getWidth(null) * 2;
-        int height = image.getHeight(null) * 2;
-        return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    public Image scaleImage(Image image){
+            int width = image.getWidth(null) * 2;
+            int height = image.getHeight(null) * 2;
+            return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
 }

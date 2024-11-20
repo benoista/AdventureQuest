@@ -34,20 +34,20 @@ public class Seraphyrax extends Monster {
 
     private void loadAnimationFrames() {
         try {
-            BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/monster/seraphyrax/moves.png")));
+            BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/monster/seraphyrax/seraphyraxattack.png")));
 
-            int frameWidthMoves = 127; // Width of each frame in moves sprite sheet
-            int frameHeightMoves = 119; // Height of each frame in moves sprite sheet
+            int frameWidthMoves = 65; // Width of each frame in moves sprite sheet
+            int frameHeightMoves = 65; // Height of each frame in moves sprite sheet
 
-            animationFramesMoves = new Image[4][9];
-            animationFramesAttack = new Image[4][6];
+            animationFramesMoves = new Image[4][10];
+            animationFramesAttack = new Image[4][13];
 
             // Load move animations
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 9; j++) {
                     if (j * frameWidthMoves + frameWidthMoves <= spriteSheetMoves.getWidth() && i * frameHeightMoves + frameHeightMoves <= spriteSheetMoves.getHeight()) {
                         BufferedImage subImage = spriteSheetMoves.getSubimage(j * frameWidthMoves, i * frameHeightMoves, frameWidthMoves, frameHeightMoves);
-                        animationFramesMoves[i][j] = scaleImage(subImage);
+                        animationFramesAttack[i][j] = scaleImage(subImage);
                     }
                 }
             }
@@ -55,7 +55,7 @@ public class Seraphyrax extends Monster {
             // Load attack animations
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 6; j++) {
-                    animationFramesAttack[i][j] = scaleImage(new ImageIcon("src/resources/monster/jack/attack/" + getDirectionName(i) + "/" + j + ".png").getImage());
+                    animationFramesMoves[i][j] = scaleImage(new ImageIcon("src/resources/monster/seraphyrax/mooves/" + getDirectionName(i) + "/" + j + ".png").getImage());
                 }
             }
         } catch (IOException e) {
