@@ -192,7 +192,7 @@ public abstract class Monster extends BaseCharacter {
      * @return the scaled Image instance or null if the input is invalid.
      */
 
-    }
+
 
 
     // Resize Image
@@ -201,6 +201,7 @@ public abstract class Monster extends BaseCharacter {
             int height = image.getHeight(null) * 2;
             return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
+
 
 }
 
