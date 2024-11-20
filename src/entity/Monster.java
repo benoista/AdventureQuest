@@ -7,6 +7,7 @@ import java.awt.*;
 
 public abstract class Monster extends BaseCharacter {
     protected int attackCooldownMax = 60;
+    protected Image lastFrame;
 
     public Monster(int hp, CollisionChecker collisionChecker) {
         this.hp = hp;
@@ -95,4 +96,12 @@ public abstract class Monster extends BaseCharacter {
     public Image drawGobelin(){
         return null;
     }
+
+    // Resize Image
+    public Image scaleImage(Image image) {
+        int width = image.getWidth(null) * 2;
+        int height = image.getHeight(null) * 2;
+        return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    }
+
 }

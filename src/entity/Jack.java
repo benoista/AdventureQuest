@@ -9,14 +9,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Minotaur extends Monster {
-
+public class Jack extends Monster {
 
     protected Image[][] animationFramesMoves;
     protected Image[][] animationFramesAttack;
 
 
-    public Minotaur(CollisionChecker collisionChecker) {
+    public Jack(CollisionChecker collisionChecker) {
         super(250, collisionChecker);
         this.attackCooldownMax = 120;
         this.direction = "up";
@@ -35,9 +34,9 @@ public class Minotaur extends Monster {
 
     private void loadAnimationFrames() {
         try {
-            BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/monster/minotaur/moves.png")));
+            BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/monster/jack/moves.png")));
 
-            int frameWidthMoves = 64; // Width of each frame in moves sprite sheet
+            int frameWidthMoves = 62; // Width of each frame in moves sprite sheet
             int frameHeightMoves = 62; // Height of each frame in moves sprite sheet
 
             animationFramesMoves = new Image[4][9];
@@ -56,7 +55,7 @@ public class Minotaur extends Monster {
             // Load attack animations
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 6; j++) {
-                    animationFramesAttack[i][j] = scaleImage(new ImageIcon("src/resources/monster/minotaur/attack/" + getDirectionName(i) + "/" + j + ".png").getImage());
+                    animationFramesAttack[i][j] = scaleImage(new ImageIcon("src/resources/monster/jack/attack/" + getDirectionName(i) + "/" + j + ".png").getImage());
                 }
             }
         } catch (IOException e) {
@@ -65,6 +64,7 @@ public class Minotaur extends Monster {
             System.err.println("Resource not found: " + e.getMessage());
         }
     }
+
 
     @Override
     public void update() {
@@ -78,16 +78,16 @@ public class Minotaur extends Monster {
     public void attackRangeDirection() {
         switch (direction) {
             case "up":
-                this.attackRange = new Rectangle(-30, -30, 200, 100);
+                this.attackRange = new Rectangle(-30, -30, 200, 75);
                 break;
             case "down":
-                this.attackRange = new Rectangle(-30, 90, 200, 100);
+                this.attackRange = new Rectangle(-30, 90, 200, 75);
                 break;
             case "left":
-                this.attackRange = new Rectangle(0, 20, 50, 100);
+                this.attackRange = new Rectangle(-30, 20, 100, 100);
                 break;
             case "right":
-                this.attackRange = new Rectangle(70, 20, 50, 110);
+                this.attackRange = new Rectangle(70, 20, 100, 110);
                 break;
         }
     }
@@ -155,10 +155,8 @@ public class Minotaur extends Monster {
             }
         }
         g2.drawImage(lastFrame, screenX, screenY, null);
-        g2.setColor(Color.RED);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         g2.setColor(Color.BLUE);
-        g2.drawRect(screenX + visionRange.x, screenY + visionRange.y, visionRange.width, visionRange.height);
+        g2.drawRect(attackRange.x + screenX, attackRange.y + screenY, attackRange.width, attackRange.height);
     }
 
 }
