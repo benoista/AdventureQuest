@@ -10,8 +10,6 @@ import java.awt.*;
 public class Gobelin extends Monster {
     private Image Frame;
 
-    // Game
-    private int HP;
     public Gobelin(CollisionChecker collisionChecker) {
         super(60, collisionChecker);
 
@@ -34,5 +32,15 @@ public class Gobelin extends Monster {
             return null;
         }
         return Frame;
+    }
+
+    @Override
+    public void attack(BaseCharacter player) {
+        currentFrame = 0;
+        isAttacking = true; // Set isAttacking to true when attacking
+        player.setHp(player.getHp() - this.dmg);
+        System.out.println("Player HP: " + player.getHp());
+        attackCooldown = attackCooldownMax;
+        isAttacking=false;
     }
 }
