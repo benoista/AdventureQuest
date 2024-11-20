@@ -4,19 +4,31 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 
-public class Sword extends SuperObject{
-    GamePanel gp;
+/**
+ * The Sword class represents a sword object in the game.
+ * Swords are typically used as weapons that can be picked up and equipped by the player to engage in combat.
+ * This class inherits from the SuperObject class.
+ */
+public class Sword extends SuperObject {
 
-    public Sword(GamePanel gp) {
-        name = "Sword";
+    /**
+     * Constructor for the Sword object.
+     * This initializes the Sword object by loading its image and setting the collision property to true.
+     */
+    public Sword() {
+        name = "Sword"; // Set the name of the object to "Sword".
+
         try {
+            // Load the image for the Sword object.
             image = ImageIO.read(getClass().getResourceAsStream("/objects/Sword.png"));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-
-        }
-        catch(Exception e) {
+            // Scale the image to the required size (48x48).
+            uTool.scaleImage(image, 48, 48);
+        } catch (Exception e) {
+            // Print the stack trace if there is an error loading the image.
             e.printStackTrace();
         }
+
+        // Set the collision property of the Sword to true, indicating it can interact with other objects.
         collision = true;
     }
 }

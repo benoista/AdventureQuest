@@ -8,14 +8,32 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+/**
+ * The TileManager class is responsible for managing the tiles in the game world.
+ * It handles loading tile images, setting up tile properties, loading the map from a file,
+ * and rendering tiles onto the screen based on the player's position.
+ */
 public class TileManager {
+    /**
+     * The GamePanel instance that provides the game context and settings.
+     */
     GamePanel gp;
+    /**
+     * An array of Tile objects, each representing a different type of tile in the game world.
+     */
     public Tile[] tile;
+    /**
+     * A 2D array that holds the tile numbers for the map grid.
+     * Each number corresponds to a specific tile type in the tile array.
+     */
     public int mapTileNum[][];
 
 
-
+    /**
+     * Constructor for the TileManager class. Initializes the tiles and loads the map.
+     *
+     * @param gp The GamePanel instance, which provides the game context.
+     */
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
@@ -25,13 +43,17 @@ public class TileManager {
         getTileImage();
         loadMap("/maps/map01.txt");
 
-
+/**
+ * Loads the tile images and sets up the tile properties.
+ * This method reads and assigns images for various tiles, including water, grass, and mountains,
+ * as well as defining their collision properties.
+ */
 
     }
     public void getTileImage(){
         try {
 
-            //water
+            // Set up tiles for different environments (e.g., water, grass, mountains, etc.)
             setup(0, "01", false);
             setup(1, "01", false);
             setup(2, "01", false);
@@ -168,6 +190,13 @@ public class TileManager {
         }catch (Exception e){e.printStackTrace();}
 
     }
+    /**
+     * Sets up a tile with an index, image path, and collision property.
+     *
+     * @param index The index of the tile in the tile array.
+     * @param imagePath The relative path to the image file for the tile.
+     * @param collision Whether the tile should have collision or not.
+     */
     public void setup (int index,String imagePath, boolean collision){
         UtilityTool uTool = new UtilityTool();
         try {
@@ -178,6 +207,13 @@ public class TileManager {
         }catch (Exception e){e.printStackTrace();}
 
     }
+
+    /**
+     * Loads the map from a file and populates the mapTileNum array with tile indices.
+     * The map is represented by a grid where each number corresponds to a tile.
+     *
+     * @param filePath The relative path to the map file (e.g., "/maps/map01.txt").
+     */
     public void loadMap(String filePath){
         try{
             InputStream is=getClass().getResourceAsStream(filePath);
@@ -204,6 +240,13 @@ public class TileManager {
         }
         catch (Exception e){}
     }
+
+    /**
+     * Draws the map onto the screen. The tiles are drawn based on the player's position.
+     * Only tiles within the screen's view are drawn.
+     *
+     * @param g2 The Graphics object used for drawing.
+     */
     public void draw(Graphics g2){
         int worldCol =0;
         int worldRow =0;

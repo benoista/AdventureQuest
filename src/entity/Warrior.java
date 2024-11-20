@@ -11,20 +11,43 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static main.Main.playerName;
+
+/**
+ * The Warrior class represents a player character in the game.
+ * It extends the Player class and provides functionality for movement, attacking,
+ * and managing animations.
+ *
+ * @see Player
+ */
 public class Warrior extends Player {
 
+    private final String playerName1;
 
-
-    public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker) {
+    /**
+     * Constructs a new Warrior object with a specified key handler and collision checker.
+     * Initializes the warrior's health, damage, attack cooldown, animation frames, and solid area.
+     *
+     * @param keyHandler       The KeyHandler to handle user input.
+     * @param collisionChecker The CollisionChecker to check for collisions.
+     */
+    public Warrior(KeyHandler keyHandler, CollisionChecker collisionChecker, String playerName) {
         super(keyHandler, collisionChecker);
+
+        playerName1 = playerName;
+      
+
         this.hp = 16;
         this.maxhp = 15;
+
         this.dmg = 30;
         this.attackCooldown = 90;
 
+
+
         // Initialize the animation frames
         loadAnimationFrames();
-        //Initialize the default frame
+        // Initialize the default frame
         lastFrame = animationFramesMoves[2][0];
 
         // Set the attack range
@@ -34,11 +57,16 @@ public class Warrior extends Player {
         attackRange.width = 70;
         attackRange.height = 50;
 
+
         //Set the hitbox
         solidArea = new Rectangle(23, 8, 20, 40);
+
     }
 
-    // Load your images into the animationFrames array
+    /**
+     * Loads the animation frames for the warrior's movement, emotes, and attacks.
+     * It loads frames from external image resources and scales them appropriately.
+     */
     private void loadAnimationFrames() {
         try {
             BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/warrior/moves.png")));
@@ -83,17 +111,55 @@ public class Warrior extends Player {
         }
     }
 
-    //Resize Image
+    /**
+     * Scales the given image to the appropriate size.
+     *
+     * @param image The image to be scaled.
+     * @return The scaled image.
+     */
     private Image scaleImage(Image image) {
         int width = image.getWidth(null);
         int height = image.getHeight(null);
         return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
+    /**
+     * Updates the warrior's state, including movement, attack range, and interaction with monsters.
+     * It also handles attack cooldown and triggers attacks on monsters within range.
+     *
+     * @param monsters The list of monsters to check for interaction.
+     * @param screenX The X position of the warrior on the screen.
+     * @param screenY The Y position of the warrior on the screen.
+     */
+
     //Change attackRangeDirection
+
     @Override
-    public void attackRangeDirection(){
-        switch(direction){
+    public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
+        super.update(monsters, screenX, screenY);
+        attackRangeDirection();
+
+        if (attackCooldown > 0) {
+            attackCooldown--;
+        }
+
+        if (isAttacking && attackCooldown == 0) {
+            for (Monster monster : monsters) {
+                if (checkRange(monster, screenX, screenY)) {
+                    attack(monster);
+                    attackCooldown = attackCooldownMax;
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the attack range based on the warrior's current direction.
+     * The attack range defines the area around the warrior where attacks can hit.
+     */
+    @Override
+    public void attackRangeDirection() {
+        switch (direction) {
             case "up":
                 attackRange.x = 0;
                 attackRange.y = -40;
@@ -121,6 +187,15 @@ public class Warrior extends Player {
         }
     }
 
+=
+    /**
+     * Draws the warrior on the screen, including animations, attack ranges, and solid areas.
+     *
+     * @param g2 The Graphics2D object used for drawing.
+     * @param screenX The X position of the warrior on the screen.
+     * @param screenY The Y position of the warrior on the screen.
+     */
+=
     @Override
     public void update(ArrayList<Monster> monsters, int screenX, int screenY){;
         super.update(monsters, screenX, screenY);
@@ -145,22 +220,26 @@ public class Warrior extends Player {
     public void draw(Graphics2D g2, int screenX, int screenY) {
         if(isDead){
             return;
+
         }
+
         frameCounter++;
-        if(emote){
+        if (emote) {
             frameDelay = 7;
         } else {
             frameDelay = 5;
         }
+
         if (frameCounter >= frameDelay) {
             frameCounter = 0;
-            currentFrame++;// Increment current frame for animation
+            currentFrame++; // Increment current frame for animation
+
             if (isAttacking) {
                 if (currentFrame >= 6) {
                     currentFrame = 0;
                     isAttacking = false; // Reset attack state after animation completes
                 }
-                switch(direction){
+                switch (direction) {
                     case "up":
                         lastFrame = animationFramesAttack[0][currentFrame];
                         break;
@@ -175,7 +254,7 @@ public class Warrior extends Player {
                         break;
                 }
             } else {
-                // Moving animation
+                // Handle moving animations
                 if (isMovingRight) {
                     lastFrame = animationFramesMoves[3][currentFrame % animationFramesMoves[3].length];
                 } else if (isMovingUp) {
@@ -184,12 +263,12 @@ public class Warrior extends Player {
                     lastFrame = animationFramesMoves[2][currentFrame % animationFramesMoves[2].length];
                 } else if (isMovingLeft) {
                     lastFrame = animationFramesMoves[1][currentFrame % animationFramesMoves[1].length];
-                } else if (emote){
+                } else if (emote) {
                     if (currentFrame >= 7) {
                         currentFrame = 0;
                         emote = false;
                     }
-                    switch(direction){
+                    switch (direction) {
                         case "up":
                             lastFrame = animationFramesEmote[0][currentFrame];
                             break;
@@ -206,8 +285,9 @@ public class Warrior extends Player {
                 }
             }
         }
-        if(lastFrame == null){
-            switch(direction){
+
+        if (lastFrame == null) {
+            switch (direction) {
                 case "up":
                     lastFrame = animationFramesMoves[0][0];
                     break;
@@ -222,6 +302,7 @@ public class Warrior extends Player {
                     break;
             }
         }
+
         g2.drawImage(lastFrame, screenX, screenY, null);
         g2.setColor(Color.WHITE);
         g2.drawString("HP: " + hp, screenX +10, screenY -10);
@@ -229,4 +310,17 @@ public class Warrior extends Player {
     }
 
 
+        // Draw attack range
+        g2.setColor(new Color(255, 0, 0, 100));
+        g2.fillRect(screenX + attackRange.x, screenY + attackRange.y, attackRange.width, attackRange.height);
+
+        // Draw warrior
+        g2.drawImage(lastFrame, screenX, screenY, null);
+        g2.setColor(Color.WHITE);  // Set text color to white (can be changed)
+        g2.setFont(new Font("Arial", Font.BOLD, 12));  // Set font for the name
+        g2.drawString(playerName1, screenX - 8, screenY - 10);
+        // Draw solid area
+        g2.setColor(Color.GREEN);
+        g2.fillRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+    }
 }
