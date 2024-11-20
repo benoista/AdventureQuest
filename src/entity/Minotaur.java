@@ -26,7 +26,7 @@ public class Minotaur extends Monster {
      *
      * @param collisionChecker The collision checker instance to be used by the Minotaur.
      */
-    public Minotaur(CollisionChecker collisionChecker) {
+    public Minotaur(CollisionChecker collisionChecker, int spawnX, int spawnY) {
         super(250, collisionChecker);
         this.attackCooldownMax = 120;
         this.direction = "up";
@@ -34,8 +34,8 @@ public class Minotaur extends Monster {
         this.dmg = 2;
 
 
-        worldX = (16 * 3) * 23; // World X position
-        worldY = (16 * 3) * 13; // World Y position
+        worldX = (16 * 3) * spawnX; // World X position
+        worldY = (16 * 3) * spawnY; // World Y position
 
         // Hitbox definition (Rectangle)
         solidArea = new Rectangle(40, 40, 50, 70);

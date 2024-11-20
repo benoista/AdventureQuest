@@ -57,9 +57,11 @@ public abstract class Player extends BaseCharacter {
      * Sets the default values for the player's position, speed, and direction.
      */
     public void setDefaultValues() {
+
         worldX = (16 * 3) * 16;
         worldY = (16 * 3) * 85;
-        speed = 4;
+        speed = 5;
+
         direction = "down";
     }
 

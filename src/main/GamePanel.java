@@ -146,8 +146,12 @@ public class GamePanel extends JPanel implements Runnable {
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
         */
-        monsters.add(new Gobelin(cChecker));
-        monsters.add(new Seraphyrax(cChecker));
+
+        monsters.add(new Minotaur(cChecker, 80,75));
+        monsters.add(new Minotaur(cChecker,133,10));
+        monsters.add(new Minotaur(cChecker, 61,30));
+        monsters.add(new Minotaur(cChecker,90,20));
+
 
 
 
@@ -253,7 +257,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.draw(g2);
         tileN.draw(g2);
-        System.out.println(playerName);
         player.draw(g2, screenX, screenY);
 
         Iterator<Monster> iterator = monsters.iterator();
