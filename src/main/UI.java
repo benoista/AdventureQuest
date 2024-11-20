@@ -98,13 +98,13 @@ public class UI {
 
             text = "You won the game";
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 + 400;
+            x = gp.getWidth() / 2 - textLength / 2;
             y = gp.getHeight() / 2 + 100;
             g2.drawString(text, x, y);
 
             text = "Your time is: " + dFromat.format(playTime);
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 + 400;
+            x = gp.getWidth() / 2 - textLength / 2;
             y = gp.getHeight() / 2;
             g2.drawString(text, x, y);
 
@@ -112,8 +112,8 @@ public class UI {
             g2.setColor(Color.yellow);
             text = "GG";
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 + 400;
-            y = gp.getHeight() / 2 - 200;
+            x = gp.getWidth() / 2 - textLength / 2;
+            y = gp.getHeight() / 2 - 100;
             g2.drawString(text, x, y);
 
         } else if (gameLost == true) { // If the game is lost
