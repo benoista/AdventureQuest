@@ -285,23 +285,10 @@ public class Warrior extends Player {
             }
         }
 
-        g2.drawImage(lastFrame, screenX, screenY, null);
-
-
-
-
-
-        // Draw attack range
-        g2.setColor(new Color(255, 0, 0, 100));
-        g2.fillRect(screenX + attackRange.x, screenY + attackRange.y, attackRange.width, attackRange.height);
-
         // Draw warrior
         g2.drawImage(lastFrame, screenX, screenY, null);
         g2.setColor(Color.WHITE);  // Set text color to white (can be changed)
         g2.setFont(new Font("Arial", Font.BOLD, 12));  // Set font for the name
         g2.drawString(playerName1, screenX - 8, screenY - 10);
-        // Draw solid area
-        g2.setColor(Color.GREEN);
-        g2.fillRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-    }
+       }
 }
