@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Main {
     public static Sound se = new Sound();
     public static Sound music = new Sound();
-    public static SuperObject[] obj = new SuperObject[15];
+    public static SuperObject[] obj = new SuperObject[22];
 
 
     public static String playerName;

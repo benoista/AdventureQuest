@@ -57,8 +57,8 @@ public abstract class Player extends BaseCharacter {
      * Sets the default values for the player's position, speed, and direction.
      */
     public void setDefaultValues() {
-        worldX = (16 * 3) * 21;
-        worldY = (16 * 3) * 13;
+        worldX = (16 * 3) * 16;
+        worldY = (16 * 3) * 85;
         speed = 4;
         direction = "down";
     }
@@ -135,6 +135,7 @@ public abstract class Player extends BaseCharacter {
                     ui.gameLost = true;
                     music.stopMusic(0);
                     se.playSE(4);
+                    ui.gameWin = true;
                     break;
                 case "House":
                     se.playSE(3);

@@ -30,28 +30,28 @@ public class AssetSetter {
      */
     public void setObject() {
         obj[0] = new Key();
-        obj[0].worldX = 25 * gp.tileSize;
-        obj[0].worldY = 10 * gp.tileSize;
+        obj[0].worldX =69 * gp.tileSize;
+        obj[0].worldY = 80 * gp.tileSize;
 
         obj[1] = new Key();
-        obj[1].worldX = 15 * gp.tileSize;
-        obj[1].worldY = 10 * gp.tileSize;
+        obj[1].worldX = 87 * gp.tileSize;
+        obj[1].worldY = 13 * gp.tileSize;
 
         obj[2] = new Key();
-        obj[2].worldX = 16 * gp.tileSize;
-        obj[2].worldY = 10 * gp.tileSize;
+        obj[2].worldX = 61 * gp.tileSize;
+        obj[2].worldY = 23 * gp.tileSize;
 
         obj[3] = new Door();
-        obj[3].worldX = 17 * gp.tileSize;
-        obj[3].worldY = 10 * gp.tileSize;
+        obj[3].worldX = 29 * gp.tileSize;
+        obj[3].worldY = 34 * gp.tileSize;
 
         obj[4] = new Chest();
-        obj[4].worldX = 18 * gp.tileSize;
-        obj[4].worldY = 10 * gp.tileSize;
+        obj[4].worldX = 133 * gp.tileSize;
+        obj[4].worldY = 2 * gp.tileSize;
 
         obj[5] = new Boot();
-        obj[5].worldX = 19 * gp.tileSize;
-        obj[5].worldY = 12 * gp.tileSize;
+        obj[5].worldX =  10* gp.tileSize;
+        obj[5].worldY = 55 * gp.tileSize;
 
         obj[6] = new House();
         obj[6].worldX = 80 * gp.tileSize;
@@ -66,23 +66,43 @@ public class AssetSetter {
         obj[8].worldY = 67 * gp.tileSize;
 
         obj[9] = new Sword();
-        obj[9].worldX = 20 * gp.tileSize;
-        obj[9].worldY = 23 * gp.tileSize;
+        obj[9].worldX = 49 * gp.tileSize;
+        obj[9].worldY = 87 * gp.tileSize;
 
         obj[10] = new Portal();
         obj[10].worldX = 24 * gp.tileSize + 24;
         obj[10].worldY = 16 * gp.tileSize;
 
         obj[11] = new Heal();
-        obj[11].worldX = 26 * gp.tileSize;
-        obj[11].worldY = 20 * gp.tileSize;
+        obj[11].worldX = 126 * gp.tileSize;
+        obj[11].worldY = 26 * gp.tileSize;
 
         obj[12] = new RedKey();
-        obj[12].worldX = 16 * gp.tileSize;
-        obj[12].worldY = 12 * gp.tileSize;
+        obj[12].worldX = 73 * gp.tileSize;
+        obj[12].worldY = 59 * gp.tileSize;
 
         obj[13] = new RedDoor();
-        obj[13].worldX = 17 * gp.tileSize;
-        obj[13].worldY = 12 * gp.tileSize;
+        obj[13].worldX = 130 * gp.tileSize;
+        obj[13].worldY = 26 * gp.tileSize;
+
+        obj[14] = new Door();
+        obj[14].worldX = 29 * gp.tileSize;
+        obj[14].worldY = 32 * gp.tileSize;
+        obj[15] = new Door();
+        obj[15].worldX = 29 * gp.tileSize;
+        obj[15].worldY = 30 * gp.tileSize;
+        obj[16] = new Door();
+        obj[16].worldX = 134 * gp.tileSize;
+        obj[16].worldY = 20 * gp.tileSize;
+        obj[17] = new Door();
+        obj[17].worldX = 133 * gp.tileSize;
+        obj[17].worldY = 20 * gp.tileSize;
+        obj[18] = new Key();
+        obj[18].worldX = 150 * gp.tileSize;
+        obj[18].worldY = 28 * gp.tileSize;
+
+
+
+
     }
 }

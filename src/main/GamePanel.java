@@ -147,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable {
         monsters.add(new Gobelin(cChecker));
         */
         monsters.add(new Gobelin(cChecker));
-        monsters.add(new Gobelin(cChecker));
+        monsters.add(new Seraphyrax(cChecker));
 
 
 
