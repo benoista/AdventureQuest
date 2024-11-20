@@ -1,9 +1,11 @@
 package main;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Represents the starting window of the Adventure Quest game.
@@ -43,7 +45,7 @@ public class GameStartWindow extends JFrame {
                 super.paintComponent(g);
                 // Draw the background image
                 if (backgroundImage != null) {
-                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
                 } else {
                     System.out.println("Background image not found.");
                 }
@@ -53,11 +55,11 @@ public class GameStartWindow extends JFrame {
 
         // Create a panel for input field and buttons
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(5, 1)); // One for input field, one for buttons
+        inputPanel.setLayout(new GridLayout(2, 1, 10, 10)); // One row for input, one for buttons
         inputPanel.setOpaque(false); // Make the background transparent
 
         // Create the input field for the player's name
-        JTextField playerNameField = new JTextField(4);
+        JTextField playerNameField = new JTextField();
         playerNameField.setFont(new Font("Arial", Font.PLAIN, 24));
         playerNameField.setForeground(Color.BLACK);
         playerNameField.setHorizontalAlignment(JTextField.CENTER);
@@ -73,9 +75,11 @@ public class GameStartWindow extends JFrame {
         buttonPanel.add(newGameButtonMage);
         buttonPanel.add(newGameButtonWarrior);
 
-        // Add the input field panel and button panel to the main panel
+        // Add the button panel below the input field
         inputPanel.add(buttonPanel);
-        panel.add(inputPanel, BorderLayout.CENTER);
+
+        // Position the inputPanel at the bottom
+        panel.add(inputPanel, BorderLayout.SOUTH);
 
         // Add the main panel to the frame
         add(panel);
@@ -87,8 +91,8 @@ public class GameStartWindow extends JFrame {
     /**
      * Creates a button for selecting a player class.
      *
-     * @param label        The label for the button (e.g., "Mage" or "Warrior").
-     * @param isWarrior    Whether the button corresponds to the Warrior class.
+     * @param label          The label for the button (e.g., "Mage" or "Warrior").
+     * @param isWarrior      Whether the button corresponds to the Warrior class.
      * @param playerNameField The input field where the player can enter their name.
      * @return The configured JButton instance.
      */
@@ -127,12 +131,15 @@ public class GameStartWindow extends JFrame {
     private void loadBackgroundImage() {
         try {
             // Load the background image (ensure the path is correct)
-            backgroundImage = new ImageIcon("resources/gameintro/GameImage.png").getImage();
+            File test = new File("src/resources/gameintro/GameImage.png");
+            backgroundImage = ImageIO.read(test);
         } catch (Exception e) {
             System.out.println("Failed to load background image: " + e.getMessage());
         }
     }
 
     // For testing the window
-
+    public static void main(String[] args) {
+        new GameStartWindow();
+    }
 }

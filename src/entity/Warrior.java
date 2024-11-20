@@ -134,24 +134,7 @@ public class Warrior extends Player {
 
     //Change attackRangeDirection
 
-    @Override
-    public void update(ArrayList<Monster> monsters, int screenX, int screenY) {
-        super.update(monsters, screenX, screenY);
-        attackRangeDirection();
 
-        if (attackCooldown > 0) {
-            attackCooldown--;
-        }
-
-        if (isAttacking && attackCooldown == 0) {
-            for (Monster monster : monsters) {
-                if (checkRange(monster, screenX, screenY)) {
-                    attack(monster);
-                    attackCooldown = attackCooldownMax;
-                }
-            }
-        }
-    }
 
     /**
      * Updates the attack range based on the warrior's current direction.
@@ -187,15 +170,14 @@ public class Warrior extends Player {
         }
     }
 
-=
+
     /**
      * Draws the warrior on the screen, including animations, attack ranges, and solid areas.
      *
-     * @param g2 The Graphics2D object used for drawing.
      * @param screenX The X position of the warrior on the screen.
      * @param screenY The Y position of the warrior on the screen.
      */
-=
+
     @Override
     public void update(ArrayList<Monster> monsters, int screenX, int screenY){;
         super.update(monsters, screenX, screenY);
@@ -306,7 +288,7 @@ public class Warrior extends Player {
         g2.drawImage(lastFrame, screenX, screenY, null);
 
 
-    }
+
 
 
         // Draw attack range

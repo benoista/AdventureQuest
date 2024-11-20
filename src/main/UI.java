@@ -12,6 +12,9 @@ import javax.swing.*;
 
 import entity.Player.*;
 
+import static entity.Player.hasKey;
+import static main.Main.gp;
+
 
 /**
  * {@code UI} handles all the on-screen user interface elements, including the display of player stats,
@@ -149,6 +152,7 @@ public class UI {
             g2.setFont(arial_40);
             g2.setColor(Color.white);
             g2.drawImage(keyImage, 20, 75, 40, 40, null); // Draw key count
+
             g2.drawString("x" + hasKey, 74, 110);
 
 
@@ -182,11 +186,6 @@ public class UI {
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i =0;
-        while(i< player.maxhp/2){
-            g2.drawImage(noHeart,x,y,null);
-            i++;
-            x += gp.tileSize;
-        }
 
 
         while (i < player.hp){
@@ -198,10 +197,5 @@ public class UI {
             i++;
             x += gp.tileSize;
         }
-    }
-
-    // Optional method to add a title screen (if needed)
-    private void drawTitleScreen() {
-        // Implement your title screen here if you need one
     }
 }

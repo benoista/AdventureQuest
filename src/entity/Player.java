@@ -26,7 +26,7 @@ public abstract class Player extends BaseCharacter {
     /** Static variables for tracking keys and player stats. */
  //Key for object
     public int hasRedKey = 0;
-    public int hasKey = 0;
+    public static int hasKey = 0;
 
     /** Holds the current animation frame for the player. */
 
@@ -51,15 +51,7 @@ public abstract class Player extends BaseCharacter {
         setDefaultValues();
     }
 
-    public void setDefaultValues(){
 
-        worldX = (16*3)*21;
-        worldY = (16*3)*13;
-        speed=5;
-        direction="down";
-
-
-    }
 
     /**
      * Sets the default values for the player's position, speed, and direction.
