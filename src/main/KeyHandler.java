@@ -33,6 +33,22 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_V){
             emotePressed = true;
         }
+        if(code == KeyEvent.VK_D && code == KeyEvent.VK_Z){
+            upPressed = true;
+            rightPressed = true;
+        }
+        if(code == KeyEvent.VK_D && code == KeyEvent.VK_S){
+            downPressed = true;
+            rightPressed = true;
+        }
+        if(code == KeyEvent.VK_Q && code == KeyEvent.VK_Z){
+            upPressed = true;
+            leftPressed = true;
+        }
+        if(code == KeyEvent.VK_Q && code == KeyEvent.VK_S){
+            downPressed = true;
+            leftPressed = true;
+        }
     }
 
     @Override
@@ -55,6 +71,22 @@ public class KeyHandler implements KeyListener{
         }
         if (code == KeyEvent.VK_V);{
             emotePressed = false;
+        }
+        if(code == KeyEvent.VK_D && code == KeyEvent.VK_Z){
+            upPressed = false;
+            rightPressed = false;
+        }
+        if(code == KeyEvent.VK_D && code == KeyEvent.VK_S){
+            downPressed = false;
+            rightPressed = false;
+        }
+        if (code == KeyEvent.VK_Q && code == KeyEvent.VK_Z){
+            upPressed = false;
+            leftPressed = false;
+        }
+        if (code == KeyEvent.VK_Q && code == KeyEvent.VK_S){
+            downPressed = false;
+            leftPressed = false;
         }
     }
 }

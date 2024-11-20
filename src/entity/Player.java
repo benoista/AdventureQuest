@@ -36,7 +36,7 @@ public abstract class Player extends BaseCharacter {
         this.keyH = keyH;
         this.collisionChecker = collisionChecker;
 
-        this.visionRange = new Rectangle(48,48,16*43, 16*30);
+        this.visionRange = new Rectangle(-300,-200,650, 450);
         setDefaultValues();
     }
 
@@ -44,7 +44,7 @@ public abstract class Player extends BaseCharacter {
 
         worldX = (16*3)*21;
         worldY = (16*3)*13;
-        speed=4;
+        speed=5;
         direction="down";
 
     }
@@ -149,7 +149,17 @@ public abstract class Player extends BaseCharacter {
     public void update(ArrayList<Monster> monsters, int screenX, int screenY){
         isMovingLeft = false;isMovingUp = false;isMovingDown = false;isMovingRight = false;
         if(keyH.upPressed==true||keyH.downPressed==true||keyH.leftPressed==true||keyH.rightPressed==true){
-            if (keyH.upPressed){
+
+            if (keyH.upPressed && keyH.rightPressed) {
+                direction="up-right";
+                System.out.println("up-right1");
+            } else if (keyH.upPressed && keyH.leftPressed) {
+                direction="up-left";
+            } else if (keyH.downPressed && keyH.rightPressed) {
+                direction="down-right";
+            } else if (keyH.downPressed && keyH.leftPressed) {
+                direction="down-left";
+            } else if (keyH.upPressed){
                 direction="up";
             }
             else if (keyH.downPressed){
@@ -158,9 +168,11 @@ public abstract class Player extends BaseCharacter {
             else if (keyH.leftPressed){
                 direction="left";
             }
-            else if (keyH.rightPressed){
-                direction="right";
+            else if (keyH.rightPressed) {
+                direction = "right";
+
             }
+
             collisionOn = false;
             collisionChecker.checkTile(this);
 
@@ -170,6 +182,26 @@ public abstract class Player extends BaseCharacter {
 
             if(!collisionOn){
                 switch (direction){
+                    case "up-right":
+                        worldX +=speed*0.75;
+                        worldY -=speed*0.75;
+                        isMovingRight = true;
+                        break;
+                    case "up-left":
+                        worldY -=speed*0.75;
+                        worldX -=speed*0.75;
+                        isMovingLeft = true;
+                        break;
+                    case "down-right":
+                        worldY +=speed*0.75;
+                        worldX +=speed*0.75;
+                        isMovingRight = true;
+                        break;
+                    case "down-left":
+                        worldY +=speed*0.75;
+                        worldX -=speed*0.75;
+                        isMovingLeft = true;
+                        break;
                     case "up":
                         worldY -=speed;
                         isMovingUp = true;
@@ -186,6 +218,8 @@ public abstract class Player extends BaseCharacter {
                         worldX+=speed;
                         isMovingRight = true;
                         break;
+
+
                 }
             }
         }
