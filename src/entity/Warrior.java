@@ -304,8 +304,7 @@ public class Warrior extends Player {
         }
 
         g2.drawImage(lastFrame, screenX, screenY, null);
-        g2.setColor(Color.WHITE);
-        g2.drawString("HP: " + hp, screenX +10, screenY -10);
+
 
     }
 
