@@ -59,7 +59,7 @@ public abstract class Player extends BaseCharacter {
     public void setDefaultValues() {
         worldX = (16 * 3) * 21;
         worldY = (16 * 3) * 13;
-        speed = 4;
+        speed = 5;
         direction = "down";
     }
 
