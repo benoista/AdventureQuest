@@ -27,7 +27,8 @@ public abstract class BaseCharacter extends Entity{
 
 
     //Game
-    protected int hp;
+    public int maxhp;
+    public int hp;
     protected int dmg;
 
     //attackRange

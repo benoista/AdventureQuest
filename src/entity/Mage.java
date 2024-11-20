@@ -18,7 +18,8 @@ public class Mage extends Player {
 
     public Mage(KeyHandler keyHandler, CollisionChecker collisionChecker, Fireball fir) {
         super(keyHandler, collisionChecker);
-        this.hp = this.maxhpUi = 10;
+        this.maxhp = 10;
+        this.hp= 10;
         this.dmg = 20;
         // Initialize the animation frames
         loadAnimationFrames();
@@ -77,10 +78,7 @@ public class Mage extends Player {
             frameCounter = 0;
             currentFrame++;// Increment current frame for animation
             if (isAttacking) {
-                if (currentFrame >= 6) {
-                    currentFrame = 0;
-                    isAttacking = false; // Reset attack state after animation completes
-                }
+                isAttacking = false;
                 switch(direction){
                     case "up":
                         lastFrame = animationFramesAttack[0][currentFrame];

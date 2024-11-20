@@ -6,7 +6,7 @@ import main.CollisionChecker;
 import java.awt.*;
 
 public abstract class Monster extends BaseCharacter {
-    protected int attackCooldownMax = 120;
+    protected int attackCooldownMax = 60;
 
     public Monster(int hp, CollisionChecker collisionChecker) {
         this.hp = hp;
