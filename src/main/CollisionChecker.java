@@ -1,19 +1,33 @@
+/**
+ * The CollisionChecker class handles collision detection and response in the game.
+ * It checks for collisions between entities, tiles, and objects, as well as their interaction ranges.
+ */
 package main;
 
 import entity.BaseCharacter;
 import entity.Entity;
 
 import static main.Main.obj;
-
+/**
+ * Responsible for checking and managing collisions between game entities, tiles, and objects.
+ */
 public class CollisionChecker {
     GamePanel gp;
 
 
-
+    /**
+     * Constructs a CollisionChecker with the specified game panel.
+     * @param gp the GamePanel instance to interact with tiles and entities
+     */
 
     public CollisionChecker(GamePanel gp){
         this.gp = gp;
     }
+    /**
+     * Checks if an entity is colliding with any tiles based on its direction and position.
+     * Updates the entity's collision state if necessary.
+     * @param entity the entity to check for tile collisions
+     */
     public void checkTile(Entity entity){
         int entityLeftWorldX = entity.worldX+ entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x +entity.solidArea.width;
@@ -86,6 +100,12 @@ public class CollisionChecker {
                 break;
         }
     }
+    /**
+     * Checks for a collision between two entities.
+     * @param entity1 the first entity
+     * @param entity2 the second entity
+     * @return true if the entities are colliding, false otherwise
+     */
 
     public boolean checkEntityCollision(Entity entity1, Entity entity2){
         int entity1LeftWorldX = entity1.worldX+ entity1.solidArea.x;
@@ -105,7 +125,10 @@ public class CollisionChecker {
         }
         return false;
     }
-
+    /**
+     * Handles the response to a collision for the given entity by reversing its movement.
+     * @param entity the entity to handle collision response
+     */
     public void handleCollision(Entity entity){
         if (entity.collisionOn){
             switch (entity.direction){
@@ -124,6 +147,12 @@ public class CollisionChecker {
             }
         }
     }
+    /**
+     * Checks if an entity is colliding with any objects in the game.
+     * @param entity the entity to check for object collisions
+     * @param player indicates if the entity is controlled by the player
+     * @return the index of the colliding object, or 999 if no collision
+     */
     public int checkObject(Entity entity, boolean player){
         int index = 999;
         for(int i =0 ; i< obj.length;i++){
@@ -188,6 +217,12 @@ public class CollisionChecker {
         }
         return index;
     }
+    /**
+     * Determines if one character can see another within its vision range.
+     * @param baseCharacter1 the character performing the vision check
+     * @param baseCharacter2 the target character
+     * @return true if the second character is within the first's vision range, false otherwise
+     */
 
     public boolean checkvisionRange(BaseCharacter baseCharacter1, BaseCharacter baseCharacter2){
        int baseCharacter1LeftWorldX = baseCharacter1.worldX+ baseCharacter1.visionRange.x;
@@ -205,7 +240,12 @@ public class CollisionChecker {
          }
          return false;
     }
-
+    /**
+     * Checks if one character is within attack range of another.
+     * @param baseCharacter1 the character performing the attack check
+     * @param baseCharacter2 the target character
+     * @return true if the second character is within the first's attack range, false otherwise
+     */
     public boolean inAttackRange(BaseCharacter baseCharacter1, BaseCharacter baseCharacter2) {
         int baseCharacter1LeftWorldX = baseCharacter1.worldX + baseCharacter1.attackRange.x;
         int baseCharacter1RightWorldX = baseCharacter1.worldX + baseCharacter1.attackRange.x + baseCharacter1.attackRange.width;

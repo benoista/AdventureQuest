@@ -12,52 +12,111 @@ import java.util.Iterator;
 
 import static main.Main.obj;
 
+/**
+ * Cette classe représente le panneau principal du jeu. Elle gère les
+ * composants graphiques, la logique du jeu, les mises à jour et les
+ * interactions entre le joueur et les éléments du jeu.
+ */
 public class GamePanel extends JPanel implements Runnable {
+
+    // Constantes pour les dimensions de la tuile et de l'écran
+    /** Taille originale d'une tuile en pixels. */
     final int originalTitleSize = 16;
+
+    /** Facteur d'échelle des tuiles. */
     final int scale = 3;
 
+    /** Taille d'une tuile après échelle en pixels. */
     public final int tileSize = originalTitleSize * scale;
-    public final int maxScreenCol=16;
-    public final int maxScreenRow=12;
-    public final int screenWidth = maxScreenCol*tileSize;
-    public final int screenHeight = maxScreenRow*tileSize;
-    public final int screenX = screenWidth/2 - (tileSize/2);
-    public final int screenY = screenHeight/2 - (tileSize/2);
+
+    /** Nombre maximum de colonnes affichées à l'écran. */
+    public final int maxScreenCol = 16;
+
+    /** Nombre maximum de lignes affichées à l'écran. */
+    public final int maxScreenRow = 12;
+
+    /** Largeur de l'écran en pixels. */
+    public final int screenWidth = maxScreenCol * tileSize;
+
+    /** Hauteur de l'écran en pixels. */
+    public final int screenHeight = maxScreenRow * tileSize;
+
+    /** Coordonnée X centrale de l'écran. */
+    public final int screenX = screenWidth / 2 - (tileSize / 2);
+
+    /** Coordonnée Y centrale de l'écran. */
+    public final int screenY = screenHeight / 2 - (tileSize / 2);
+
+
+
+    // Attributs de la classe
+    /** Indique si le joueur est un guerrier. */
     private boolean isWarrior;
+    private final String playerName;
+    /** Instance du joueur (guerrier ou mage). */
     public Player player;
 
+    /** Nombre maximal de colonnes dans le monde. */
+    public final int maxWorldCol = 160;
 
-    //world settings
-    public  final  int maxWorldCol = 160;
-    public  final  int maxWorldRow = 120;
+    /** Nombre maximal de lignes dans le monde. */
+    public final int maxWorldRow = 120;
 
+    /** Cadence d'images par seconde (FPS). */
+    int FPS = 60;
 
-    int FPS =60;
-
+    /** Gestionnaire de tuiles pour le niveau principal. */
     TileManager tileM = new TileManager(this);
+
+    /** Gestionnaire de tuiles pour le deuxième niveau. */
     TileManager2 tileN = new TileManager2(this);
-    KeyHandler keyH= new KeyHandler();
-    //public static Sound se = new Sound();
+
+    /** Gestionnaire des événements clavier. */
+    KeyHandler keyH = new KeyHandler();
+
+
+
+    /** Instance pour la musique du jeu. */
     Sound music = new Sound();
 
+    /** Gestionnaire des collisions. */
     public CollisionChecker cChecker = new CollisionChecker(this);
+
+    /** Gestionnaire des objets du jeu. */
     public AssetSetter aSetter = new AssetSetter(this);
 
-
+    /** Thread principal du jeu. */
     Thread gameThread;
 
-    public Player player;
+    /** Instance de boule de feu utilisée par les mages. */
     public Fireball fireball = new Fireball(cChecker);
 
-
+    /** État actuel du jeu. */
     public int gameState;
+
+    /** État : menu titre. */
     public final int tilteState = 0;
+
+    /** État : jeu en cours. */
     public final int playState = 1;
+
+    /** État : jeu en pause. */
     public final int pauseState = 2;
-    //Spawn Monster
+
+    /** État : dialogue en cours. */
+    public final int dialogue = 3;
+
+    /** Liste des monstres présents dans le jeu. */
     public ArrayList<Monster> monsters = new ArrayList<>();
 
-    public GamePanel(boolean isWarrior) {
+    /**
+     * Constructeur de la classe GamePanel.
+     *
+     * @param isWarrior  Indique si le joueur est un guerrier.
+     * @param playerName
+     */
+    public GamePanel(boolean isWarrior, String playerName) {
+
         setSize(800, 600);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -66,66 +125,80 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         this.isWarrior = isWarrior;
+        this.playerName = playerName;
 
-        // Set up the game window
-
-
-
-
-
-        // Add game panel or other components here
+        // Initialisation du joueur
         if (isWarrior) {
-            this.player= new Warrior(keyH, cChecker);
+
+            this.player = new Warrior(keyH, cChecker, playerName);
         } else {
-            this.player = new Mage(keyH, cChecker , fireball);
+            this.player = new Mage(keyH, cChecker, fireball,playerName);
         }
 
-        //Add monsters
+        // Ajout des monstres
         monsters.add(new Minotaur(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
         monsters.add(new Gobelin(cChecker));
     }
-    public void setupGame(){
+
+    /**
+     * Configure les objets et initialise la musique du jeu.
+     */
+    public void setupGame() {
         aSetter.setObject();
         music.playMusic(0);
-
     }
-    public void startGameThread(){
+
+    /**
+     * Démarre le thread principal du jeu.
+     */
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * Boucle principale du jeu. Gère les mises à jour et le rendu.
+     */
     @Override
     public void run() {
-        double drawInterval =  1000000000 /FPS;
-        double delta=0;
+        double drawInterval = 1000000000 / FPS;
+        double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
-        long timer =0;
-        int drawCount =0;
-        while (gameThread!=null){
-            currentTime = System.nanoTime();
-            delta += (currentTime-lastTime)/drawInterval;
-            timer += currentTime-lastTime;
-            lastTime = currentTime;
-            if(delta>= 1) {
-                update(screenX, screenY);
+        long timer = 0;
+        int drawCount = 0;
 
+        while (gameThread != null) {
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            timer += currentTime - lastTime;
+            lastTime = currentTime;
+
+            if (delta >= 1) {
+                update(screenX, screenY);
                 repaint();
                 delta--;
                 drawCount++;
             }
-            if (timer >= 1000000000){
-                drawCount=0;
-                timer=0;
+
+            if (timer >= 1000000000) {
+                drawCount = 0;
+                timer = 0;
             }
         }
-
     }
 
+    /**
+     * Met à jour les éléments du jeu.
+     *
+     * @param screenX Coordonnée X de l'écran.
+     * @param screenY Coordonnée Y de l'écran.
+     */
     public void update(int screenX, int screenY) {
         player.update(monsters, screenX, screenY);
+
         for (Monster monster : monsters) {
             monster.update();
             if (cChecker.checkEntityCollision(player, monster)) {
@@ -150,19 +223,19 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-
+    /**
+     * Dessine les éléments du jeu sur le panneau.
+     *
+     * @param g Contexte graphique utilisé pour le dessin.
+     */
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-
         tileM.draw(g2);
         tileN.draw(g2);
-
-
-
-        player.draw(g2, screenX ,screenY);
+        System.out.println(playerName);
+        player.draw(g2, screenX, screenY);
 
         Iterator<Monster> iterator = monsters.iterator();
         while (iterator.hasNext()) {
@@ -170,26 +243,25 @@ public class GamePanel extends JPanel implements Runnable {
             if (monster.isDead()) {
                 iterator.remove();
             } else {
-                if (monster instanceof Gobelin){
-                    g2.drawImage(monster.drawGobelin() , monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY, null);
+                if (monster instanceof Gobelin) {
+                    g2.drawImage(monster.drawGobelin(), monster.worldX - player.worldX + screenX, monster.worldY - player.worldY + screenY, null);
                 } else {
                     int monsterX = monster.worldX - player.worldX + screenX;
                     int monsterY = monster.worldY - player.worldY + screenY;
-                    monster.draw(g2,monsterX, monsterY);
+                    monster.draw(g2, monsterX, monsterY);
                     monster.drawAttackRange(g2, monsterX, monsterY);
                 }
             }
         }
-        for (int i = 0 ; i < obj.length ; i++) {
+
+        for (int i = 0; i < obj.length; i++) {
             if (obj[i] != null) {
-                obj[i].draw(g2,this);
+                obj[i].draw(g2, this);
             }
         }
         Main.ui.draw(g2);
+        Main.ui.setPlayer(player);
 
-
-        // Display the lastFrame attribute of player
         g2.dispose();
     }
-
 }

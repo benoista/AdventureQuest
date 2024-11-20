@@ -1,5 +1,6 @@
 package main;
 
+import entity.Player;
 import object.Heart;
 import object.Key;
 
@@ -9,121 +10,153 @@ import java.text.DecimalFormat;
 import javax.swing.*;
 
 import static entity.Player.*;
+import static main.Main.gp;
 
-import static main.GamePanel.*; // Use the correct reference for GamePanel
-import static main.Main.*;
-
+/**
+ * {@code UI} handles all the on-screen user interface elements, including the display of player stats,
+ * messages, and game outcome (win/loss). It updates the graphics context with information such as
+ * the player's life, key count, time played, and game result (win/loss).
+ */
 public class UI {
 
-    Font arial_40 , arial_80B;
-    BufferedImage FullHeart,halfHeart,noHeart;
+    // Fonts for rendering text in different sizes
+    Font arial_40, arial_80B;
+
+    // Images for hearts and keys
+    BufferedImage FullHeart, halfHeart, noHeart;
     BufferedImage keyImage;
+
+    // Flags for game messages and state
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
     public boolean gameWin = false;
-    public boolean gameLost=false;
+    public boolean gameLost = false;
 
+    // Player instance and playtime tracking
+    public Player player;
     double playTime;
     DecimalFormat dFromat = new DecimalFormat("#0.00");
 
+    /**
+     * Constructs the UI object, initializing fonts, images for hearts and keys, and setting up the
+     * player's hearts and key image.
+     */
     public UI() {
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
-        // Example setup for the key (adjust if needed)
-        Heart heart = new Heart(gp);
+        // Initialize heart and key images
+        Heart heart = new Heart();
         FullHeart = heart.image;
         halfHeart = heart.image2;
         noHeart = heart.image3;
-        Key key = new Key(gp);
+        Key key = new Key();
         keyImage = key.image;
     }
 
+    /**
+     * Sets the player instance that the UI will display information for.
+     *
+     * @param player The player whose information will be displayed on the UI.
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    /**
+     * Displays a message on the screen.
+     *
+     * @param text The message to be displayed.
+     */
     public void showMessage(String text) {
         message = text;
         messageOn = true;
     }
 
+    /**
+     * Draws the user interface on the screen, including the player’s health, time played, key count,
+     * and game win/loss status. If the game is won or lost, it displays a relevant message.
+     *
+     * @param g2 The graphics context used for drawing the UI elements.
+     */
     public void draw(Graphics2D g2) {
+        // If in the dialogue state, no UI updates happen here
+        if (gp.gameState == gp.dialogue) {
+            // Custom dialogue UI handling can be added here
+        }
 
-          if (gameWin == true) {
-                  g2.setFont(arial_40);
-                  g2.setColor(Color.white);
+        // If the game is won
+        if (gameWin == true) {
+            g2.setFont(arial_40);
+            g2.setColor(Color.white);
+            String text;
+            int textLength;
+            int x;
+            int y;
 
-                  String text;
-                  int textLength;
-                  int x;
-                  int y;
-
-                  text = "You won the game";
-                  textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-                  x = gp.getWidth() / 2 - textLength / 2 + 400;
-            y = gp.getHeight() / 2 +100;
+            text = "You won the game";
+            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = gp.getWidth() / 2 - textLength / 2 + 400;
+            y = gp.getHeight() / 2 + 100;
             g2.drawString(text, x, y);
 
             text = "Your time is: " + dFromat.format(playTime);
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 +400;
-            y = gp.getHeight() / 2 ;
+            x = gp.getWidth() / 2 - textLength / 2 + 400;
+            y = gp.getHeight() / 2;
             g2.drawString(text, x, y);
 
             g2.setFont(arial_80B);
             g2.setColor(Color.yellow);
             text = "GG";
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 +400;
-            y = gp.getHeight() / 2 -200;
+            x = gp.getWidth() / 2 - textLength / 2 + 400;
+            y = gp.getHeight() / 2 - 200;
             g2.drawString(text, x, y);
 
-            // Stop game loop if applicable
-        } else if (gameLost == true)
-         {
+        } else if (gameLost == true) { // If the game is lost
+            g2.setColor(Color.black);
+            g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());  // Fills the entire screen with black
+
             g2.setFont(arial_40);
             g2.setColor(Color.white);
-
             String text;
             int textLength;
             int x;
             int y;
 
-            // Display lose message
             text = "You lost the game";
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 ;
-            y = gp.getHeight() / 2 +100 ;
+            x = gp.getWidth() / 2 - textLength / 2;
+            y = gp.getHeight() / 2 + 100;
             g2.drawString(text, x, y);
 
-            // Display time played or additional information
             text = "Your time was: " + dFromat.format(playTime);
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getWidth() / 2 - textLength / 2 ;
-            y = gp.getHeight() / 2 ;
+            x = gp.getWidth() / 2 - textLength / 2;
+            y = gp.getHeight() / 2;
             g2.drawString(text, x, y);
 
-            // Display a "Try Again" or "Game Over" message
             g2.setFont(arial_80B);
             g2.setColor(Color.red);
             text = "GAME OVER";
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = gp.getWidth() / 2 - textLength / 2;
-            y = gp.getHeight() / 2 -100;
+            y = gp.getHeight() / 2 - 100;
             g2.drawString(text, x, y);
-
-            // Stop game loop if applicable
-        }
-
-
-        else {
-            drawPlayerLife(g2);
+        } else { // Game is ongoing
+            drawPlayerLife(g2, player); // Draw player health
             g2.setFont(arial_40);
             g2.setColor(Color.white);
-            g2.drawImage(keyImage, 20, 75, 40, 40, null);
+            g2.drawImage(keyImage, 20, 75, 40, 40, null); // Draw key count
             g2.drawString("x" + hasKey, 74, 110);
 
+            // Track and display time played
             playTime += (double) 1 / 60;
             g2.drawString("Time " + dFromat.format(playTime), 550, 65);
 
+            // Display temporary message if available
             if (messageOn) {
                 g2.setFont(g2.getFont().deriveFont(20F));
                 g2.drawString(message, 50, 300);
@@ -136,32 +169,43 @@ public class UI {
             }
         }
     }
-    public void drawPlayerLife(Graphics2D g2){
-        int x = gp.tileSize/2;
-        int y = gp.tileSize/2;
-        int i =0;
-        while(i< maxhp/2){
-            g2.drawImage(noHeart,x,y,null);
+
+    /**
+     * Draws the player's life on the screen, represented as hearts. Full hearts, half hearts, and
+     * empty hearts are drawn based on the player's current health.
+     *
+     * @param g2 The graphics context used for drawing the life hearts.
+     * @param player The player whose health is being displayed.
+     */
+    public void drawPlayerLife(Graphics2D g2, Player player) {
+        int x = gp.tileSize / 2;
+        int y = gp.tileSize / 2;
+        int i = 0;
+
+        // Draw empty hearts
+        while (i < maxhp / 2) {
+            g2.drawImage(noHeart, x, y, null);
             i++;
             x += gp.tileSize;
         }
-        x=gp.tileSize/2;
-        y=gp.tileSize/2;
-        i =0;
 
-        while (i < hp){
-            g2.drawImage(halfHeart,x,y,null);
+        // Draw the player's current health
+        x = gp.tileSize / 2;
+        y = gp.tileSize / 2;
+        i = 0;
+
+        while (i < hp) {
+            g2.drawImage(halfHeart, x, y, null);
             i++;
-            if (i< hp){
-                g2.drawImage(FullHeart,x,y,null);
+            if (i < hp) {
+                g2.drawImage(FullHeart, x, y, null);
             }
             i++;
             x += gp.tileSize;
         }
-
-
     }
-    // Example method for title screen (optional, if needed)
+
+    // Optional method to add a title screen (if needed)
     private void drawTitleScreen() {
         // Implement your title screen here if you need one
     }
