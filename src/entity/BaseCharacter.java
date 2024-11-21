@@ -108,4 +108,11 @@ public abstract class BaseCharacter extends Entity {
             default: return "";
         }
     }
+
+    public int getDmg(){
+        return dmg;
+    }
+    public boolean getisAttacking(){
+        return isAttacking;
+    }
 }

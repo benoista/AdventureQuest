@@ -34,4 +34,13 @@ public class Entity {
 
     /** The collision checker used to detect and handle collisions. */
     public CollisionChecker collisionChecker;
+
+    /**
+     * GetDirection of the Entity.
+     *
+     *@return Returns the direction of the Entity (as a string).
+     */
+    public String getDirection() {
+        return direction;
+    }
 }
