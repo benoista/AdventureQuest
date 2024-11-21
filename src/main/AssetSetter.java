@@ -12,7 +12,7 @@ import static main.Main.obj;
 /**
  * Handles the placement of game objects on the world grid.
  */
-public class AssetSetter {
+public class AssetSetter extends SuperObject {
     private GamePanel gp;
 
     /**

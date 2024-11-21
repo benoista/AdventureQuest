@@ -1,5 +1,6 @@
 package entity;
 
+import main.AssetSetter;
 import main.CollisionChecker;
 
 import java.awt.*;

@@ -4,7 +4,7 @@ import object.SuperObject;
 
 import javax.swing.*;
 
-public class Main {
+public class Main  {
     public static Sound se = new Sound();
     public static Sound music = new Sound();
     public static SuperObject[] obj = new SuperObject[22];

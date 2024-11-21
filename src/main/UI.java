@@ -21,7 +21,7 @@ import static main.Main.gp;
  * messages, and game outcome (win/loss). It updates the graphics context with information such as
  * the player's life, key count, time played, and game result (win/loss).
  */
-public class UI {
+public class UI{
 
     // Fonts for rendering text in different sizes
     Font arial_40, arial_80B;

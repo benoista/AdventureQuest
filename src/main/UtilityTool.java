@@ -1,12 +1,14 @@
 package main;
 
+import tile.Tile;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
  * A utility class that provides helper methods for image manipulation.
  */
-public class UtilityTool {
+public class UtilityTool extends Tile {
 
     /**
      * Scales a given image to the specified width and height.

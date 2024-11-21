@@ -10,7 +10,7 @@ import java.net.URL;
  * and sound effects. It allows playing, looping, and stopping audio clips, as well as setting
  * which audio file to use.
  */
-public class Sound {
+public class Sound extends UI {
 
     // The Clip object used for playing the audio
     Clip clip;

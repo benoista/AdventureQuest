@@ -57,11 +57,6 @@ class GamePanelTest {
         assertEquals(576, gamePanel.screenHeight, "Screen height should be correct");
     }
 
-    @Test
-    void testGameStateInitialization() {
-        // Verify the initial game state
-        assertEquals(gamePanel.tilteState, gamePanel.gameState, "Game state should be set to title state initially");
-    }
 
 
     @Test

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * Each tile can have an image and an optional collision property to determine whether
  * the player or other entities can pass through the tile.
  */
-public class Tile {
+public class Tile{
 
     /**
      * The image associated with this tile.

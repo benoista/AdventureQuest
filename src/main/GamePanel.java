@@ -20,26 +20,18 @@ import static main.Main.obj;
 public class GamePanel extends JPanel implements Runnable {
 
     // Constantes pour les dimensions de la tuile et de l'écran
-    /** Taille originale d'une tuile en pixels. */
-    final int originalTitleSize = 16;
 
-    /** Facteur d'échelle des tuiles. */
-    final int scale = 3;
 
     /** Taille d'une tuile après échelle en pixels. */
-    public int tileSize = originalTitleSize * scale;
+    public int tileSize = 16 * 3;
 
-    /** Nombre maximum de colonnes affichées à l'écran. */
-    public final int maxScreenCol = 16;
 
-    /** Nombre maximum de lignes affichées à l'écran. */
-    public final int maxScreenRow = 12;
 
     /** Largeur de l'écran en pixels. */
-    public final int screenWidth = maxScreenCol * tileSize;
+    public final int screenWidth = 16 * tileSize;
 
     /** Hauteur de l'écran en pixels. */
-    public final int screenHeight = maxScreenRow * tileSize;
+    public final int screenHeight = 12 * tileSize;
 
     /** Coordonnée X centrale de l'écran. */
     public final int screenX = screenWidth / 2 - (tileSize / 2);
@@ -62,8 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
     /** Nombre maximal de lignes dans le monde. */
     public final int maxWorldRow = 120;
 
-    /** Cadence d'images par seconde (FPS). */
-    int FPS = 60;
+
 
     /** Gestionnaire de tuiles pour le niveau principal. */
     TileManager tileM = new TileManager(this);
@@ -93,20 +84,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Fireball fireball = new Fireball(cChecker);
 
-    /** État actuel du jeu. */
-    public int gameState;
 
-    /** État : menu titre. */
-    public final int tilteState = 0;
 
-    /** État : jeu en cours. */
-    public final int playState = 1;
-
-    /** État : jeu en pause. */
-    public final int pauseState = 2;
-
-    /** État : dialogue en cours. */
-    public final int dialogue = 3;
 
     /** Liste des monstres présents dans le jeu. */
     public ArrayList<Monster> monsters = new ArrayList<>();
@@ -181,7 +160,7 @@ public class GamePanel extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double drawInterval = 1000000000 / FPS;
+        double drawInterval = 1000000000 /60;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
