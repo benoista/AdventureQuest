@@ -134,14 +134,20 @@ public class Fireball extends SuperObject {
     public void draw(Graphics g) {
         if (alive) {
             switch (direction) {
-                case "up": g.drawImage(FireBall[0][0], posX, posY, null); break;
-                case "down": g.drawImage(FireBall[2][0], posX, posY, null); break;
-                case "left": g.drawImage(FireBall[1][0], posX, posY, null); break;
-                case "right": g.drawImage(FireBall[3][0], posX, posY, null); break;
+                case "up":
+                    g.drawImage(FireBall[0][0], posX, posY, null);
+                    break;
+                case "down":
+                    g.drawImage(FireBall[2][0], posX, posY, null);
+                    break;
+                case "left":
+                    g.drawImage(FireBall[1][0], posX, posY, null);
+                    break;
+                case "right":
+                    g.drawImage(FireBall[3][0], posX, posY, null);
+                    break;
             }
         }
-        g.setColor(Color.RED);
-        g.drawRect(posX + solidArea.x, posY + solidArea.y, solidArea.width, solidArea.height);  // Draw the fireball's collision area
     }
 
     /**
