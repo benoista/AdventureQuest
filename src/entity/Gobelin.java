@@ -24,19 +24,28 @@ import java.util.Objects;
  * @see Monster
  */
 public class Gobelin extends Monster {
-    private Image Frame;
 
-
-    public Gobelin(CollisionChecker collisionChecker) {
+    public Gobelin(CollisionChecker collisionChecker, int zone) {
         super(60, collisionChecker);
 
         this.direction = "down";
         this.speed = 1;
         this.dmg = 1;
 
-        // Randomized position within certain bounds
-        this.worldX = (16*3) * (30 + (int)(Math.random() * ((50 - 30) + 1)));
-        this.worldY = (16*3) * (20 + (int)(Math.random() * ((35 - 20) + 1)));
+        switch (zone){
+            case 1:
+                this.worldX = (16*3) * 30;
+                this.worldY = (16*3) * 20;
+                break;
+            case 2:
+                this.worldX = (16*3) * 50;
+                this.worldY = (16*3) * 20;
+                break;
+            case 3:
+                this.worldX = (16*3) * 30;
+                this.worldY = (16*3) * 35;
+                break;
+        }
 
         loadAnimationFrames();
     }

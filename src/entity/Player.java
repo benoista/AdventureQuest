@@ -58,8 +58,8 @@ public class Player extends BaseCharacter {
      */
     public void setDefaultValues() {
 
-        worldX = (16 * 3) * 16;
-        worldY = (16 * 3) * 85;
+        worldX = (16 * 3) * 20;
+        worldY = (16 * 3) * 83;
         speed = 5;
 
         direction = "down";
@@ -162,7 +162,6 @@ public class Player extends BaseCharacter {
 
             if (keyH.upPressed && keyH.rightPressed) {
                 direction="up-right";
-                System.out.println("up-right1");
             } else if (keyH.upPressed && keyH.leftPressed) {
                 direction="up-left";
             } else if (keyH.downPressed && keyH.rightPressed) {
@@ -239,7 +238,6 @@ public class Player extends BaseCharacter {
 
 
         if(keyH.attackPressed){
-
             isAttacking = true;
         }
         if (keyH.emotePressed) {
@@ -280,7 +278,6 @@ public class Player extends BaseCharacter {
      */
     public void attack(Monster monster) {
         monster.setHp(monster.getHp() - this.dmg);
-        System.out.println("Monster HP: " + monster.getHp());
     }
 
     /**
@@ -318,12 +315,25 @@ public class Player extends BaseCharacter {
  
     public void draw(Graphics2D g2, int screenX, int screenY){}
 
+    /**
+     * Check if player dead.
+     *
+     * @return boolean isDead.
+     */
     public boolean isDead() {
         if (hp <= 0) {
             isDead = true;
         }
         return isDead;
 
+    }
+
+    /**
+     * getEmote Emote boolean
+     * @return emote boolean.
+     */
+    public boolean getEmote() {
+        return emote;
     }
 
     public String getName() {
