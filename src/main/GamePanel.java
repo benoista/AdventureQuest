@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
 
     /** Taille d'une tuile après échelle en pixels. */
-    public final int tileSize = originalTitleSize * scale;
+    public int tileSize = originalTitleSize * scale;
 
     /** Nombre maximum de colonnes affichées à l'écran. */
     public final int maxScreenCol = 16;
@@ -158,6 +158,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+
+
     /**
      * Configure les objets et initialise la musique du jeu.
      */
@@ -213,6 +215,7 @@ public class GamePanel extends JPanel implements Runnable {
      * @param screenY Coordonnée Y de l'écran.
      */
     public void update(int screenX, int screenY) {
+
         player.update(monsters, screenX, screenY);
 
         if (player.isDead()) {
@@ -244,6 +247,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
+
     }
 
     /**

@@ -128,7 +128,7 @@ public class GameStartWindow extends JFrame {
      * Loads the background image for the game start window.
      * The image is loaded from the specified file path.
      */
-    private void loadBackgroundImage() {
+    void loadBackgroundImage() {
         try {
             // Load the background image (ensure the path is correct)
             File test = new File("src/resources/gameintro/GameImage.png");
@@ -141,5 +141,10 @@ public class GameStartWindow extends JFrame {
     // For testing the window
     public static void main(String[] args) {
         new GameStartWindow();
+    }
+
+    public Image getBackgroundImage() {
+
+        return null;
     }
 }
