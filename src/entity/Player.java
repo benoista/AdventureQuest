@@ -12,7 +12,7 @@ import static main.Main.*;
  * Represents a player character in the game. The player can interact with objects,
  * move around the world, attack monsters, and perform various actions.
  */
-public abstract class Player extends BaseCharacter {
+public class Player extends BaseCharacter {
 
 
     /** KeyHandler instance for managing user input. */
@@ -324,5 +324,9 @@ public abstract class Player extends BaseCharacter {
         }
         return isDead;
 
+    }
+
+    public String getName() {
+        return "TestPlayer";
     }
 }

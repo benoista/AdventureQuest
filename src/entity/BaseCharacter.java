@@ -9,7 +9,7 @@ import java.awt.*;
  *
  * <p>Subclasses of this class should implement specific character behavior, such as handling specific attacks or movement patterns.</p>
  */
-public abstract class BaseCharacter extends Entity {
+public class BaseCharacter extends Entity {
 
     /** Flag indicating whether the character is currently attacking. */
     protected boolean isAttacking = false;
