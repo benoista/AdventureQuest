@@ -33,17 +33,22 @@ public class Gobelin extends Monster {
         this.dmg = 1;
 
         switch (zone){
-            case 1:
-                this.worldX = (16*3) * 30;
-                this.worldY = (16*3) * 20;
+            case 1: //TP Zone
+                this.worldX = (16*3) * (20 + (int)(Math.random() * ((40 - 20) + 1)));
+                this.worldY = (16*3) * (20 + (int)(Math.random() * ((25 - 10) + 1)));
                 break;
-            case 2:
-                this.worldX = (16*3) * 50;
-                this.worldY = (16*3) * 20;
+            case 2: // Mid Zone
+                this.worldX = (16*3) * (20 + (int)(Math.random() * ((75 - 65) + 1)));
+                this.worldX = (16*3) * 65;
+                this.worldY = (16*3) * 33;
                 break;
             case 3:
-                this.worldX = (16*3) * 30;
-                this.worldY = (16*3) * 35;
+                this.worldX = (16*3) * 130;
+                this.worldY = (16*3) * 10;
+                break;
+            case 4:
+                this.worldX = (16*3) * 90;
+                this.worldY = (16*3) * 2;
                 break;
         }
 
