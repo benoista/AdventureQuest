@@ -200,6 +200,22 @@ public class CollisionChecker {
                 case "right":
                     entity.worldX -= entity.speed;
                     break;
+                case "up-left":
+                    entity.worldY += entity.speed;
+                    entity.worldX += entity.speed;
+                    break;
+                case "up-right":
+                    entity.worldY += entity.speed;
+                    entity.worldX -= entity.speed;
+                    break;
+                case "down-left":
+                    entity.worldY -= entity.speed;
+                    entity.worldX += entity.speed;
+                    break;
+                case "down-right":
+                    entity.worldY -= entity.speed;
+                    entity.worldX -= entity.speed;
+                    break;
             }
         }
     }
@@ -264,6 +280,54 @@ public class CollisionChecker {
                             }
                         }
                     break;
+                    case "up-right":
+                        entity.solidArea.x += entity.speed;
+                        entity.solidArea.y += entity.speed;
+                        if (entity.solidArea.intersects(obj[i].solidArea)){
+                            if ( obj[i].collision == true){
+                                entity.collisionOn = true;
+                            }
+                            if (player == true){
+                                index =i;
+                            }
+                        }
+                        break;
+                    case "up-left":
+                        entity.solidArea.x -= entity.speed;
+                        entity.solidArea.y -= entity.speed;
+                        if (entity.solidArea.intersects(obj[i].solidArea)){
+                            if ( obj[i].collision == true){
+                                entity.collisionOn = true;
+                            }
+                            if (player == true){
+                                index =i;
+                            }
+                        }
+                        break;
+                    case "down-right":
+                        entity.solidArea.x += entity.speed;
+                        entity.solidArea.y += entity.speed;
+                        if (entity.solidArea.intersects(obj[i].solidArea)){
+                            if ( obj[i].collision == true){
+                                entity.collisionOn = true;
+                            }
+                            if (player == true){
+                                index =i;
+                            }
+                        }
+                        break;
+                    case "down-left":
+                        entity.solidArea.x += entity.speed;
+                        entity.solidArea.y -= entity.speed;
+                        if (entity.solidArea.intersects(obj[i].solidArea)){
+                            if ( obj[i].collision == true){
+                                entity.collisionOn = true;
+                            }
+                            if (player == true){
+                                index =i;
+                            }
+                        }
+                        break;
                 }
                 entity.solidArea.x =entity.solidAreaDefaultX;
                 entity.solidArea.y =entity.solidAreaDefaultY;
