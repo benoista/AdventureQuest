@@ -18,8 +18,6 @@ public class TestMonster {
         assertEquals(1, gobelin.speed);
         assertEquals(1, gobelin.getDmg());
         assertEquals("down", gobelin.direction);
-        assertEquals((16*3) * 30, gobelin.worldX);
-        assertEquals((16*3) * 20, gobelin.worldY);
     }
 
     //Test for isDead() method

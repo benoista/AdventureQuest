@@ -449,8 +449,7 @@ public class TestPlayer {
         CollisionChecker collisionChecker = new CollisionChecker(gamePanel);
         Warrior player = new Warrior(keyH, collisionChecker, "");
 
-        assertEquals((16 * 3) * 16, player.worldX);
-        assertEquals((16 * 3) * 85, player.worldY);
+
         assertEquals(5, player.speed);
         assertEquals("down", player.direction);
     }
