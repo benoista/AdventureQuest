@@ -222,9 +222,8 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 } else {
                     if (monster.canAttack()) {
-                        System.out.println(player.getHp());
                         monster.attack(player);
-                        System.out.println(player.getHp());
+                        Main.music.playSE(7);
                     }
                 }
             }
