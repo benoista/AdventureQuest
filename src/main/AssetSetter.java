@@ -66,7 +66,7 @@ public class AssetSetter extends SuperObject {
         obj[8].worldY = 67 * gp.tileSize;
 
         obj[9] = new Sword();
-        obj[9].worldX = 49 * gp.tileSize;
+        obj[9].worldX = 48 * gp.tileSize;
         obj[9].worldY = 87 * gp.tileSize;
 
         obj[10] = new Portal();

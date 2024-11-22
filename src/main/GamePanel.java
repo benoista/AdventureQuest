@@ -119,18 +119,34 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Ajout des monstres
 
-        /*
+
 
        monsters.add(new Minotaur(cChecker, 80,75));
         monsters.add(new Minotaur(cChecker,133,10));
         monsters.add(new Minotaur(cChecker, 61,30));
         monsters.add(new Minotaur(cChecker,90,20));
-        */
+
 
         monsters.add(new Gobelin(cChecker, 1));
         monsters.add(new Gobelin(cChecker, 1));
         monsters.add(new Gobelin(cChecker, 1));
         monsters.add(new Gobelin(cChecker, 1));
+
+        monsters.add(new Gobelin(cChecker, 2));
+        monsters.add(new Gobelin(cChecker, 2));
+        monsters.add(new Gobelin(cChecker, 2));
+        monsters.add(new Gobelin(cChecker, 2));
+
+        monsters.add(new Gobelin(cChecker, 3));
+        monsters.add(new Gobelin(cChecker, 3));
+        monsters.add(new Gobelin(cChecker, 3));
+        monsters.add(new Gobelin(cChecker, 3));
+
+        monsters.add(new Gobelin(cChecker, 4));
+        monsters.add(new Gobelin(cChecker, 4));
+        monsters.add(new Gobelin(cChecker, 4));
+        monsters.add(new Gobelin(cChecker, 4));
+
 
 
 
