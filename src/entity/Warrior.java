@@ -222,8 +222,9 @@ public class Warrior extends Player {
 
                 if (currentFrame >= 6) {
                     currentFrame = 0;
-                    Main.music.playSE(10);
-                    isAttacking = false; // Reset attack state after animation completes
+
+                    isAttacking = false;
+                    Main.music.playSE(10);// Reset attack state after animation completes
                 }
                 switch (direction) {
                     case "up":
