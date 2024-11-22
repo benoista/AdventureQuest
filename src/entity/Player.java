@@ -128,10 +128,11 @@ public class Player extends BaseCharacter {
                     break;
                 case "Portal":
                     music.stopMusic(0);
-                    se.playMusic(6);
+                    se.playSE(5);
                     ui.showMessage("You accessed the end of the world");
                     worldX = 16 * 3 * 135;
                     worldY = 16 * 3 * 35;
+                    se.playSE(6);
                     break;
                 case "Chest":
                     ui.gameLost = true;
