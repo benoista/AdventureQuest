@@ -122,7 +122,7 @@ public class Mage extends Player {
 
             // Handle attack animation
             if (isAttacking) {
-                Main.music.playSE(9);
+
                 isAttacking = false;
                 switch(direction){
 
@@ -230,7 +230,9 @@ public class Mage extends Player {
 
         // Check if the fireball collides with any monsters
         for (Monster monster : monsters) {
+
             if (checkRange(monster, screenX, screenY)) {
+                Main.music.playSE(9);
                 attack(monster);  // Attack the monster if within range
             }
         }
