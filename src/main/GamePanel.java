@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
+
     /** Largeur de l'écran en pixels. */
     public final int screenWidth = 16 * tileSize;
 
@@ -84,7 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Fireball fireball = new Fireball(cChecker);
 
-
+    protected int coolodwnmonsterRun = 13;
 
 
     /** Liste des monstres présents dans le jeu. */
@@ -121,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
-       monsters.add(new Minotaur(cChecker, 80,75));
+        monsters.add(new Minotaur(cChecker, 80,75));
         monsters.add(new Minotaur(cChecker,133,10));
         monsters.add(new Minotaur(cChecker, 61,30));
         monsters.add(new Minotaur(cChecker,90,20));
@@ -146,7 +147,6 @@ public class GamePanel extends JPanel implements Runnable {
         monsters.add(new Gobelin(cChecker, 4));
         monsters.add(new Gobelin(cChecker, 4));
         monsters.add(new Gobelin(cChecker, 4));
-
 
 
 
@@ -233,7 +233,12 @@ public class GamePanel extends JPanel implements Runnable {
                             monster.collisionOn = true;
                             break;
                         } else {
-                            monster.setChase(player.worldX, player.worldY);
+                            if (coolodwnmonsterRun == 0) {
+                                monster.setChase(player.worldX, player.worldY);
+                                coolodwnmonsterRun = 10;
+                            }else{
+                                coolodwnmonsterRun--;
+                            }
                         }
                     }
                 } else {
