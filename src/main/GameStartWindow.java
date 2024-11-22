@@ -38,6 +38,8 @@ public class GameStartWindow extends JFrame {
         // Load the background image
         loadBackgroundImage();
 
+        Main.music.playSE(12);
+
         // Create and configure the main panel
         JPanel panel = new JPanel() {
             @Override
