@@ -33,25 +33,23 @@ public class Gobelin extends Monster {
         this.dmg = 1;
 
         switch (zone){
-            case 1: //TP Zone
-                this.worldX = (16*3) * (20 + (int)(Math.random() * ((20 - 20) + 1)));
-                this.worldY = (16*3) * (20 + (int)(Math.random() * ((25 - 10) + 1)));
+            case 1: // TP Zone
+                this.worldX = (16 * 3) * (20 + (int)(Math.random() * (6))); // 20 to 25
+                this.worldY = (16 * 3) * (10 + (int)(Math.random() * (16))); // 10 to 25
                 break;
             case 2: // Mid Zone
 
-                this.worldX = (16*3) * (20 + (int)(Math.random() * ((50 - 00) + 1)));
-                this.worldY = (16*3) * (20 + (int)(Math.random() * ((33 - 40) + 1)));
+                this.worldX = (16 * 3) * (60 + (int)(Math.random() * 6)); // 50 to 55
+                this.worldY = (16 * 3) * (33 + (int)(Math.random() * 8)); // 33 to 40
 
                 break;
             case 3:
-                this.worldX = (16*3) * (20 + (int)(Math.random() * ((80 - 100) + 1)));
-                this.worldY = (16*3) * (20 + (int)(Math.random() * ((75 - 85) + 1)));
-
+                this.worldX = (16 * 3) * (80 + (int)(Math.random() * 21)); // 80 to 100
+                this.worldY = (16 * 3) * (75 + (int)(Math.random() * 11)); // 75 to 85
                 break;
             case 4:
-                this.worldX = (16*3) * (20 + (int)(Math.random() * ((100 - 120) + 1)));
-                this.worldY = (16*3) * (20 + (int)(Math.random() * ((20 - 30) + 1)));
-
+                this.worldX = (16 * 3) * (80 + (int)(Math.random() * 11)); // 100 to 120
+                this.worldY = (16 * 3) * (20 + (int)(Math.random() * 11)); // 20 to 30
                 break;
         }
 

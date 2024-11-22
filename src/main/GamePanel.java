@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
     /** Coordonnée Y centrale de l'écran. */
     public final int screenY = screenHeight / 2 - (tileSize / 2);
 
-    private int coolodwnmonsterRun = 18 ;
+    private int coolodwnmonsterRun = 18;
 
     // Attributs de la classe
     /** Indique si le joueur est un guerrier. */
@@ -218,6 +218,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (player.isDead()) {
             Main.ui.gameLost = true;
+            gameThread =null;
+        }
+        if(Main.ui.gameWin){
             gameThread =null;
         }
 
