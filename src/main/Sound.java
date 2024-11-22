@@ -30,6 +30,12 @@ public class Sound extends UI {
         soundURL[4] = getClass().getResource("/sound/fanfare.wav");
         soundURL[5] = getClass().getResource("/sound/tp.wav");
         soundURL[6] = getClass().getResource("/sound/dungeon.wav");
+        soundURL[7] = getClass().getResource("/sound/dungeon.wav");
+        soundURL[8] = getClass().getResource("/sound/dungeon.wav");
+        soundURL[9] = getClass().getResource("/sound/boom.wav");
+        soundURL[10] = getClass().getResource("/sound/epéé.wav");
+        soundURL[11] = getClass().getResource("/sound/introméchant.wav");
+        soundURL[12] = getClass().getResource("/sound/gameIntro.wav");
     }
 
     /**

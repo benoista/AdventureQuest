@@ -2,6 +2,7 @@ package entity;
 
 import main.CollisionChecker;
 import main.KeyHandler;
+import main.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -217,8 +218,10 @@ public class Warrior extends Player {
             currentFrame++; // Increment current frame for animation
 
             if (isAttacking) {
+
                 if (currentFrame >= 6) {
                     currentFrame = 0;
+                    Main.music.playSE(10);
                     isAttacking = false; // Reset attack state after animation completes
                 }
                 switch (direction) {

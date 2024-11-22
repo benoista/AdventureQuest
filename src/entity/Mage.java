@@ -2,8 +2,10 @@ package entity;
 
 import main.CollisionChecker;
 import main.KeyHandler;
+import main.Main;
 import object.Fireball;
 
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -120,7 +122,7 @@ public class Mage extends Player {
 
             // Handle attack animation
             if (isAttacking) {
-
+                Main.music.playSE(9);
                 isAttacking = false;
                 switch(direction){
 

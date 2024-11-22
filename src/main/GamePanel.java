@@ -210,6 +210,7 @@ public class GamePanel extends JPanel implements Runnable {
                 cChecker.handleCollision(player);
             }
             if (cChecker.checkvisionRange(monster, player)) {
+
                 if (!cChecker.inAttackRange(monster, player)) {
                     for (Monster monster1 : monsters) {
                         if (monster != monster1 && cChecker.checkEntityCollision(monster, monster1)) {
