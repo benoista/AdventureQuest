@@ -2,6 +2,7 @@
 package entity;
 
 import main.CollisionChecker;
+import main.Main;
 
 import java.awt.*;
 /**

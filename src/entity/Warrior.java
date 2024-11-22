@@ -2,6 +2,7 @@ package entity;
 
 import main.CollisionChecker;
 import main.KeyHandler;
+import main.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

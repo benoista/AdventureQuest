@@ -279,6 +279,7 @@ public class Player extends BaseCharacter {
      */
     public void attack(Monster monster) {
         monster.setHp(monster.getHp() - this.dmg);
+        Main.music.playSE(8);
     }
 
     /**
@@ -323,6 +324,7 @@ public class Player extends BaseCharacter {
      */
     public boolean isDead() {
         if (hp <= 0) {
+            Main.music.playSE(13);
             isDead = true;
         }
         return isDead;

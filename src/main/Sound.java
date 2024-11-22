@@ -31,6 +31,8 @@ public class Sound extends UI {
         soundURL[5] = getClass().getResource("/sound/tp.wav");
         soundURL[6] = getClass().getResource("/sound/dungeon.wav");
         soundURL[7] = getClass().getResource("/sound/merde.wav");
+        soundURL[8] = getClass().getResource("/sound/dmgmonster.wav");
+        soundURL[13] = getClass().getResource("/sound/loose.wav");
     }
 
     /**
