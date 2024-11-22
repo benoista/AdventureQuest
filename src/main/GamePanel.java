@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
     /** Coordonnée Y centrale de l'écran. */
     public final int screenY = screenHeight / 2 - (tileSize / 2);
 
-
+    private int coolodwnmonsterRun = 10;
 
     // Attributs de la classe
     /** Indique si le joueur est un guerrier. */
@@ -234,7 +234,12 @@ public class GamePanel extends JPanel implements Runnable {
                             monster.collisionOn = true;
                             break;
                         } else {
-                            monster.setChase(player.worldX, player.worldY);
+                            if (coolodwnmonsterRun == 0) {
+                                monster.setChase(player.worldX, player.worldY);
+                                coolodwnmonsterRun = 10;
+                            }else{
+                                coolodwnmonsterRun--;
+                            }
                         }
 
                     }
