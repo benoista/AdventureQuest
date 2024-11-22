@@ -62,7 +62,7 @@ public class Gobelin extends Monster {
             BufferedImage spriteSheetMoves = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/monster/gobelin/moves.png")));
 
             int frameWidthMoves = 64; // Width of each frame in moves sprite sheet
-            int frameHeightMoves = 64; // Height of each frame in moves sprite sheet
+            int frameHeightMoves = 63; // Height of each frame in moves sprite sheet
 
             animationFramesMoves = new Image[4][9];
 
