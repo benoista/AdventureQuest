@@ -239,7 +239,7 @@ public class GamePanel extends JPanel implements Runnable {
                         } else {
                             if (coolodwnmonsterRun == 0) {
                                 monster.setChase(player.worldX, player.worldY);
-                                coolodwnmonsterRun = 10;
+                                coolodwnmonsterRun = 18;
                             }else{
                                 coolodwnmonsterRun--;
                             }
