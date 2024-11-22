@@ -189,7 +189,7 @@ public class Warrior extends Player {
             attackCooldown--;
         }
 
-        if (isAttacking && attackCooldown == 0) {
+        if (isAttacking && attackCooldown == 0 & attackDelai) {
             for (Monster monster : monsters) {
                 if(checkRange(monster, screenX, screenY)){
                     attack(monster);
@@ -197,6 +197,7 @@ public class Warrior extends Player {
                 }
             }
         }
+        attackDelai = false;
     }
     //UpdateFrame for animation
     @Override

@@ -14,6 +14,7 @@ import static main.Main.*;
  */
 public class Player extends BaseCharacter {
 
+    protected boolean attackDelai;
 
     /** KeyHandler instance for managing user input. */
 
@@ -240,6 +241,7 @@ public class Player extends BaseCharacter {
 
         if(keyH.attackPressed){
             isAttacking = true;
+            attackDelai = true;
         }
         if (keyH.emotePressed) {
             emote = true;
