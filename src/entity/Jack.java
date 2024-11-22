@@ -15,15 +15,15 @@ public class Jack extends Monster {
     protected Image[][] animationFramesAttack;
 
 
-    public Jack(CollisionChecker collisionChecker) {
+    public Jack(CollisionChecker collisionChecker, int spawnX, int spawnY) {
         super(250, collisionChecker);
         this.attackCooldownMax = 120;
         this.direction = "up";
         this.speed = 1;
         this.dmg = 2;
 
-        worldX = (16 * 3) * 23;
-        worldY = (16 * 3) * 13;
+        worldX = (16 * 3) * spawnX; // World X position
+        worldY = (16 * 3) * spawnY;
 
         // hitbox
         solidArea = new Rectangle(40, 40, 50, 70);

@@ -29,7 +29,7 @@ public class Gobelin extends Monster {
         super(60, collisionChecker);
 
         this.direction = "down";
-        this.speed = 1;
+        this.speed =  1;
         this.dmg = 1;
 
         switch (zone){

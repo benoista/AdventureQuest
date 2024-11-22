@@ -73,13 +73,13 @@ public class TestMonster {
         GamePanel gamePanel = new GamePanel(true,"");
         KeyHandler keyH = new KeyHandler();
         CollisionChecker collisionChecker = new CollisionChecker(gamePanel);
-        Jack jack = new Jack(collisionChecker);
+        Minotaur jack = new Minotaur(collisionChecker,2,2);
         assertEquals(250,jack.getHp());
         assertEquals("up",jack.direction);
         assertEquals(1,jack.speed);
         assertEquals(2,jack.getDmg());
-        assertEquals((16 * 3) * 23,jack.worldX);
-        assertEquals((16 * 3) * 13,jack.worldY);
+        assertEquals((16 * 3) * 2,jack.worldX);
+        assertEquals((16 * 3) * 2,jack.worldY);
     }
 
     //TEST Seraphyrax
